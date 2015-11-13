@@ -119,11 +119,11 @@ TRANS       5 5 0
 ROTAT       0 0 0
 SCALE       .01 10 10
 
-// Sphere
+// mesh
 OBJECT 6
 mesh
 material 1
 TRANS       -1 2 -1
 ROTAT       0 0 0
 SCALE       3 3 3
-OBJFILE		dragon.obj
+OBJFILE		obj/dragon.obj
