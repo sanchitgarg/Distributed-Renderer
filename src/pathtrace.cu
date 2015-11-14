@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <cuda.h>
 #include <cuda_runtime.h>
+#include <device_launch_parameters.h>
 #include <cmath>
 #include <thrust/execution_policy.h>
 #include <thrust/random.h>
@@ -18,7 +19,7 @@
 
 #include <stream_compaction/efficient.h>
 
-#define DI 1
+#define DI 0
 #define DOF 0
 #define SHOW_TIMING 0
 #define ERRORCHECK 1
@@ -75,6 +76,8 @@ static glm::vec3 *dev_image = NULL;
 static Camera *dev_camera = NULL;
 static Geom *dev_geoms = NULL;
 static int* dev_geoms_count = NULL;
+static MeshGeom *dev_meshes = NULL;
+static int *dev_meshes_count = NULL;
 static Material *dev_materials = NULL;
 static RenderState *dev_state = NULL;
 static RayState *dev_rays_begin = NULL;
@@ -82,32 +85,40 @@ static RayState *dev_rays_end = NULL;
 static int *dev_light_indices = NULL;
 static int *dev_light_count = NULL;
 
+//Initialise cuda memory
 void pathtraceInit(Scene *scene) {
     hst_scene = scene;
     const Camera &cam = hst_scene->state.camera;
     const int pixelcount = cam.resolution.x * cam.resolution.y;
 
-    //std::vector<Geom> geoms = hst_scene->geoms;
-    //std::vector<Material> materials = hst_scene->materials;
-
+	//2D Pixel array to store image color
     cudaMalloc(&dev_image, pixelcount * sizeof(glm::vec3));
     cudaMemset(dev_image, 0, pixelcount * sizeof(glm::vec3));
-    // TODO: initialize the above static variables added above
-
 
     //Copy Camera
     cudaMalloc((void**)&dev_camera, sizeof(Camera));
     cudaMemcpy(dev_camera, &hst_scene->state.camera, sizeof(Camera), cudaMemcpyHostToDevice);
 
-    //Copy geometry
-    cudaMalloc((void**)&dev_geoms, hst_scene->geoms.size() * sizeof(Geom));
-    cudaMemcpy(dev_geoms, hst_scene->geoms.data(), hst_scene->geoms.size() * sizeof(Geom), cudaMemcpyHostToDevice);
-    //Copy geometry count
-    int geom_count = hst_scene->geoms.size();
-    cudaMalloc((void**)&dev_geoms_count, sizeof(int));
-    cudaMemcpy(dev_geoms_count, &geom_count, sizeof(int), cudaMemcpyHostToDevice);
+	//Copy geometry count
+	int geom_count = hst_scene->geoms.size();
+	cudaMalloc((void**)&dev_geoms_count, sizeof(int));
+	cudaMemcpy(dev_geoms_count, &geom_count, sizeof(int), cudaMemcpyHostToDevice);
+	//Copy geometry
+	cudaMalloc((void**)&dev_geoms, geom_count * sizeof(Geom));
+	cudaMemcpy(dev_geoms, hst_scene->geoms.data(), geom_count * sizeof(Geom), cudaMemcpyHostToDevice);
 
-    //Copy material
+
+	//Copy meshes count
+	int mesh_count = hst_scene->meshGeoms.size();
+	//std::cout << mesh_count << std::endl;
+	cudaMalloc((void**)&dev_meshes_count, sizeof(int));
+	cudaMemcpy(dev_meshes_count, &mesh_count, sizeof(int), cudaMemcpyHostToDevice);
+	//Copy mesh data
+	cudaMalloc((void**)&dev_meshes, mesh_count * sizeof(MeshGeom));
+	cudaMemcpy(dev_meshes, hst_scene->meshGeoms.data(), mesh_count * sizeof(MeshGeom), cudaMemcpyHostToDevice);
+    
+	
+	//Copy material
     cudaMalloc((void**)&dev_materials, hst_scene->materials.size() * sizeof(Material));
     cudaMemcpy(dev_materials, hst_scene->materials.data(), hst_scene->materials.size() * sizeof(Material), cudaMemcpyHostToDevice);
 
@@ -139,6 +150,8 @@ void pathtraceFree() {
     cudaFree(dev_camera);
     cudaFree(dev_geoms);
     cudaFree(dev_geoms_count);
+	cudaFree(dev_meshes);
+	cudaFree(dev_meshes_count);
     cudaFree(dev_materials);
     cudaFree(dev_state);
     cudaFree(dev_rays_begin);
@@ -195,7 +208,6 @@ __global__ void kernJitterDOF(Camera * camera, RayState* rays, int iter)
 
 		Ray &r = rays[index].ray;
 
-//		bool outside;
 		glm::vec3 intersectionPoint, normal;
 
 		sphereIntersectionTest(camera->camSphere, r, intersectionPoint, normal);//, outside);
@@ -210,11 +222,13 @@ __global__ void kernJitterDOF(Camera * camera, RayState* rays, int iter)
 
 
 //Kernel function that performs one iteration of tracing the path.
-__global__ void kernTracePath(Camera * camera, RayState *ray, Geom * geoms, int *geomCount, int* lightIndices, int *lightCount, Material* materials, glm::vec3* image, int iter, int currDepth, int rayCount)
+__global__ void kernTracePath(Camera * camera, RayState *ray, Geom * geoms, int *geomCount, MeshGeom *meshGeoms, int *meshCount, int* lightIndices, int *lightCount, Material* materials, glm::vec3* image, int iter, int currDepth, int rayCount)
 {
 	 int index = (blockIdx.x * blockDim.x) + threadIdx.x;
 
-	 if(index < rayCount)
+	 //printf("%d\n", *meshCount);
+
+	 if (index < rayCount)
 	 {
 		 if(ray[index].isAlive)
 		 {
@@ -236,6 +250,11 @@ __global__ void kernTracePath(Camera * camera, RayState *ray, Geom * geoms, int 
 				 else if(geoms[i].type == SPHERE)
 				 {
 					 t = sphereIntersectionTest(geoms[i], r.ray, intersectionPoint, normal);//, outside);
+				 }
+
+				 else if (geoms[i].type == MESH)
+				 {
+					 t = meshIntersectionTest(geoms[i], meshGeoms[geoms[i].meshid], r.ray, intersectionPoint, normal);//, outside);
 				 }
 
 				 if(t < min_t && t > 0)//&& !outside)
@@ -362,7 +381,7 @@ void pathtrace(uchar4 *pbo, int frame, int iter) {
     // TODO: perform one iteration of path tracing
 
     //Setup initial rays
-    kernGetRayDirections<<<blocksPerGrid, blockSize>>>(dev_camera, dev_rays_begin, iter);
+    kernGetRayDirections<<< blocksPerGrid, blockSize>>>(dev_camera, dev_rays_begin, iter);
 
     //Jitter rays as per Depth of field
     if(DOF)
@@ -384,9 +403,14 @@ void pathtrace(uchar4 *pbo, int frame, int iter) {
 //    	cudaEventRecord(start);
 
     	//Take one step, should make dead rays as false
-    	kernTracePath<<<numBlocks, numThreads>>>(dev_camera, dev_rays_begin, dev_geoms, dev_geoms_count, dev_light_indices, dev_light_count, dev_materials, dev_image, iter, i, rayCount);
-
-    	//Stream compaction using work efficient
+    	kernTracePath<<<numBlocks, numThreads>>>(dev_camera, dev_rays_begin, dev_geoms, dev_geoms_count, dev_meshes, dev_meshes_count, dev_light_indices, dev_light_count, dev_materials, dev_image, iter, i, rayCount);
+		checkCUDAError("pathtrace step");
+		//kernTracePath <<<1,1>>>(dev_camera, dev_rays_begin, dev_geoms, dev_geoms_count, dev_meshes, dev_meshes_count, dev_light_indices, dev_light_count, dev_materials, dev_image, iter, i, rayCount);
+		//int t;
+		//std::cout << "iteration" << std::endl;
+		//std::cin >> t;
+    	
+		//Stream compaction using work efficient
 //    	rayCount = StreamCompaction::Efficient::compact(rayCount, dev_rays_begin);
 
 //    	Compact rays, dev_rays_end points to the new end

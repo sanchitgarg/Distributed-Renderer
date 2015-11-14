@@ -25,8 +25,10 @@ public:
     std::vector<Geom> geoms;
     std::vector<Material> materials;
     std::vector<Mesh> meshes;
+	std::vector<MeshGeom> meshGeoms;
     RenderState state;
 
     void configureCamera();
     void findLights();
+	void configureMeshes();
 };

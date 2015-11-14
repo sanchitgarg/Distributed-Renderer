@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include <glm/gtx/intersect.hpp>
 
 #include "sceneStructs.h"
 #include "utilities.h"
@@ -140,4 +141,46 @@ __host__ __device__ float sphereIntersectionTest(Geom sphere, Ray r,
     }
 
     return glm::length(r.origin - intersectionPoint);
+}
+
+
+__host__ __device__ float meshIntersectionTest(Geom g, MeshGeom m, Ray r,
+	glm::vec3 &intersectionPoint, glm::vec3 &normal, bool outside = false) {
+
+	glm::vec3 ro = multiplyMV(g.inverseTransform, glm::vec4(r.origin, 1.0f));
+	glm::vec3 rd = glm::normalize(multiplyMV(g.inverseTransform, glm::vec4(r.direction, 0.0f)));
+
+	Ray rt;
+	rt.origin = ro;
+	rt.direction = rd;
+
+	float tMax=-1.0, t=0.0;
+	
+	glm::vec3 barcCoord;
+
+	for (int i = 0, j=0; i < m.numVertices; i+=3, ++j)
+	{
+		//Back face culling
+		if (glm::dot(m.normals[j], rt.direction) < 0.001)
+		{
+			if (glm::intersectRayTriangle(rt.origin, rt.direction,
+				m.triangles[i], m.triangles[i + 1], m.triangles[i + 2], barcCoord))
+			{
+				intersectionPoint = barcCoord[0] * m.triangles[i] +
+									barcCoord[1] * m.triangles[i + 1] +
+									barcCoord[2] * m.triangles[i + 2];
+
+				t = glm::length(intersectionPoint - rt.origin);
+				tMax = glm::max(t, tMax);
+				normal = m.normals[j];
+			}
+		}
+	}
+
+	glm::vec3 objspaceIntersection = getPointOnRay(rt, t);
+
+	intersectionPoint = multiplyMV(g.transform, glm::vec4(objspaceIntersection, 1.f));
+	normal = glm::normalize(multiplyMV(g.invTranspose, glm::vec4(normal, 0.f)));
+	
+	return tMax;
 }

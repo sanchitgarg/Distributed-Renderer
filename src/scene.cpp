@@ -5,6 +5,8 @@
 #include <glm/gtx/string_cast.hpp>
 #include "Mesh.h"
 
+static int meshIndex = 0;
+
 Scene::Scene(string filename) {
     cout << "Reading scene from " << filename << " ..." << endl;
     cout << " " << endl;
@@ -33,6 +35,7 @@ Scene::Scene(string filename) {
     }
 
     findLights();
+	configureMeshes();
 }
 
 int Scene::loadGeom(string objectid) {
@@ -57,6 +60,8 @@ int Scene::loadGeom(string objectid) {
             } else if (strcmp(line.c_str(), "mesh") == 0) {
                 cout << "Creating new mesh..." << endl;
                 newGeom.type = MESH;
+				newGeom.meshid = meshIndex;
+				++meshIndex;
             }
         }
 
@@ -89,7 +94,16 @@ int Scene::loadGeom(string objectid) {
             else if (strcmp(tokens[0].c_str(), "OBJFILE") == 0)
             {
             	Mesh m;
-            	m.LoadMesh(tokens[1].c_str());
+				
+				//create the meshpath back form the tokens
+				string meshPath = "";
+				for (int i = 1; i < tokens.size(); ++i)
+				{
+					meshPath += tokens[i] + " ";
+				}
+				//std::cout << tokens.size()<<" Mesh path " << meshPath << std::endl;
+
+            	m.LoadMesh(meshPath.c_str());
 
             	meshes.push_back(m);
             }
@@ -246,5 +260,36 @@ void Scene::findLights()
 	{
 		if(materials[geoms[i].materialid].emittance > 0)
 			state.lightIndices.push_back(i);
+	}
+}
+
+void Scene::configureMeshes()
+{
+	//For all meshes
+	for (int i = 0; i < meshes.size(); ++i)
+	{
+		//Get the mesh and change the vector to an array
+		MeshGeom m;
+		m.numVertices = meshes[i].getNumVertices(0);
+
+		//Do this for triangles
+		m.triangles = new glm::vec3[m.numVertices];
+		//and normals
+		m.normals = new glm::vec3[m.numVertices/3];
+
+		vector<glm::vec3> & triangle = meshes[i].getTriangles(0);
+		vector<glm::vec3> & normals = meshes[i].getNormals(0);
+
+		for (int j = 0; j < m.numVertices; ++j)
+		{
+			m.triangles[j] = triangle[j];
+		}
+
+		for (int j = 0; j < m.numVertices / 3; ++j)
+		{
+			m.normals[j] = normals[j];
+		}
+
+		meshGeoms.push_back(m);
 	}
 }

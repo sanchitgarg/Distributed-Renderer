@@ -33,7 +33,14 @@ struct Geom {
     glm::mat4 transform;
     glm::mat4 inverseTransform;
     glm::mat4 invTranspose;
-    //char filename[64];
+	int meshid;
+};
+
+struct MeshGeom {
+	int numVertices;	//Number of vertices
+	glm::vec3 *triangles;	//indices of triangles
+							// in triples
+	glm::vec3 *normals;		//Triangle normals
 };
 
 struct Material {
