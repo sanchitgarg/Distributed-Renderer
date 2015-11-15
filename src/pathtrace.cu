@@ -93,47 +93,57 @@ void pathtraceInit(Scene *scene) {
 
 	//2D Pixel array to store image color
     cudaMalloc(&dev_image, pixelcount * sizeof(glm::vec3));
-    cudaMemset(dev_image, 0, pixelcount * sizeof(glm::vec3));
+	cudaMemset(dev_image, 0, pixelcount * sizeof(glm::vec3));
+	checkCUDAError("pathtraceInit");
 
     //Copy Camera
     cudaMalloc((void**)&dev_camera, sizeof(Camera));
-    cudaMemcpy(dev_camera, &hst_scene->state.camera, sizeof(Camera), cudaMemcpyHostToDevice);
+	cudaMemcpy(dev_camera, &hst_scene->state.camera, sizeof(Camera), cudaMemcpyHostToDevice);
+	checkCUDAError("pathtraceInit");
 
 	//Copy geometry count
 	int geom_count = hst_scene->geoms.size();
 	cudaMalloc((void**)&dev_geoms_count, sizeof(int));
 	cudaMemcpy(dev_geoms_count, &geom_count, sizeof(int), cudaMemcpyHostToDevice);
+	checkCUDAError("pathtraceInit");
+
 	//Copy geometry
 	cudaMalloc((void**)&dev_geoms, geom_count * sizeof(Geom));
 	cudaMemcpy(dev_geoms, hst_scene->geoms.data(), geom_count * sizeof(Geom), cudaMemcpyHostToDevice);
 
-
+	checkCUDAError("pathtraceInit");
 	//Copy meshes count
 	int mesh_count = hst_scene->meshGeoms.size();
 	//std::cout << mesh_count << std::endl;
 	cudaMalloc((void**)&dev_meshes_count, sizeof(int));
 	cudaMemcpy(dev_meshes_count, &mesh_count, sizeof(int), cudaMemcpyHostToDevice);
+	checkCUDAError("pathtraceInit");
 	//Copy mesh data
 	cudaMalloc((void**)&dev_meshes, mesh_count * sizeof(MeshGeom));
 	cudaMemcpy(dev_meshes, hst_scene->meshGeoms.data(), mesh_count * sizeof(MeshGeom), cudaMemcpyHostToDevice);
     
-	
+
+	checkCUDAError("pathtraceInit");
 	//Copy material
     cudaMalloc((void**)&dev_materials, hst_scene->materials.size() * sizeof(Material));
     cudaMemcpy(dev_materials, hst_scene->materials.data(), hst_scene->materials.size() * sizeof(Material), cudaMemcpyHostToDevice);
 
+	checkCUDAError("pathtraceInit");
     //Copy state
     cudaMalloc((void**)&dev_state, sizeof(RenderState));
     cudaMemcpy(dev_state, &hst_scene->state, sizeof(RenderState), cudaMemcpyHostToDevice);
 
+	checkCUDAError("pathtraceInit");
     //Allocate memory for rays
     cudaMalloc((void**)&dev_rays_begin, pixelcount * sizeof(RayState));
 //    cudaMalloc((void**)&dev_rays_end, sizeof(RayState));
 
+	checkCUDAError("pathtraceInit");
     //Copy Light Indices
     cudaMalloc((void**)&dev_light_indices, hst_scene->state.lightIndices.size() * sizeof(int));
     cudaMemcpy(dev_light_indices, hst_scene->state.lightIndices.data(), hst_scene->state.lightIndices.size() * sizeof(int), cudaMemcpyHostToDevice);
 
+	checkCUDAError("pathtraceInit");
     //Copy Light Count
     int lightCount = hst_scene->state.lightIndices.size();
     cudaMalloc((void**)&dev_light_count, sizeof(int));
