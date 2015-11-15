@@ -1,7 +1,7 @@
 
 #include "Mesh.h"
-#include <assimp-3.1.1-win\include\assimp\Importer.hpp>
-#include <assimp-3.1.1-win\include\assimp\postprocess.h>
+#include <assimp\Importer.hpp>
+#include <assimp\postprocess.h>
 
 Mesh::MeshEntry::~MeshEntry()
 {

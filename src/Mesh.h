@@ -8,7 +8,7 @@
 
 #include <vector>
 #include <glm/glm.hpp>
-#include <assimp-3.1.1-win\include\assimp\scene.h>
+#include <assimp\scene.h>
 
 struct Vertex
 {

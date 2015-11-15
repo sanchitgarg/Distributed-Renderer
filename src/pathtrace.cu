@@ -17,7 +17,7 @@
 #include "intersections.h"
 #include "interactions.h"
 
-#include <stream_compaction/efficient.h>
+//#include <efficient.h>
 
 #define DI 0
 #define DOF 0
@@ -405,10 +405,7 @@ void pathtrace(uchar4 *pbo, int frame, int iter) {
     	//Take one step, should make dead rays as false
     	kernTracePath<<<numBlocks, numThreads>>>(dev_camera, dev_rays_begin, dev_geoms, dev_geoms_count, dev_meshes, dev_meshes_count, dev_light_indices, dev_light_count, dev_materials, dev_image, iter, i, rayCount);
 		checkCUDAError("pathtrace step");
-		//kernTracePath <<<1,1>>>(dev_camera, dev_rays_begin, dev_geoms, dev_geoms_count, dev_meshes, dev_meshes_count, dev_light_indices, dev_light_count, dev_materials, dev_image, iter, i, rayCount);
-		//int t;
-		//std::cout << "iteration" << std::endl;
-		//std::cin >> t;
+
     	
 		//Stream compaction using work efficient
 //    	rayCount = StreamCompaction::Efficient::compact(rayCount, dev_rays_begin);
