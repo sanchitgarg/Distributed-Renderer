@@ -1,0 +1,42 @@
+﻿Build started 11/14/2015 8:05:29 PM.
+     1>Project "C:\Users\Sanchit Garg\Desktop\GPU\Final Project\Distributed Renderer\Distributed Renderer\Distributed Renderer.vcxproj" on node 2 (Build target(s)).
+     1>AddCudaCompileDeps:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I..\external\Assimp\include /I..\external\include /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /I. /FIcuda_runtime.h /c "C:\Users\Sanchit Garg\Desktop\GPU\Final Project\Distributed Renderer\src\pathtrace.cu" 
+       CudaBuild:
+         Compiling CUDA source file ..\src\pathtrace.cu...
+         cmd.exe /C "C:\Users\Sanchit Garg\AppData\Local\Temp\tmp5538e68afca949e3b4d78311602a4255.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2013 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin"  -I..\external\Assimp\include -I..\external\include -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd " -o Debug\pathtrace.cu.obj "C:\Users\Sanchit Garg\Desktop\GPU\Final Project\Distributed Renderer\src\pathtrace.cu"
+         
+         C:\Users\Sanchit Garg\Desktop\GPU\Final Project\Distributed Renderer\Distributed Renderer>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2013 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin"  -I..\external\Assimp\include -I..\external\include -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd " -o Debug\pathtrace.cu.obj "C:\Users\Sanchit Garg\Desktop\GPU\Final Project\Distributed Renderer\src\pathtrace.cu" 
+     1>c:\users\sanchit garg\desktop\gpu\final project\distributed renderer\src\intersections.h(48): warning : parameter "outside" was set but never used
+     1>c:\users\sanchit garg\desktop\gpu\final project\distributed renderer\external\include\glm\gtx\intersect.inl(51): warning : calling a __host__ function from a __host__ __device__ function is not allowed
+     1>c:\users\sanchit garg\desktop\gpu\final project\distributed renderer\external\include\glm\gtx\intersect.inl(51) (col. 32) : warning : calling a __host__ function("std::numeric_limits<float> ::epsilon") from a __host__ __device__ function("glm::intersectRayTriangle<glm::tvec3<float, (glm::precision)0> > ") is not allowed
+     1>c:\users\sanchit garg\desktop\gpu\final project\distributed renderer\src\intersections.h(48): warning : parameter "outside" was set but never used
+         pathtrace.cu
+     1>c:\users\sanchit garg\desktop\gpu\final project\distributed renderer\src\intersections.h(65): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\sanchit garg\desktop\gpu\final project\distributed renderer\src\interactions.h(74): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\sanchit garg\desktop\gpu\final project\distributed renderer\src\interactions.h(76): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Sanchit Garg\Desktop\GPU\Final Project\Distributed Renderer\Debug\Distributed Renderer.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\external\Assimp\lib\x86 /LIBPATH:..\external\lib\win /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\lib\Win32" cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib glew32.lib assimp.lib glu32.lib opengl32.lib glew32s.lib glfw3.lib glfw3dll.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Sanchit Garg\Desktop\GPU\Final Project\Distributed Renderer\Debug\Distributed Renderer.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Sanchit Garg\Desktop\GPU\Final Project\Distributed Renderer\Debug\Distributed Renderer.lib" /MACHINE:X86 Debug\pathtrace.cu.obj
+         Debug\glslUtility.obj
+         Debug\image.obj
+         Debug\main.obj
+         Debug\Mesh.obj
+         Debug\preview.obj
+         Debug\scene.obj
+         Debug\stb.obj
+         Debug\utilities.obj
+         Distributed Renderer.vcxproj -> C:\Users\Sanchit Garg\Desktop\GPU\Final Project\Distributed Renderer\Debug\Distributed Renderer.exe
+       PostBuildEvent:
+         echo copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Sanchit Garg\Desktop\GPU\Final Project\Distributed Renderer\Debug\"
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Sanchit Garg\Desktop\GPU\Final Project\Distributed Renderer\Debug\"
+         :VCEnd
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Sanchit Garg\Desktop\GPU\Final Project\Distributed Renderer\Debug\"
+         C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart32_75.dll
+         C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart64_75.dll
+                 2 file(s) copied.
+     1>Done Building Project "C:\Users\Sanchit Garg\Desktop\GPU\Final Project\Distributed Renderer\Distributed Renderer\Distributed Renderer.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:25.26
