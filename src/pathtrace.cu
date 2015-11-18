@@ -17,7 +17,7 @@
 #include "intersections.h"
 #include "interactions.h"
 
-//#include <efficient.h>
+#include <stream_compaction/efficient.h>
 
 #define DI 0
 #define DOF 0
@@ -93,57 +93,38 @@ void pathtraceInit(Scene *scene) {
 
 	//2D Pixel array to store image color
     cudaMalloc(&dev_image, pixelcount * sizeof(glm::vec3));
-	cudaMemset(dev_image, 0, pixelcount * sizeof(glm::vec3));
-	checkCUDAError("pathtraceInit");
+    cudaMemset(dev_image, 0, pixelcount * sizeof(glm::vec3));
 
     //Copy Camera
     cudaMalloc((void**)&dev_camera, sizeof(Camera));
-	cudaMemcpy(dev_camera, &hst_scene->state.camera, sizeof(Camera), cudaMemcpyHostToDevice);
-	checkCUDAError("pathtraceInit");
+    cudaMemcpy(dev_camera, &hst_scene->state.camera, sizeof(Camera), cudaMemcpyHostToDevice);
 
 	//Copy geometry count
 	int geom_count = hst_scene->geoms.size();
 	cudaMalloc((void**)&dev_geoms_count, sizeof(int));
 	cudaMemcpy(dev_geoms_count, &geom_count, sizeof(int), cudaMemcpyHostToDevice);
-	checkCUDAError("pathtraceInit");
-
 	//Copy geometry
 	cudaMalloc((void**)&dev_geoms, geom_count * sizeof(Geom));
 	cudaMemcpy(dev_geoms, hst_scene->geoms.data(), geom_count * sizeof(Geom), cudaMemcpyHostToDevice);
 
-	checkCUDAError("pathtraceInit");
-	//Copy meshes count
-	int mesh_count = hst_scene->meshGeoms.size();
-	//std::cout << mesh_count << std::endl;
-	cudaMalloc((void**)&dev_meshes_count, sizeof(int));
-	cudaMemcpy(dev_meshes_count, &mesh_count, sizeof(int), cudaMemcpyHostToDevice);
-	checkCUDAError("pathtraceInit");
-	//Copy mesh data
-	cudaMalloc((void**)&dev_meshes, mesh_count * sizeof(MeshGeom));
-	cudaMemcpy(dev_meshes, hst_scene->meshGeoms.data(), mesh_count * sizeof(MeshGeom), cudaMemcpyHostToDevice);
-    
-
-	checkCUDAError("pathtraceInit");
+	copyMeshes();
+	
 	//Copy material
     cudaMalloc((void**)&dev_materials, hst_scene->materials.size() * sizeof(Material));
     cudaMemcpy(dev_materials, hst_scene->materials.data(), hst_scene->materials.size() * sizeof(Material), cudaMemcpyHostToDevice);
 
-	checkCUDAError("pathtraceInit");
     //Copy state
     cudaMalloc((void**)&dev_state, sizeof(RenderState));
     cudaMemcpy(dev_state, &hst_scene->state, sizeof(RenderState), cudaMemcpyHostToDevice);
 
-	checkCUDAError("pathtraceInit");
     //Allocate memory for rays
     cudaMalloc((void**)&dev_rays_begin, pixelcount * sizeof(RayState));
 //    cudaMalloc((void**)&dev_rays_end, sizeof(RayState));
 
-	checkCUDAError("pathtraceInit");
     //Copy Light Indices
     cudaMalloc((void**)&dev_light_indices, hst_scene->state.lightIndices.size() * sizeof(int));
     cudaMemcpy(dev_light_indices, hst_scene->state.lightIndices.data(), hst_scene->state.lightIndices.size() * sizeof(int), cudaMemcpyHostToDevice);
 
-	checkCUDAError("pathtraceInit");
     //Copy Light Count
     int lightCount = hst_scene->state.lightIndices.size();
     cudaMalloc((void**)&dev_light_count, sizeof(int));
@@ -170,6 +151,45 @@ void pathtraceFree() {
     cudaFree(dev_light_count);
 
     checkCUDAError("pathtraceFree");
+}
+
+void copyMeshes()
+{
+	//Copy meshes count
+	int mesh_count = hst_scene->meshGeoms.size();
+
+	MeshGeom *allMeshes = new MeshGeom[mesh_count];
+
+	cudaMalloc((void**)&dev_meshes_count, sizeof(int));
+	cudaMemcpy(dev_meshes_count, &mesh_count, sizeof(int), cudaMemcpyHostToDevice);
+
+	for (int i = 0; i < mesh_count; ++i)
+	{
+		/*meshes[i] = hst_scene->meshGeoms[i];
+		meshes[i].numVertices = hst_scene->meshGeoms[i].numVertices;*/
+		MeshGeom meshes;
+
+		meshes = hst_scene->meshGeoms[i];
+		meshes.numVertices = hst_scene->meshGeoms[i].numVertices;
+
+		glm::vec3 *triangles, *normals;
+
+		cudaMalloc(&triangles, meshes.numVertices * sizeof(glm::vec3));
+		cudaMalloc(&normals, meshes.numVertices * sizeof(glm::vec3));
+
+		cudaMemcpy(triangles, hst_scene->meshGeoms[i].triangles, meshes.numVertices * sizeof(glm::vec3), cudaMemcpyHostToDevice);
+		cudaMemcpy(normals, hst_scene->meshGeoms[i].normals, meshes.numVertices * sizeof(glm::vec3), cudaMemcpyHostToDevice);
+
+		meshes.normals = normals;
+		meshes.triangles = triangles;
+
+		allMeshes[i] = meshes;
+		/*meshes[i].normals = normals;
+		meshes[i].triangles = triangles;*/
+	}
+
+	cudaMalloc((void**)&dev_meshes, mesh_count * sizeof(MeshGeom));
+	cudaMemcpy(dev_meshes, allMeshes, mesh_count * sizeof(MeshGeom), cudaMemcpyHostToDevice);
 }
 
 //Kernel function that gets all the ray directions
@@ -264,6 +284,7 @@ __global__ void kernTracePath(Camera * camera, RayState *ray, Geom * geoms, int 
 
 				 else if (geoms[i].type == MESH)
 				 {
+					 //t = sphereIntersectionTest(geoms[i], r.ray, intersectionPoint, normal);//, outside);
 					 t = meshIntersectionTest(geoms[i], meshGeoms[geoms[i].meshid], r.ray, intersectionPoint, normal);//, outside);
 				 }
 
@@ -401,7 +422,7 @@ void pathtrace(uchar4 *pbo, int frame, int iter) {
 
     dev_rays_end = dev_rays_begin + pixelcount;
     int rayCount = pixelcount;
-    int numBlocks, numThreads = 64;
+    int numBlocks, numThreads = 128;
 
     numBlocks = (rayCount + numThreads - 1) / numThreads;
 
@@ -415,7 +436,10 @@ void pathtrace(uchar4 *pbo, int frame, int iter) {
     	//Take one step, should make dead rays as false
     	kernTracePath<<<numBlocks, numThreads>>>(dev_camera, dev_rays_begin, dev_geoms, dev_geoms_count, dev_meshes, dev_meshes_count, dev_light_indices, dev_light_count, dev_materials, dev_image, iter, i, rayCount);
 		checkCUDAError("pathtrace step");
-
+		//kernTracePath <<<1,1>>>(dev_camera, dev_rays_begin, dev_geoms, dev_geoms_count, dev_meshes, dev_meshes_count, dev_light_indices, dev_light_count, dev_materials, dev_image, iter, i, rayCount);
+		//int t;
+		//std::cout << "iteration" << std::endl;
+		//std::cin >> t;
     	
 		//Stream compaction using work efficient
 //    	rayCount = StreamCompaction::Efficient::compact(rayCount, dev_rays_begin);

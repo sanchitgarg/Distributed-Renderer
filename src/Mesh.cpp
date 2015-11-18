@@ -1,7 +1,7 @@
 
 #include "Mesh.h"
-#include <assimp\Importer.hpp>
-#include <assimp\postprocess.h>
+#include <assimp-3.1.1-win\include\assimp\Importer.hpp>
+#include <assimp-3.1.1-win\include\assimp\postprocess.h>
 
 Mesh::MeshEntry::~MeshEntry()
 {
@@ -97,15 +97,17 @@ std::vector<glm::vec3> Mesh::getTriangles(int index)
 std::vector<glm::vec3> Mesh::getNormals(int index)
 {
     std::vector<glm::vec3> normalCoord;
-    glm::vec3 v1, v2, v3;
+    //glm::vec3 v1, v2, v3;
 
-    for(int i = 0; i<m_Entries[index].NumIndices; i+=3)
+    for(int i = 0; i<m_Entries[index].NumIndices; i+=1)
     {
-        v1= m_Entries[index].vertices[i].vertCoord;
+        /*v1= m_Entries[index].vertices[i].vertCoord;
         v2= m_Entries[index].vertices[i+1].vertCoord;
         v3= m_Entries[index].vertices[i+2].vertCoord;
 
-        normalCoord.push_back(glm::normalize(glm::cross((v3-v1),(v2-v1))));
+		normalCoord.push_back(glm::normalize(glm::cross((v2-v1),(v3-v1))));*/
+
+		normalCoord.push_back(m_Entries[index].vertices[i].normal);
     }
 
     return normalCoord;

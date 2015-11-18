@@ -144,43 +144,61 @@ __host__ __device__ float sphereIntersectionTest(Geom sphere, Ray r,
 }
 
 
-__host__ __device__ float meshIntersectionTest(Geom g, MeshGeom m, Ray r,
+__host__ __device__ float meshIntersectionTest(Geom g, MeshGeom &m, Ray r,
 	glm::vec3 &intersectionPoint, glm::vec3 &normal, bool outside = false) {
 
-	glm::vec3 ro = multiplyMV(g.inverseTransform, glm::vec4(r.origin, 1.0f));
-	glm::vec3 rd = glm::normalize(multiplyMV(g.inverseTransform, glm::vec4(r.direction, 0.0f)));
-
+	//Transform ray into geometry coordinates
 	Ray rt;
-	rt.origin = ro;
-	rt.direction = rd;
-
-	float tMax=-1.0, t=0.0;
+	rt.origin = multiplyMV(g.inverseTransform, glm::vec4(r.origin, 1.0f));
+	rt.direction = glm::normalize(multiplyMV(g.inverseTransform, glm::vec4(r.direction, 0.0f)));
 	
 	glm::vec3 barcCoord;
+	glm::vec3 norm;
+	glm::vec3 minBarcCoord;
+	minBarcCoord.z = FLT_MAX;
 
-	for (int i = 0, j=0; i < m.numVertices; i+=3, ++j)
+	int triIndex = -1;
+
+	//For all triangles
+	for (int i = 0; i < m.numVertices; i+=3)
 	{
+		//Find the trinagle normal
+		//norm = glm::normalize(m.normals[i] + m.normals[i + 1] + m.normals[i + 2]);
+
 		//Back face culling
-		if (glm::dot(m.normals[j], rt.direction) < 0.001)
+		if (glm::dot(glm::normalize(m.normals[i] + m.normals[i + 1] + m.normals[i + 2]), rt.direction) < 0.000)
 		{
+			//Find intersection point
+			// If intersection then glm::intersectRayTriangle returns true
 			if (glm::intersectRayTriangle(rt.origin, rt.direction,
 				m.triangles[i], m.triangles[i + 1], m.triangles[i + 2], barcCoord))
-			{
-				intersectionPoint = barcCoord[0] * m.triangles[i] +
-									barcCoord[1] * m.triangles[i + 1] +
-									barcCoord[2] * m.triangles[i + 2];
-
-				t = glm::length(intersectionPoint - rt.origin);
-				tMax = glm::max(t, tMax);
-				normal = m.normals[j];
+			{	
+				//The barycentric coordinates that you get are as follows
+				// z gives the distance to the triangle
+				// first coord = 1.0 - barcCoor.x - barcCoor.y;
+				// second coord = barcCoor.x;
+				// third coord = barcCoor.y;
+				if (barcCoord.z < minBarcCoord.z)
+				{
+					triIndex = i;
+					minBarcCoord = barcCoord;
+				}
 			}
 		}
 	}
 
-	glm::vec3 objspaceIntersection = getPointOnRay(rt, t);
+	if (triIndex > -1)
+	{
+		glm::vec3 objspaceIntersection = getPointOnRay(rt, minBarcCoord.z);
+		normal = (1.0f - minBarcCoord[0] - minBarcCoord[1]) * m.normals[triIndex] +
+						minBarcCoord[0] * m.normals[triIndex + 1] +
+						minBarcCoord[1] * m.normals[triIndex + 2];
+		
+		intersectionPoint = multiplyMV(g.transform, glm::vec4(objspaceIntersection, 1.f));
+		normal = glm::normalize(multiplyMV(g.transform, glm::vec4(normal, 0.f)));
 
-	intersectionPoint = multiplyMV(g.transform, glm::vec4(objspaceIntersection, 1.f));
-	normal = glm::normalize(multiplyMV(g.invTranspose, glm::vec4(normal, 0.f)));
+		return minBarcCoord.z;
+	}
 	
-	return tMax;
+	return -1.0;
 }

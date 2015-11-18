@@ -1,7 +1,7 @@
 #ifndef __EFFICIENT_H__
 #define __EFFICIENT_H__
 
-#include "scesceneStructs.h>
+#include <src/sceneStructs.h>
 
 namespace StreamCompaction {
 namespace Efficient {

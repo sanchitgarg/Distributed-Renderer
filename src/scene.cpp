@@ -275,7 +275,7 @@ void Scene::configureMeshes()
 		//Do this for triangles
 		m.triangles = new glm::vec3[m.numVertices];
 		//and normals
-		m.normals = new glm::vec3[m.numVertices/3];
+		m.normals = new glm::vec3[m.numVertices];
 
 		vector<glm::vec3> & triangle = meshes[i].getTriangles(0);
 		vector<glm::vec3> & normals = meshes[i].getNormals(0);
@@ -283,12 +283,13 @@ void Scene::configureMeshes()
 		for (int j = 0; j < m.numVertices; ++j)
 		{
 			m.triangles[j] = triangle[j];
-		}
-
-		for (int j = 0; j < m.numVertices / 3; ++j)
-		{
 			m.normals[j] = normals[j];
 		}
+
+		/*for (int j = 0; j < m.numVertices / 3; ++j)
+		{
+			m.normals[j] = normals[j];
+		}*/
 
 		meshGeoms.push_back(m);
 	}
