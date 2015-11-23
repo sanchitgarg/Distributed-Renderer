@@ -20,6 +20,10 @@
 #include "utilities.h"
 #include "scene.h"
 
+#include "Helper.h"
+#include "PacketListener.h"
+#include "PacketSender.h"
+
 using namespace std;
 
 //-------------------------------

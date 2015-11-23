@@ -132,5 +132,5 @@ material 4
 TRANS       -1 2 -1
 ROTAT       0 0 0
 SCALE       2 2 2
-OBJFILE		C:\Users\Sanchit Garg\Desktop\GPU\Distributed Renderer\objs\teapot.obj
+OBJFILE		C:\Users\Dome\Documents\GitHub\Distributed-Renderer\objs\teapot.obj
 

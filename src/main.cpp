@@ -37,11 +37,23 @@ int main(int argc, char** argv) {
     width = renderState->camera.resolution.x;
     height = renderState->camera.resolution.y;
 
-    // Initialize CUDA and GL components
-    init();
+	initWinSock();
+	std::string ip = getSelfIP();
+	printInfo(ip, RECVPORT);
+
+	PacketListener pRecv(RECVPORT);
+	PacketSender pSend;
 
     // GLFW main loop
-    mainLoop();
+	std::thread rthread = pRecv.getThread();
+	std::thread sthread = pSend.getThread();
+	std::thread mThread(mainLoop, &pRecv, &pSend, "127.0.0.1");
+
+	rthread.join();
+	sthread.join();
+	mThread.join();
+
+	WSACleanup();
 
     return 0;
 }

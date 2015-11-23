@@ -9,6 +9,7 @@ GLuint pbo;
 GLuint displayImage;
 
 GLFWwindow *window;
+extern Scene *scene;
 
 std::string currentTimeString() {
     time_t now;
@@ -166,8 +167,41 @@ bool init() {
     return true;
 }
 
-void mainLoop() {
-    while (!glfwWindowShouldClose(window)) {
+
+void packThisShit(PacketSender* pSend, std::string client_ip, 
+	vector<glm::vec3> pixelClr){
+
+	for (int i = 0; i < width / TILESIZE; i++){
+		for (int j = 0; j < height / TILESIZE; j++){
+
+			Packet* p = new Packet();
+			p->set_type(PacketType::PIXEL);
+			p->set_tx(i * TILESIZE);
+			p->set_ty(j * TILESIZE);
+			p->set_tilesize(TILESIZE);
+
+			for (int k = 0; k < TILESIZE; k++){
+				for (int l = 0; l < TILESIZE; l++){
+					//std::this_thread::sleep_for(std::chrono::milliseconds(500));
+					Pixel* pixel = p->add_pixel();
+
+					glm::ivec3 clr = pixelClr[(j + l) * width + (i + k)];
+					pixel->set_r(clr.x);
+					pixel->set_g(clr.y);
+					pixel->set_b(clr.z);
+				}
+			}
+
+			pSend->sendPacket(p, client_ip, RECVPORT);
+		}
+	}
+
+}
+void mainLoop(PacketListener* pRecv, PacketSender* pSend, std::string client_ip) {
+	// Initialize CUDA and GL components
+	init();
+
+	while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
         runCuda();
 
@@ -182,6 +216,8 @@ void mainLoop() {
         // VAO, shader program, and texture already bound
         glDrawElements(GL_TRIANGLES, 6,  GL_UNSIGNED_SHORT, 0);
         glfwSwapBuffers(window);
+
+		packThisShit(pSend, client_ip, scene->state.image);
     }
     glfwDestroyWindow(window);
     glfwTerminate();
