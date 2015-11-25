@@ -46,6 +46,7 @@ void PacketSender::run(){
 		}
 		mutex.unlock();
 
+		//std::cout << "IM TRYINGGG" << std::endl;
 		if (next != nullptr){
 			next->setIPandPort(si_target);
 			next->serializePacket(buf, bufLen);

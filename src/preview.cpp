@@ -10,6 +10,7 @@ GLuint displayImage;
 
 GLFWwindow *window;
 extern Scene *scene;
+extern int iteration;
 
 std::string currentTimeString() {
     time_t now;
@@ -169,7 +170,7 @@ bool init() {
 
 
 void packThisShit(PacketSender* pSend, std::string client_ip, 
-	vector<glm::vec3> pixelClr){
+	vector<glm::ivec3> pixelClr){
 
 	for (int i = 0; i < width / TILESIZE; i++){
 		for (int j = 0; j < height / TILESIZE; j++){
@@ -182,13 +183,19 @@ void packThisShit(PacketSender* pSend, std::string client_ip,
 
 			for (int k = 0; k < TILESIZE; k++){
 				for (int l = 0; l < TILESIZE; l++){
-					//std::this_thread::sleep_for(std::chrono::milliseconds(500));
+					
 					Pixel* pixel = p->add_pixel();
 
-					glm::ivec3 clr = pixelClr[(j + l) * width + (i + k)];
-					pixel->set_r(clr.x);
-					pixel->set_g(clr.y);
-					pixel->set_b(clr.z);
+					/*int gradientX = ((i * TILESIZE) + k) * 255 / width;
+					int gradientY = ((j * TILESIZE) + l) * 255 / height;
+					pixel->set_r(gradientX);
+					pixel->set_g(gradientY);
+					pixel->set_b(0);*/
+					
+					glm::ivec3 clr = pixelClr[(i * TILESIZE + k) + (j * TILESIZE + l) * width];
+					pixel->set_r(clr.r);
+					pixel->set_g(clr.g);
+					pixel->set_b(clr.b);
 				}
 			}
 
@@ -201,6 +208,7 @@ void mainLoop(PacketListener* pRecv, PacketSender* pSend, std::string client_ip)
 	// Initialize CUDA and GL components
 	init();
 
+	int iter = 0;
 	while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
         runCuda();
@@ -216,8 +224,33 @@ void mainLoop(PacketListener* pRecv, PacketSender* pSend, std::string client_ip)
         // VAO, shader program, and texture already bound
         glDrawElements(GL_TRIANGLES, 6,  GL_UNSIGNED_SHORT, 0);
         glfwSwapBuffers(window);
+		//std::cout << std::endl << iteration;
+		if (iter == 20){
 
-		packThisShit(pSend, client_ip, scene->state.image);
+			std::cout << " SEND SHIT" << std::endl;
+
+			iter = 0;
+			std::vector<glm::ivec3> sendData;
+
+			//scene->getImage();
+			//float mul = 255.0 / iteration;
+			for (int i = 0; i < scene->state.image.size(); ++i)
+			{
+				glm::ivec3 color;
+				
+				color.x = glm::clamp((int)(scene->state.image[i].x / iteration * 255.0), 0, 255);
+				color.y = glm::clamp((int)(scene->state.image[i].y / iteration * 255.0), 0, 255);
+				color.z = glm::clamp((int)(scene->state.image[i].z / iteration * 255.0), 0, 255);
+				
+				//utilityCore::printVec3(scene->state.image[i]);
+				//utilityCore::printVec3(color);
+				sendData.push_back(color);
+			}
+
+			packThisShit(pSend, client_ip, sendData);
+		}
+		
+		iter++;
     }
     glfwDestroyWindow(window);
     glfwTerminate();

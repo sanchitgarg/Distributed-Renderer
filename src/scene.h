@@ -31,4 +31,5 @@ public:
     void configureCamera();
     void findLights();
 	void configureMeshes();
+	void getImage();
 };

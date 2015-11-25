@@ -47,7 +47,8 @@ int main(int argc, char** argv) {
     // GLFW main loop
 	std::thread rthread = pRecv.getThread();
 	std::thread sthread = pSend.getThread();
-	std::thread mThread(mainLoop, &pRecv, &pSend, "127.0.0.1");
+	std::thread mThread(mainLoop, &pRecv, &pSend, "158.130.104.23");
+	//std::thread mThread(mainLoop, &pRecv, &pSend, "127.0.0.1");
 
 	rthread.join();
 	sthread.join();
@@ -68,6 +69,7 @@ void saveImage() {
             int index = x + (y * width);
             glm::vec3 pix = renderState->image[index];
             img.setPixel(width - 1 - x, y, glm::vec3(pix) / samples);
+			utilityCore::printVec3(pix);
         }
     }
 
