@@ -186,6 +186,7 @@ void packThisShit(PacketSender* pSend, std::string client_ip,
 					
 					Pixel* pixel = p->add_pixel();
 
+					//Test code for data transfer
 					/*int gradientX = ((i * TILESIZE) + k) * 255 / width;
 					int gradientY = ((j * TILESIZE) + l) * 255 / height;
 					pixel->set_r(gradientX);
@@ -224,33 +225,34 @@ void mainLoop(PacketListener* pRecv, PacketSender* pSend, std::string client_ip)
         // VAO, shader program, and texture already bound
         glDrawElements(GL_TRIANGLES, 6,  GL_UNSIGNED_SHORT, 0);
         glfwSwapBuffers(window);
-		//std::cout << std::endl << iteration;
-		if (iter == 20){
-
-			std::cout << " SEND SHIT" << std::endl;
-
-			iter = 0;
-			std::vector<glm::ivec3> sendData;
-
-			//scene->getImage();
-			//float mul = 255.0 / iteration;
-			for (int i = 0; i < scene->state.image.size(); ++i)
-			{
-				glm::ivec3 color;
-				
-				color.x = glm::clamp((int)(scene->state.image[i].x / iteration * 255.0), 0, 255);
-				color.y = glm::clamp((int)(scene->state.image[i].y / iteration * 255.0), 0, 255);
-				color.z = glm::clamp((int)(scene->state.image[i].z / iteration * 255.0), 0, 255);
-				
-				//utilityCore::printVec3(scene->state.image[i]);
-				//utilityCore::printVec3(color);
-				sendData.push_back(color);
-			}
-
-			packThisShit(pSend, client_ip, sendData);
-		}
 		
-		iter++;
+		//TODO: uncomment when you want to send the data over the network
+		//if (iter == 20){
+
+		//	std::cout << " SEND SHIT" << std::endl;
+
+		//	iter = 0;
+		//	std::vector<glm::ivec3> sendData;
+
+		//	//scene->getImage();
+		//	//float mul = 255.0 / iteration;
+		//	for (int i = 0; i < scene->state.image.size(); ++i)
+		//	{
+		//		glm::ivec3 color;
+		//		
+		//		color.x = glm::clamp((int)(scene->state.image[i].x / iteration * 255.0), 0, 255);
+		//		color.y = glm::clamp((int)(scene->state.image[i].y / iteration * 255.0), 0, 255);
+		//		color.z = glm::clamp((int)(scene->state.image[i].z / iteration * 255.0), 0, 255);
+		//		
+		//		//utilityCore::printVec3(scene->state.image[i]);
+		//		//utilityCore::printVec3(color);
+		//		sendData.push_back(color);
+		//	}
+
+		//	packThisShit(pSend, client_ip, sendData);
+		//}
+		//
+		//iter++;
     }
     glfwDestroyWindow(window);
     glfwTerminate();

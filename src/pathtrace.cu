@@ -256,8 +256,6 @@ __global__ void kernTracePath(Camera * camera, RayState *ray, Geom * geoms, int 
 {
 	 int index = (blockIdx.x * blockDim.x) + threadIdx.x;
 
-	 //printf("%d\n", *meshCount);
-
 	 if (index < rayCount)
 	 {
 		 if(ray[index].isAlive)
@@ -288,7 +286,7 @@ __global__ void kernTracePath(Camera * camera, RayState *ray, Geom * geoms, int 
 					 t = meshIntersectionTest(geoms[i], meshGeoms[geoms[i].meshid], r.ray, intersectionPoint, normal);//, outside);
 				 }
 
-				 if(t < min_t && t > 0)//&& !outside)
+				 if (t > 0 && t < min_t)//&& !outside)
 				 {
 					 min_t = t;
 					 nearestIntersectionPoint = intersectionPoint;
@@ -319,7 +317,26 @@ __global__ void kernTracePath(Camera * camera, RayState *ray, Geom * geoms, int 
 				 {
 					 thrust::default_random_engine rng = makeSeededRandomEngine(iter, index, currDepth);
 
-					 scatterRay(camera->position,
+					 getRayColor(camera->position,
+						 r,
+						 nearestIntersectionPoint,
+						 nearestNormal,
+						 materials,
+						 rng,
+						 geoms,
+						 nearestIndex,
+						 geomCount,
+						 meshGeoms,
+						 meshCount,
+						 lightIndices,
+						 lightCount);
+					 
+
+					 //TODO: Remove next line for path tracing
+					 image[r.pixelIndex] += r.rayColor;
+
+
+					 /*scatterRay(camera->position,
 								 r,
 								 nearestIntersectionPoint,
 								 nearestNormal,
@@ -328,7 +345,7 @@ __global__ void kernTracePath(Camera * camera, RayState *ray, Geom * geoms, int 
 								 geoms,
 								 nearestIndex,
 								 lightIndices,
-								 lightCount);
+								 lightCount);*/
 				 }
 			 }
 		 }
@@ -426,7 +443,8 @@ void pathtrace(uchar4 *pbo, int frame, int iter) {
 
     numBlocks = (rayCount + numThreads - 1) / numThreads;
 
-    for(int i=0; (i<traceDepth && rayCount > 0); ++i)
+    //for(int i=0; (i<traceDepth && rayCount > 0); ++i)
+	for (int i = 0; (i<1 && rayCount > 0); ++i)
     {
 //    	cudaEvent_t start, stop;
 //    	cudaEventCreate(&start);
@@ -461,7 +479,7 @@ void pathtrace(uchar4 *pbo, int frame, int iter) {
     //Direct Illumination
     if(DI && rayCount > 0)
     {
-    	kernDirectLightPath<<<numBlocks, numThreads>>>(dev_camera, dev_rays_begin, dev_geoms, dev_light_indices, dev_light_count, dev_materials, dev_image, iter, traceDepth, rayCount);
+    	//kernDirectLightPath<<<numBlocks, numThreads>>>(dev_camera, dev_rays_begin, dev_geoms, dev_light_indices, dev_light_count, dev_materials, dev_image, iter, traceDepth, rayCount);
     }
 
     // Send results to OpenGL buffer for rendering
