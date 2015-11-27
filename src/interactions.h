@@ -438,38 +438,40 @@ void getRayColor(glm::vec3 &camPosition,
 	
 	//---------BIS calculation---------------
 	//BIS variables
-	//glm::vec3 BIS(0.f);
-	//float PDFBxDF;
+	glm::vec3 BIS(0.f);
+	float PDFBxDF;
 
-	////Take a wi direction based on input direction and BxDF
-	//glm::vec3 wi = getBxDFDirection(material, normal, rng, ray.ray.direction);
-	//
-	////Calculate the BxDF PDF
-	//PDFBxDF = calculateBxDFPDF(normal, wi, material);
+	//Take a wi direction based on input direction and BxDF
+	glm::vec3 wi = getBxDFDirection(material, normal, rng, ray.ray.direction);
+	
+	//Calculate the BxDF PDF
+	PDFBxDF = calculateBxDFPDF(normal, wi, material);
 
-	//if (PDFBxDF > EPSILON)
-	//{
-	//	//Select a light at random
-	//	selectRandomLight(lightIndices, lightCount, rng, lightIndex);
+	if (PDFBxDF > EPSILON)
+	{
+		//Select a light at random
+		selectRandomLight(lightIndices, lightCount, rng, lightIndex);
 
-	//	lightIntersection = intersect;
-	//	lightNormal = normal;
+		lightIntersection = intersect;
+		lightNormal = normal;
 
-	//	////See if this ray hits the light
-	//	if (hitSelectedLight(lightIntersection, lightNormal, wi, g, geomCount, meshGeoms, lightIndices, lightIndex))
-	//	{
-	//		float cosTheta = glm::abs(glm::dot(lightNormal, glm::normalize(intersect - lightIntersection)));
-	//		//If it hits the light, check if this is the closest intersection
+		//See if this ray hits the light
+		if (hitSelectedLight(lightIntersection, lightNormal, wi, g, geomCount, meshGeoms, lightIndices, lightIndex))
+		{
+			float cosTheta = glm::abs(glm::dot(lightNormal, glm::normalize(intersect - lightIntersection)));
 
-	//		glm::vec3 term1 = getLightTerm(g, m, lightIndex);
-	//		glm::vec3 term2 = getBxDFTerm(material);
+			BIS = (getLightTerm(g, m, lightIndex) * getBxDFTerm(material) * cosTheta) / PDFBxDF;
+			
+			//TODO : ERROR ->
+			//	If we try and access BIS variable, the code crashes. Check this
+			//printf("%f \n", BIS.x);
+			//printf("%f \n", BIS.y);
+			//printf("%f \n", BIS.z);
+		}
+	}
 
-	//		//BIS = (getLightTerm(g, m, lightIndex) * getBxDFTerm(material) * cosTheta) / PDFBxDF;
-	//	}
-	//}
-
+	
 	//Set Ray Color
-	ray.rayColor = (LIS);
 	//ray.rayColor = (BIS);
 }
 
