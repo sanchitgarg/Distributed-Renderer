@@ -262,12 +262,13 @@ float getLightArea(Geom *g, int *lightIndices, int &lightIndex)
 	}
 }
 
-bool hitSelectedLight(glm::vec3 &lightIntersect, glm::vec3 lightNormal, glm::vec3 &wi, 
+__host__ __device__
+bool hitSelectedLight( glm::vec3 &lightIntersect, glm::vec3 &lightNormal, glm::vec3 &wi,
 					Geom * g, int *geomCount, MeshGeom *meshGeoms,
 					int * lightIndices, int &lightIndex)
 {
 	Ray r;
-	r.origin = lightIntersect + EPSILON * wi;
+	r.origin = lightIntersect + 0.001f * wi;
 	r.direction = wi;
 
 	float lightT = -1.0f;
@@ -293,10 +294,11 @@ bool hitSelectedLight(glm::vec3 &lightIntersect, glm::vec3 lightNormal, glm::vec
 	{
 		glm::vec3 intersectionPoint, normal;
 		//Now check if the path is clear i.e. light is the closest intersection
-		float t;
+		float t = -1.0f;
+
 		for (int i = 0; i < (*geomCount); ++i)
 		{
-			if (i != lightIndex)
+			if (i != lightIndices[lightIndex])
 			{
 				switch (geom.type)
 				{
@@ -320,9 +322,13 @@ bool hitSelectedLight(glm::vec3 &lightIntersect, glm::vec3 lightNormal, glm::vec
 				}
 			}
 		}
+
+		//If we can reach the light and that is our closest intersection point
+		//	Then return true
+		return true;
 	}
 
-	return true;
+	return false;
 }
 
 
@@ -358,7 +364,7 @@ glm::vec3 getBxDFDirection(Material &m,
 	if (m.hasReflective == 0 && m.hasRefractive == 0)
 	{
 		//cosine weighted hemisphere direction
-		return calculateRandomDirectionInHemisphere(normal, rng);
+		return glm::normalize(calculateRandomDirectionInHemisphere(normal, rng));
 	}
 }
 
@@ -370,7 +376,7 @@ float calculateBxDFPDF(glm::vec3 &normal, glm::vec3 &wi, Material &m)
 	if (m.hasReflective == 0 && m.hasRefractive == 0)
 	{
 		//TODO : CHECK
-		return glm::abs(glm::dot(normal, wi));
+		return glm::abs(glm::dot(normal, wi)) * ONE_OVER_PI;
 	}
 }
 
@@ -404,8 +410,8 @@ void getRayColor(glm::vec3 &camPosition,
 	//Variables for light sampling
 	glm::vec3 lightNormal = normal;
 	glm::vec3 lightIntersection = intersect;
-	int lightIndex;
-
+	int lightIndex=0;
+	
 	Material &material = m[g[geomIndex].materialid];
 
 	//---------LIS calculation---------------
@@ -436,11 +442,12 @@ void getRayColor(glm::vec3 &camPosition,
 		}
 	}
 	
+
 	//---------BIS calculation---------------
 	//BIS variables
 	glm::vec3 BIS(0.f);
 	float PDFBxDF;
-
+	//lightIndex = 0;
 	//Take a wi direction based on input direction and BxDF
 	glm::vec3 wi = getBxDFDirection(material, normal, rng, ray.ray.direction);
 	
@@ -449,30 +456,26 @@ void getRayColor(glm::vec3 &camPosition,
 
 	if (PDFBxDF > EPSILON)
 	{
-		//Select a light at random
-		selectRandomLight(lightIndices, lightCount, rng, lightIndex);
-
 		lightIntersection = intersect;
 		lightNormal = normal;
 
-		//See if this ray hits the light
+		//See if this ray hits the light used in LIS
 		if (hitSelectedLight(lightIntersection, lightNormal, wi, g, geomCount, meshGeoms, lightIndices, lightIndex))
 		{
 			float cosTheta = glm::abs(glm::dot(lightNormal, glm::normalize(intersect - lightIntersection)));
 
 			BIS = (getLightTerm(g, m, lightIndex) * getBxDFTerm(material) * cosTheta) / PDFBxDF;
-			
-			//TODO : ERROR ->
-			//	If we try and access BIS variable, the code crashes. Check this
-			//printf("%f \n", BIS.x);
-			//printf("%f \n", BIS.y);
-			//printf("%f \n", BIS.z);
 		}
 	}
-
 	
-	//Set Ray Color
-	//ray.rayColor = (BIS);
+	//Set Ray Color using power heuristics
+	PDFLight *= PDFLight;
+	PDFBxDF *= PDFBxDF;
+	
+	ray.rayColor = ((PDFLight * LIS) + (PDFBxDF * BIS)) / (PDFBxDF + PDFLight);
+	
+	//ray.rayColor = BIS;
+	//ray.rayColor = LIS;
 }
 
 

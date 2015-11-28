@@ -440,6 +440,8 @@ void pathtrace(uchar4 *pbo, int frame, int iter) {
     dev_rays_end = dev_rays_begin + pixelcount;
     int rayCount = pixelcount;
     int numBlocks, numThreads = 128;
+	//int k;
+	//std::cin >> k;
 
     numBlocks = (rayCount + numThreads - 1) / numThreads;
 
@@ -452,6 +454,7 @@ void pathtrace(uchar4 *pbo, int frame, int iter) {
 //    	cudaEventRecord(start);
 
     	//Take one step, should make dead rays as false
+		//kernTracePath << <1, 1>> >(dev_camera, dev_rays_begin, dev_geoms, dev_geoms_count, dev_meshes, dev_meshes_count, dev_light_indices, dev_light_count, dev_materials, dev_image, iter, i, rayCount);
     	kernTracePath<<<numBlocks, numThreads>>>(dev_camera, dev_rays_begin, dev_geoms, dev_geoms_count, dev_meshes, dev_meshes_count, dev_light_indices, dev_light_count, dev_materials, dev_image, iter, i, rayCount);
 		checkCUDAError("pathtrace step");
 		//kernTracePath <<<1,1>>>(dev_camera, dev_rays_begin, dev_geoms, dev_geoms_count, dev_meshes, dev_meshes_count, dev_light_indices, dev_light_count, dev_materials, dev_image, iter, i, rayCount);
