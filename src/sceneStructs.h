@@ -19,6 +19,7 @@ struct Ray {
 struct RayState
 {
 	Ray ray;
+	float rayThroughPut;
 	int pixelIndex;
 	glm::vec3 rayColor;
 	bool isAlive;

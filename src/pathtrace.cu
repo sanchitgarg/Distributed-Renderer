@@ -219,8 +219,9 @@ __global__ void kernGetRayDirections(Camera * camera, RayState* rays, int iter)
 		rays[index].ray.direction = rayDir;
 		rays[index].ray.origin = camera->position;
 		rays[index].isAlive = true;
-		rays[index].rayColor = glm::vec3(1);
+		rays[index].rayColor = glm::vec3(0);
 		rays[index].pixelIndex = index;
+		rays[index].rayThroughPut = 1.0f;
 
 //		printf("%d %d : %f %f %f\n", x, y, rayDir.x, rayDir.y, rayDir.z);
 	}
@@ -282,7 +283,6 @@ __global__ void kernTracePath(Camera * camera, RayState *ray, Geom * geoms, int 
 
 				 else if (geoms[i].type == MESH)
 				 {
-					 //t = sphereIntersectionTest(geoms[i], r.ray, intersectionPoint, normal);//, outside);
 					 t = meshIntersectionTest(geoms[i], meshGeoms[geoms[i].meshid], r.ray, intersectionPoint, normal);//, outside);
 				 }
 
@@ -299,18 +299,31 @@ __global__ void kernTracePath(Camera * camera, RayState *ray, Geom * geoms, int 
 			 if(nearestIndex == -1)
 			 {
 				 r.isAlive = false;
+
+				 //Write the accumulated color for that pixel.
+				 image[r.pixelIndex] += r.rayColor;
 			 }
 
 			 //else find the material color
 			 else
 			 {
+				 //If light source
 				 if(materials[geoms[nearestIndex].materialid].emittance >= 1)
 				 {
 					 //Light source, end ray here
 					 r.isAlive = false;
-					 image[r.pixelIndex] += (r.rayColor
-							 * materials[geoms[nearestIndex].materialid].emittance
-							 * materials[geoms[nearestIndex].materialid].color);
+					 
+					 //If this is the primary ray, write the light color
+					 if (currDepth == 0)
+					 {
+						 image[r.pixelIndex] += materials[geoms[nearestIndex].materialid].emittance
+												* materials[geoms[nearestIndex].materialid].color;
+					 }
+					 //Else write the accumulated color
+					 else
+					 {
+						 image[r.pixelIndex] += (r.rayColor);
+					 }
 				 }
 
 				 else
@@ -332,10 +345,6 @@ __global__ void kernTracePath(Camera * camera, RayState *ray, Geom * geoms, int 
 						 lightCount);
 					 
 
-					 //TODO: Remove next line for path tracing
-					 image[r.pixelIndex] += r.rayColor;
-
-
 					 /*scatterRay(camera->position,
 								 r,
 								 nearestIntersectionPoint,
@@ -346,13 +355,16 @@ __global__ void kernTracePath(Camera * camera, RayState *ray, Geom * geoms, int 
 								 nearestIndex,
 								 lightIndices,
 								 lightCount);*/
+
+					 //TODO: Remove next line for path tracing
+					 //image[r.pixelIndex] += r.rayColor;
 				 }
 			 }
 		 }
 	 }
 }
 
-__global__ void kernDirectLightPath(Camera * camera, RayState *ray, Geom * geoms, int * lightIndices, int* lightCount, Material* materials, glm::vec3* image, int iter, int currDepth, int rayCount)
+__global__ void kernDirectLightPath(Camera * camera, RayState *ray, Geom * geoms, int * lightIndices, int* lightCount, glm::vec3* image, int iter, int currDepth, int rayCount)
 {
 	int index = (blockIdx.x * blockDim.x) + threadIdx.x;
 
@@ -376,9 +388,45 @@ __global__ void kernDirectLightPath(Camera * camera, RayState *ray, Geom * geoms
 			if(t > 0)
 			{
 				//Intersection with light, write the color
-				image[r.pixelIndex] += (r.rayColor
+				image[r.pixelIndex] += r.rayColor;
+				
+				/*image[r.pixelIndex] += (r.rayColor
 											 * materials[geoms[i].materialid].emittance
-											 * materials[geoms[i].materialid].color);
+											 * materials[geoms[i].materialid].color);*/
+			}
+		}
+	}
+}
+
+
+__global__ void kernWritePixels(Camera * camera, RayState *ray, glm::vec3* image, int rayCount)
+{
+	int index = (blockIdx.x * blockDim.x) + threadIdx.x;
+
+	if (index < rayCount)
+	{
+		if (ray[index].isAlive)
+		{
+			image[ray[index].pixelIndex] += ray[index].rayColor;
+		}
+	}
+}
+
+__global__ void kernRussianRoullete(Camera * camera, RayState *ray, glm::vec3* image, int iter, int rayCount)
+{
+	int index = (blockIdx.x * blockDim.x) + threadIdx.x;
+
+	if (index < rayCount)
+	{
+		if (ray[index].isAlive)
+		{
+			thrust::default_random_engine rng = makeSeededRandomEngine(iter, index, 0);
+			thrust::uniform_real_distribution<float> u01(0, 1.0f);
+			
+			if (ray[index].rayThroughPut < u01(rng))
+			{
+				ray[index].isAlive = false;
+				image[ray[index].pixelIndex] += ray[index].rayColor;
 			}
 		}
 	}
@@ -440,13 +488,12 @@ void pathtrace(uchar4 *pbo, int frame, int iter) {
     dev_rays_end = dev_rays_begin + pixelcount;
     int rayCount = pixelcount;
     int numBlocks, numThreads = 128;
-	//int k;
-	//std::cin >> k;
 
     numBlocks = (rayCount + numThreads - 1) / numThreads;
+	int i;
 
-    //for(int i=0; (i<traceDepth && rayCount > 0); ++i)
-	for (int i = 0; (i<1 && rayCount > 0); ++i)
+    for(int i=0; (i<traceDepth && rayCount > 0); ++i)	//For Path Tracing
+	//for (int i = 0; i<1; ++i)							//For DI
     {
 //    	cudaEvent_t start, stop;
 //    	cudaEventCreate(&start);
@@ -454,21 +501,20 @@ void pathtrace(uchar4 *pbo, int frame, int iter) {
 //    	cudaEventRecord(start);
 
     	//Take one step, should make dead rays as false
-		//kernTracePath << <1, 1>> >(dev_camera, dev_rays_begin, dev_geoms, dev_geoms_count, dev_meshes, dev_meshes_count, dev_light_indices, dev_light_count, dev_materials, dev_image, iter, i, rayCount);
     	kernTracePath<<<numBlocks, numThreads>>>(dev_camera, dev_rays_begin, dev_geoms, dev_geoms_count, dev_meshes, dev_meshes_count, dev_light_indices, dev_light_count, dev_materials, dev_image, iter, i, rayCount);
 		checkCUDAError("pathtrace step");
-		//kernTracePath <<<1,1>>>(dev_camera, dev_rays_begin, dev_geoms, dev_geoms_count, dev_meshes, dev_meshes_count, dev_light_indices, dev_light_count, dev_materials, dev_image, iter, i, rayCount);
-		//int t;
-		//std::cout << "iteration" << std::endl;
-		//std::cin >> t;
-    	
-		//Stream compaction using work efficient
-//    	rayCount = StreamCompaction::Efficient::compact(rayCount, dev_rays_begin);
 
-//    	Compact rays, dev_rays_end points to the new end
-    	dev_rays_end = thrust::remove_if(thrust::device, dev_rays_begin, dev_rays_end, isDead());
+		//If currDepth is > 2, play russian roullete
+		if (i > 2)
+		{
+			kernRussianRoullete << <numBlocks, numThreads >> >(dev_camera, dev_rays_begin, dev_image, iter, rayCount);
+		}
+
+		// Compact rays, dev_rays_end points to the new end
+		dev_rays_end = thrust::remove_if(thrust::device, dev_rays_begin, dev_rays_end, isDead());
     	rayCount = dev_rays_end - dev_rays_begin;
 
+		//Calculate new number of blocks
     	numBlocks = (rayCount + numThreads - 1) / numThreads;
 
 //    	cudaEventRecord(stop);
@@ -479,10 +525,16 @@ void pathtrace(uchar4 *pbo, int frame, int iter) {
 //    		std::cout<</*"Iter : "<<iter<<" Depth : "<<i<<" Total time in milliseconds : "<<*/milliseconds<<std::endl;
     }
 
+	//std::cout << i << std::endl;
+	if (rayCount > 0)
+	{
+		kernWritePixels << <numBlocks, numThreads >> >(dev_camera, dev_rays_begin, dev_image, rayCount);
+	}
+
     //Direct Illumination
     if(DI && rayCount > 0)
     {
-    	//kernDirectLightPath<<<numBlocks, numThreads>>>(dev_camera, dev_rays_begin, dev_geoms, dev_light_indices, dev_light_count, dev_materials, dev_image, iter, traceDepth, rayCount);
+    	kernDirectLightPath<<<numBlocks, numThreads>>>(dev_camera, dev_rays_begin, dev_geoms, dev_light_indices, dev_light_count, dev_image, iter, traceDepth, rayCount);
     }
 
     // Send results to OpenGL buffer for rendering

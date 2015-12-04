@@ -2,6 +2,7 @@
 
 #include "intersections.h"
 #include <glm/gtc/matrix_inverse.hpp>
+#include <glm/gtx/component_wise.hpp>
 
 
 // ---------------------------------------------------------------------------------------
@@ -268,7 +269,7 @@ bool hitSelectedLight( glm::vec3 &lightIntersect, glm::vec3 &lightNormal, glm::v
 					int * lightIndices, int &lightIndex)
 {
 	Ray r;
-	r.origin = lightIntersect + 0.001f * wi;
+	r.origin = lightIntersect + EPSILON * wi;
 	r.direction = wi;
 
 	float lightT = -1.0f;
@@ -372,6 +373,12 @@ glm::vec3 getBxDFDirection(Material &m,
 __host__ __device__
 float calculateBxDFPDF(glm::vec3 &normal, glm::vec3 &wi, Material &m)
 {
+	//REFLECTIVE MATERIAL
+	if (m.hasReflective)
+	{
+
+	}
+
 	//DIFFUSED MATERIAL
 	if (m.hasReflective == 0 && m.hasRefractive == 0)
 	{
@@ -424,7 +431,7 @@ void getRayColor(glm::vec3 &camPosition,
 		//If we hit a light, then we can reach the light so do LIS calculations
 
 		//Find the absdot(wi, N) term
-		float cosTheta = glm::abs(glm::dot(lightNormal, glm::normalize(intersect - lightIntersection)));
+		float cosTheta = glm::abs(glm::dot(normal, glm::normalize(intersect - lightIntersection)));
 
 		if (cosTheta > EPSILON)
 		{
@@ -447,7 +454,9 @@ void getRayColor(glm::vec3 &camPosition,
 	//BIS variables
 	glm::vec3 BIS(0.f);
 	float PDFBxDF;
-	//lightIndex = 0;
+	float cosTheta = 0.0;
+	glm::vec3 BxDFTerm;
+
 	//Take a wi direction based on input direction and BxDF
 	glm::vec3 wi = getBxDFDirection(material, normal, rng, ray.ray.direction);
 	
@@ -458,22 +467,34 @@ void getRayColor(glm::vec3 &camPosition,
 	{
 		lightIntersection = intersect;
 		lightNormal = normal;
+		
+		//CosTheta is the absdot of the surface normal and the wi
+		cosTheta = glm::abs(glm::dot(normal, wi));
+
+		//Get the BxDF term
+		BxDFTerm = getBxDFTerm(material);
 
 		//See if this ray hits the light used in LIS
 		if (hitSelectedLight(lightIntersection, lightNormal, wi, g, geomCount, meshGeoms, lightIndices, lightIndex))
-		{
-			float cosTheta = glm::abs(glm::dot(lightNormal, glm::normalize(intersect - lightIntersection)));
-
-			BIS = (getLightTerm(g, m, lightIndex) * getBxDFTerm(material) * cosTheta) / PDFBxDF;
+		{	
+			BIS = (getLightTerm(g, m, lightIndex) * BxDFTerm * cosTheta) / PDFBxDF;
 		}
 	}
-	
+
 	//Set Ray Color using power heuristics
 	PDFLight *= PDFLight;
-	PDFBxDF *= PDFBxDF;
-	
-	ray.rayColor = ((PDFLight * LIS) + (PDFBxDF * BIS)) / (PDFBxDF + PDFLight);
-	
+	float PDFBxDF2 = PDFBxDF * PDFBxDF;
+	ray.rayColor += (((PDFLight * LIS) + (PDFBxDF2 * BIS)) / (PDFBxDF2 + PDFLight)) * ray.rayThroughPut;
+
+	//Calculate new throughput which is the max of rgb of costheta(BRDF) * BxDFTerm / BxDF PDF
+	ray.rayThroughPut *= cosTheta * glm::compMax(BxDFTerm) / PDFBxDF;
+
+	//New ray direction is the wi selected
+	ray.ray.direction = wi;
+
+	//New ray origin is the intersection point plus some offset in the new direction
+	ray.ray.origin = intersect + wi * EPSILON;
+
 	//ray.rayColor = BIS;
 	//ray.rayColor = LIS;
 }
@@ -506,16 +527,16 @@ void getRayColor(glm::vec3 &camPosition,
 */
 __host__ __device__
 void scatterRay(
-glm::vec3 &camPosition,
-RayState &ray,
-glm::vec3 intersect,
-glm::vec3 normal,
-Material &m,
-thrust::default_random_engine &rng,
-Geom *g,
-int geomIndex,
-int *lightIndices,
-int *lightCount)
+		glm::vec3 &camPosition,
+		RayState &ray,
+		glm::vec3 intersect,
+		glm::vec3 normal,
+		Material &m,
+		thrust::default_random_engine &rng,
+		Geom *g,
+		int geomIndex,
+		int *lightIndices,
+		int *lightCount)
 {
 
 	Ray &r = ray.ray;
@@ -557,13 +578,13 @@ int *lightCount)
 				}
 
 				r.direction = glm::normalize(calculateRandomDirectionInHemisphere(newNormal, rng));
-				r.origin = newIntersect + 0.001f * r.direction;
+				r.origin = newIntersect + EPSILON * r.direction;
 			}
 
 			else
 			{
 				//Do diffused
-				r.origin = intersect + 0.001f * r.direction;
+				r.origin = intersect + EPSILON * r.direction;
 			}
 		}
 
@@ -584,7 +605,7 @@ int *lightCount)
 
 				ray.rayColor *= (m.color);
 				r.direction = (glm::reflect(r.direction, normal));
-				r.origin = intersect + 0.001f * r.direction;
+				r.origin = intersect + EPSILON * r.direction;
 			}
 
 			else
@@ -592,7 +613,7 @@ int *lightCount)
 				//Do refraction
 				ray.rayColor *= (m.color);
 				r.direction = transmittedDir;
-				r.origin = intersect + 0.001f * r.direction;
+				r.origin = intersect + EPSILON * r.direction;
 
 				//Intersect with the object again
 				//float t;
@@ -608,7 +629,7 @@ int *lightCount)
 				}
 
 				r.direction = (glm::refract(r.direction, normal, m.indexOfRefraction));
-				r.origin = intersect + 0.001f * r.direction;
+				r.origin = intersect + EPSILON * r.direction;
 			}
 		}
 	}
@@ -646,13 +667,13 @@ int *lightCount)
 			}
 
 			r.direction = glm::normalize(calculateRandomDirectionInHemisphere(newNormal, rng));
-			r.origin = newIntersect + 0.001f * r.direction;
+			r.origin = newIntersect + EPSILON * r.direction;
 		}
 
 		else
 		{
 			//Do diffused
-			r.origin = intersect + 0.001f * r.direction;
+			r.origin = intersect + EPSILON * r.direction;
 		}
 	}
 
@@ -673,7 +694,7 @@ int *lightCount)
 			ray.rayColor *= (m.specular.color * specTerm);
 
 			//r.direction = glm::reflect(r.direction, normal);
-			r.origin = intersect + 0.001f * r.direction;
+			r.origin = intersect + EPSILON * r.direction;
 		}
 
 		else
@@ -681,7 +702,7 @@ int *lightCount)
 			//Do perfect diffused
 			ray.rayColor *= (m.color);
 			r.direction = glm::normalize(calculateRandomDirectionInHemisphere(normal, rng));
-			r.origin = intersect + 0.001f * r.direction;
+			r.origin = intersect + EPSILON * r.direction;
 		}
 	}
 
@@ -706,7 +727,7 @@ int *lightCount)
 
 			ray.rayColor *= (m.color);
 			r.direction = (glm::reflect(r.direction, normal));
-			r.origin = intersect + 0.001f * r.direction;
+			r.origin = intersect + EPSILON * r.direction;
 		}
 
 		else
@@ -714,7 +735,7 @@ int *lightCount)
 			//Do refraction
 			ray.rayColor *= (m.color);
 			r.direction = transmittedDir;
-			r.origin = intersect + 0.001f * r.direction;
+			r.origin = intersect + EPSILON * r.direction;
 
 			//Intersect with the object again
 			//float t;
@@ -730,7 +751,7 @@ int *lightCount)
 			}
 
 			r.direction = (glm::refract(r.direction, normal, m.indexOfRefraction));
-			r.origin = intersect + 0.001f * r.direction;
+			r.origin = intersect + EPSILON * r.direction;
 		}
 
 	}
@@ -740,7 +761,7 @@ int *lightCount)
 		//Reflective surface
 		ray.rayColor *= m.color;
 		r.direction = (glm::reflect(r.direction, normal));
-		r.origin = intersect + 0.001f * r.direction;
+		r.origin = intersect + EPSILON * r.direction;
 	}
 
 	else if (m.hasRefractive > 0)
@@ -748,7 +769,7 @@ int *lightCount)
 		//Refractive surface
 		ray.rayColor *= m.color;
 		r.direction = (glm::refract(r.direction, normal, 1.0f / m.indexOfRefraction));
-		r.origin = intersect + 0.001f * r.direction;
+		r.origin = intersect + EPSILON * r.direction;
 
 		//Intersect with the object again
 		//		float t;
@@ -766,7 +787,7 @@ int *lightCount)
 		//		if (t > 0)
 		{
 			r.direction = (glm::refract(r.direction, normal, m.indexOfRefraction));
-			r.origin = intersect + 0.001f * r.direction;
+			r.origin = intersect + EPSILON * r.direction;
 		}
 	}
 }
