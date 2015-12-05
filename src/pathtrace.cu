@@ -266,27 +266,27 @@ __global__ void kernTracePath(Camera * camera, RayState *ray, Geom * geoms, int 
 			 RayState &r = ray[index];
 			 int nearestIndex = -1;
 			 glm::vec3 nearestIntersectionPoint = glm::vec3(0), nearestNormal = glm::vec3(0);
-//			 bool outside = false;
+			 bool outside = false;
 
 			 //Find geometry intersection
 			 for(int i=0; i<(*geomCount); ++i)
 			 {
 				 if(geoms[i].type == CUBE)
 				 {
-					 t = boxIntersectionTest(geoms[i], r.ray, intersectionPoint, normal);//, outside);
+					 t = boxIntersectionTest(geoms[i], r.ray, intersectionPoint, normal, outside);
 				 }
 
 				 else if(geoms[i].type == SPHERE)
 				 {
-					 t = sphereIntersectionTest(geoms[i], r.ray, intersectionPoint, normal);//, outside);
+					 t = sphereIntersectionTest(geoms[i], r.ray, intersectionPoint, normal, outside);
 				 }
 
 				 else if (geoms[i].type == MESH)
 				 {
-					 t = meshIntersectionTest(geoms[i], meshGeoms[geoms[i].meshid], r.ray, intersectionPoint, normal);//, outside);
+					 t = meshIntersectionTest(geoms[i], meshGeoms[geoms[i].meshid], r.ray, intersectionPoint, normal, outside);
 				 }
 
-				 if (t > 0 && t < min_t)//&& !outside)
+				 if (t > 0 && t < min_t)
 				 {
 					 min_t = t;
 					 nearestIntersectionPoint = intersectionPoint;
@@ -334,6 +334,7 @@ __global__ void kernTracePath(Camera * camera, RayState *ray, Geom * geoms, int 
 						 r,
 						 nearestIntersectionPoint,
 						 nearestNormal,
+						 outside,
 						 materials,
 						 rng,
 						 geoms,
@@ -490,7 +491,6 @@ void pathtrace(uchar4 *pbo, int frame, int iter) {
     int numBlocks, numThreads = 128;
 
     numBlocks = (rayCount + numThreads - 1) / numThreads;
-	int i;
 
     for(int i=0; (i<traceDepth && rayCount > 0); ++i)	//For Path Tracing
 	//for (int i = 0; i<1; ++i)							//For DI

@@ -339,21 +339,109 @@ bool hitSelectedLight( glm::vec3 &lightIntersect, glm::vec3 &lightNormal, glm::v
 //						BxDF Calculation Functions
 // ---------------------------------------------------------------------------------------
 
+//Helper function to evaluate Fresnel reflection formula for dielectric materials
+__host__ __device__
+float FrDiel(float &cosi, float &cost, float &ei, float &et)
+{
+	float etat(et);
+	float etai(ei);
+
+	float Rparl = ((etat * cosi) - (etai * cost)) /
+						((etat * cosi) + (etai * cost));
+
+	float Rperp = ((etai * cosi) - (etat * cost)) /
+						((etai * cosi) + (etat * cost));
+
+	return (Rparl * Rparl + Rperp * Rperp) / 2.0f;
+}
+
+//Function to evaluate the fresnel term for refraction
+__host__ __device__
+float evaluateFresnel(Material &m,
+						glm::vec3 &wi, glm::vec3 &wo, bool &outside,
+						glm::vec3 &normal)
+{
+	float cosi = glm::dot(wo, normal);
+	cosi = glm::clamp(cosi, -1.f, 1.f);
+	
+	float absCosi = glm::abs(cosi);
+
+	float ei, et;
+
+	if (outside)
+	{
+		ei = 1.0f;
+		et = m.indexOfRefraction;
+	}
+
+	else
+	{
+		ei = m.indexOfRefraction; 
+		et = 1.0f;
+	}
+
+	float sint = (ei / et) * sqrtf(max(0.0f, 1.0f - cosi * cosi));
+
+	if (sint >= 1.f)
+	{
+		//TIR
+		return 1.0f;
+	}
+
+	else
+	{
+		//Else refracted so get the color
+		float cost = sqrtf(max(0.0f, 1.f - sint*sint));
+
+		//Using dielectric materials
+		return FrDiel(absCosi, cost, ei, et);
+	}
+}
+
 //Function to calculate the BxDF term (color) used by the Monte Carlo estimator
 __host__ __device__
 glm::vec3 getBxDFTerm(Material &m,
-						glm::vec3 &wi, glm::vec3 &normal)
+						glm::vec3 &wi, glm::vec3 &wo, bool &outside,
+						glm::vec3 &normal)
 {
 	//REFRACTIVE MATERIAL
 	if (m.hasRefractive)
 	{
-		return m.color;
+		//PBRT : Pg 444
+		//	Assuming transmission scale factor T = material color
+
+		//glm::vec3 F = evaluateFresnel(m, wi, wo, outside, normal);
+		//float F = evaluateFresnel(m, wi, wo, outside, normal);
+		//F = glm::clamp(F, 0.0f, 1.0f);
+		//
+		//if (outside)
+		//{
+		//	//return (m.indexOfRefraction * m.indexOfRefraction) * (glm::vec3(1.f) - F) 
+		//	//					* m.color / glm::abs(glm::dot(wi, normal));
+		//	return (m.indexOfRefraction * m.indexOfRefraction) * (1.f - F)
+		//			* m.color / glm::abs(glm::dot(wi, normal));
+		//
+		//	//return F * m.color / glm::abs(glm::dot(wi, normal));
+		//
+		//}
+		//else
+		//{
+		//	//return (1.0f / (m.indexOfRefraction * m.indexOfRefraction)) * (glm::vec3(1.f) - F)
+		//	//	* m.color / glm::abs(glm::dot(wi, normal));
+		//	return (1.0f / (m.indexOfRefraction * m.indexOfRefraction)) * (1.f - F)
+		//			* m.color / glm::abs(glm::dot(wi, normal));
+		//
+		//	//return F * m.color / glm::abs(glm::dot(wi, normal));
+		//}
+		//	
+		return 1.0f * m.color / glm::abs(glm::dot(wo, normal));
 	}
 
 	//REFLECTIVE MATERIAL
 	else if (m.hasReflective)
 	{
-		//Specular term is 1.0 for perfect mirror
+		//Fresnel (Specular) term is 1.0 for perfect mirror
+		//PBRT : Pg 441
 		return 1.0f * m.color / glm::abs(glm::dot(wi, normal));
 	}
 
@@ -362,6 +450,7 @@ glm::vec3 getBxDFTerm(Material &m,
 	{
 		//Calculate : (Diffused Color * base color * texture color) / PI
 		//		As the color gets distributed equally around the hemisphere
+		//PBRT : Pg 447
 		return m.color * ONE_OVER_PI;
 	}
 
@@ -372,7 +461,7 @@ glm::vec3 getBxDFTerm(Material &m,
 __host__ __device__
 glm::vec3 getBxDFDirection(Material &m,
 							glm::vec3 &normal, thrust::default_random_engine &rng,
-							glm::vec3 &rayDirection, glm::vec3 &intersect,
+							glm::vec3 &rayDirection, glm::vec3 &intersect, bool &outside,
 							Geom *g, int geomIndex
 							)
 {
@@ -383,24 +472,32 @@ glm::vec3 getBxDFDirection(Material &m,
 		//Create a ray
 		Ray r; r.direction = rayDirection;
 
-		//Refract it once
-		r.direction = (glm::refract(r.direction, normal, 1.0f / m.indexOfRefraction));
-		r.origin = intersect + EPSILON * r.direction;
-
-		// find intersection with the same object
-		if (g[geomIndex].type == SPHERE)
+		//Refract
+		if (outside)
 		{
-			sphereIntersectionTest(g[geomIndex], r, intersect, normal);
+			r.direction = (glm::refract(r.direction, normal, m.indexOfRefraction));
+		}
+		else
+		{
+			r.direction = (glm::refract(r.direction, normal, 1.0f / m.indexOfRefraction));
 		}
 
-		else if (g[geomIndex].type == CUBE)
-		{
-			boxIntersectionTest(g[geomIndex], r, intersect, normal);
-		}
+		r.origin = intersect + 100.0f * EPSILON * r.direction;
 
-		//Refract it again
-		r.direction = (glm::refract(r.direction, normal, m.indexOfRefraction));
-		r.origin = intersect + EPSILON * r.direction;
+		//// find intersection with the same object
+		//if (g[geomIndex].type == SPHERE)
+		//{
+		//	sphereIntersectionTest(g[geomIndex], r, intersect, normal);
+		//}
+
+		//else if (g[geomIndex].type == CUBE)
+		//{
+		//	boxIntersectionTest(g[geomIndex], r, intersect, normal);
+		//}
+
+		////Refract it again
+		//r.direction = (glm::refract(r.direction, normal, m.indexOfRefraction));
+		//r.origin = intersect + EPSILON * r.direction;
 
 		//Set the new intersection as the offset position
 		intersect = r.origin;
@@ -459,6 +556,7 @@ void getRayColor(glm::vec3 &camPosition,
 		RayState &ray,
 		glm::vec3 &intersect,
 		glm::vec3 &normal,
+		bool &outside,
 		Material *m,
 		thrust::default_random_engine &rng,
 		Geom *g,
@@ -505,7 +603,7 @@ void getRayColor(glm::vec3 &camPosition,
 			if (PDFLight > EPSILON)
 			{
 				// LIS = LightTerm * BxDFTerm * absdot(wi, N) / PDFLight
-				LIS = (getLightTerm(g, m, lightIndex) * getBxDFTerm(material, wi, normal) * cosTheta) / PDFLight;
+				LIS = (getLightTerm(g, m, lightIndex) * getBxDFTerm(material, wi, ray.ray.direction, outside, normal) * cosTheta) / PDFLight;
 			}
 		}
 	}
@@ -518,8 +616,8 @@ void getRayColor(glm::vec3 &camPosition,
 	float cosTheta = 0.0;
 	glm::vec3 BxDFTerm;
 
-	//Take a wi direction based on input direction and BxDF
-	glm::vec3 wi = getBxDFDirection(material, normal, rng, ray.ray.direction, intersect, g, geomIndex);
+	//Find an wi direction based on input direction and BxDF
+	glm::vec3 wi = getBxDFDirection(material, normal, rng, ray.ray.direction, intersect, outside, g, geomIndex);
 	
 	//Calculate the BxDF PDF
 	PDFBxDF = calculateBxDFPDF(normal, wi, material);
@@ -533,7 +631,7 @@ void getRayColor(glm::vec3 &camPosition,
 		cosTheta = glm::abs(glm::dot(normal, wi));
 
 		//Get the BxDF term
-		BxDFTerm = getBxDFTerm(material, wi, normal);
+		BxDFTerm = getBxDFTerm(material, wi, ray.ray.direction, outside, normal);
 
 		//See if this ray hits the light used in LIS
 		if (hitSelectedLight(lightIntersection, lightNormal, wi, g, geomCount, meshGeoms, lightIndices, lightIndex))
