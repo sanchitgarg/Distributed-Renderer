@@ -21,8 +21,7 @@
 #include "scene.h"
 
 #include "Helper.h"
-#include "PacketListener.h"
-#include "PacketSender.h"
+#include "PacketManager.h"
 
 using namespace std;
 

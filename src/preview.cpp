@@ -168,7 +168,7 @@ bool init() {
     return true;
 }
 
-
+/*
 void packThisShit(PacketSender* pSend, std::string client_ip, 
 	vector<glm::ivec3> pixelClr){
 
@@ -187,11 +187,11 @@ void packThisShit(PacketSender* pSend, std::string client_ip,
 					Pixel* pixel = p->add_pixel();
 
 					//Test code for data transfer
-					/*int gradientX = ((i * TILESIZE) + k) * 255 / width;
+					int gradientX = ((i * TILESIZE) + k) * 255 / width;
 					int gradientY = ((j * TILESIZE) + l) * 255 / height;
 					pixel->set_r(gradientX);
 					pixel->set_g(gradientY);
-					pixel->set_b(0);*/
+					pixel->set_b(0);
 					
 					glm::ivec3 clr = pixelClr[(i * TILESIZE + k) + (j * TILESIZE + l) * width];
 					pixel->set_r(clr.r);
@@ -205,7 +205,9 @@ void packThisShit(PacketSender* pSend, std::string client_ip,
 	}
 
 }
-void mainLoop(PacketListener* pRecv, PacketSender* pSend, std::string client_ip) {
+*/
+
+void mainLoop(PacketManager* pMgr, std::string client_ip) {
 	// Initialize CUDA and GL components
 	init();
 
@@ -254,6 +256,7 @@ void mainLoop(PacketListener* pRecv, PacketSender* pSend, std::string client_ip)
 		//
 		//iter++;
     }
+
     glfwDestroyWindow(window);
     glfwTerminate();
 }

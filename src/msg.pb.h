@@ -26,24 +26,29 @@
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
+namespace Message {
+
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_msg_2eproto();
 void protobuf_AssignDesc_msg_2eproto();
 void protobuf_ShutdownFile_msg_2eproto();
 
-class Pixel;
-class Packet;
+class Color;
+class INIT;
+class ACK;
+class PIXEL;
+class START_RENDER;
 
 // ===================================================================
 
-class Pixel : public ::google::protobuf::Message {
+class Color : public ::google::protobuf::Message {
  public:
-  Pixel();
-  virtual ~Pixel();
+  Color();
+  virtual ~Color();
 
-  Pixel(const Pixel& from);
+  Color(const Color& from);
 
-  inline Pixel& operator=(const Pixel& from) {
+  inline Color& operator=(const Color& from) {
     CopyFrom(from);
     return *this;
   }
@@ -57,17 +62,17 @@ class Pixel : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const Pixel& default_instance();
+  static const Color& default_instance();
 
-  void Swap(Pixel* other);
+  void Swap(Color* other);
 
   // implements Message ----------------------------------------------
 
-  Pixel* New() const;
+  Color* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const Pixel& from);
-  void MergeFrom(const Pixel& from);
+  void CopyFrom(const Color& from);
+  void MergeFrom(const Color& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -110,7 +115,7 @@ class Pixel : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 b() const;
   inline void set_b(::google::protobuf::int32 value);
 
-  // @@protoc_insertion_point(class_scope:Pixel)
+  // @@protoc_insertion_point(class_scope:Message.Color)
  private:
   inline void set_has_r();
   inline void clear_has_r();
@@ -131,18 +136,18 @@ class Pixel : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_msg_2eproto();
 
   void InitAsDefaultInstance();
-  static Pixel* default_instance_;
+  static Color* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class Packet : public ::google::protobuf::Message {
+class INIT : public ::google::protobuf::Message {
  public:
-  Packet();
-  virtual ~Packet();
+  INIT();
+  virtual ~INIT();
 
-  Packet(const Packet& from);
+  INIT(const INIT& from);
 
-  inline Packet& operator=(const Packet& from) {
+  inline INIT& operator=(const INIT& from) {
     CopyFrom(from);
     return *this;
   }
@@ -156,17 +161,17 @@ class Packet : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const Packet& default_instance();
+  static const INIT& default_instance();
 
-  void Swap(Packet* other);
+  void Swap(INIT* other);
 
   // implements Message ----------------------------------------------
 
-  Packet* New() const;
+  INIT* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const Packet& from);
-  void MergeFrom(const Packet& from);
+  void CopyFrom(const INIT& from);
+  void MergeFrom(const INIT& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -188,284 +193,1118 @@ class Packet : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required uint32 type = 1;
-  inline bool has_type() const;
-  inline void clear_type();
-  static const int kTypeFieldNumber = 1;
-  inline ::google::protobuf::uint32 type() const;
-  inline void set_type(::google::protobuf::uint32 value);
+  // required string viewer_ip = 1;
+  inline bool has_viewer_ip() const;
+  inline void clear_viewer_ip();
+  static const int kViewerIpFieldNumber = 1;
+  inline const ::std::string& viewer_ip() const;
+  inline void set_viewer_ip(const ::std::string& value);
+  inline void set_viewer_ip(const char* value);
+  inline void set_viewer_ip(const char* value, size_t size);
+  inline ::std::string* mutable_viewer_ip();
+  inline ::std::string* release_viewer_ip();
+  inline void set_allocated_viewer_ip(::std::string* viewer_ip);
 
-  // optional int32 tX = 2;
-  inline bool has_tx() const;
-  inline void clear_tx();
-  static const int kTXFieldNumber = 2;
-  inline ::google::protobuf::int32 tx() const;
-  inline void set_tx(::google::protobuf::int32 value);
+  // required int32 viewer_port = 2;
+  inline bool has_viewer_port() const;
+  inline void clear_viewer_port();
+  static const int kViewerPortFieldNumber = 2;
+  inline ::google::protobuf::int32 viewer_port() const;
+  inline void set_viewer_port(::google::protobuf::int32 value);
 
-  // optional int32 tY = 3;
-  inline bool has_ty() const;
-  inline void clear_ty();
-  static const int kTYFieldNumber = 3;
-  inline ::google::protobuf::int32 ty() const;
-  inline void set_ty(::google::protobuf::int32 value);
+  // required int32 width = 3;
+  inline bool has_width() const;
+  inline void clear_width();
+  static const int kWidthFieldNumber = 3;
+  inline ::google::protobuf::int32 width() const;
+  inline void set_width(::google::protobuf::int32 value);
 
-  // optional int32 tileSize = 4;
-  inline bool has_tilesize() const;
-  inline void clear_tilesize();
-  static const int kTileSizeFieldNumber = 4;
-  inline ::google::protobuf::int32 tilesize() const;
-  inline void set_tilesize(::google::protobuf::int32 value);
+  // required int32 height = 4;
+  inline bool has_height() const;
+  inline void clear_height();
+  static const int kHeightFieldNumber = 4;
+  inline ::google::protobuf::int32 height() const;
+  inline void set_height(::google::protobuf::int32 value);
 
-  // repeated .Pixel pixel = 5;
-  inline int pixel_size() const;
-  inline void clear_pixel();
-  static const int kPixelFieldNumber = 5;
-  inline const ::Pixel& pixel(int index) const;
-  inline ::Pixel* mutable_pixel(int index);
-  inline ::Pixel* add_pixel();
-  inline const ::google::protobuf::RepeatedPtrField< ::Pixel >&
-      pixel() const;
-  inline ::google::protobuf::RepeatedPtrField< ::Pixel >*
-      mutable_pixel();
-
-  // @@protoc_insertion_point(class_scope:Packet)
+  // @@protoc_insertion_point(class_scope:Message.INIT)
  private:
-  inline void set_has_type();
-  inline void clear_has_type();
-  inline void set_has_tx();
-  inline void clear_has_tx();
-  inline void set_has_ty();
-  inline void clear_has_ty();
-  inline void set_has_tilesize();
-  inline void clear_has_tilesize();
+  inline void set_has_viewer_ip();
+  inline void clear_has_viewer_ip();
+  inline void set_has_viewer_port();
+  inline void clear_has_viewer_port();
+  inline void set_has_width();
+  inline void clear_has_width();
+  inline void set_has_height();
+  inline void clear_has_height();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::google::protobuf::uint32 type_;
-  ::google::protobuf::int32 tx_;
-  ::google::protobuf::int32 ty_;
-  ::google::protobuf::int32 tilesize_;
-  ::google::protobuf::RepeatedPtrField< ::Pixel > pixel_;
+  ::std::string* viewer_ip_;
+  ::google::protobuf::int32 viewer_port_;
+  ::google::protobuf::int32 width_;
+  ::google::protobuf::int32 height_;
   friend void  protobuf_AddDesc_msg_2eproto();
   friend void protobuf_AssignDesc_msg_2eproto();
   friend void protobuf_ShutdownFile_msg_2eproto();
 
   void InitAsDefaultInstance();
-  static Packet* default_instance_;
+  static INIT* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ACK : public ::google::protobuf::Message {
+ public:
+  ACK();
+  virtual ~ACK();
+
+  ACK(const ACK& from);
+
+  inline ACK& operator=(const ACK& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ACK& default_instance();
+
+  void Swap(ACK* other);
+
+  // implements Message ----------------------------------------------
+
+  ACK* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ACK& from);
+  void MergeFrom(const ACK& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 rendererID = 1;
+  inline bool has_rendererid() const;
+  inline void clear_rendererid();
+  static const int kRendererIDFieldNumber = 1;
+  inline ::google::protobuf::int32 rendererid() const;
+  inline void set_rendererid(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:Message.ACK)
+ private:
+  inline void set_has_rendererid();
+  inline void clear_has_rendererid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::int32 rendererid_;
+  friend void  protobuf_AddDesc_msg_2eproto();
+  friend void protobuf_AssignDesc_msg_2eproto();
+  friend void protobuf_ShutdownFile_msg_2eproto();
+
+  void InitAsDefaultInstance();
+  static ACK* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class PIXEL : public ::google::protobuf::Message {
+ public:
+  PIXEL();
+  virtual ~PIXEL();
+
+  PIXEL(const PIXEL& from);
+
+  inline PIXEL& operator=(const PIXEL& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PIXEL& default_instance();
+
+  void Swap(PIXEL* other);
+
+  // implements Message ----------------------------------------------
+
+  PIXEL* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const PIXEL& from);
+  void MergeFrom(const PIXEL& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 iteration = 1;
+  inline bool has_iteration() const;
+  inline void clear_iteration();
+  static const int kIterationFieldNumber = 1;
+  inline ::google::protobuf::int32 iteration() const;
+  inline void set_iteration(::google::protobuf::int32 value);
+
+  // required int32 firstPixelPtr = 2;
+  inline bool has_firstpixelptr() const;
+  inline void clear_firstpixelptr();
+  static const int kFirstPixelPtrFieldNumber = 2;
+  inline ::google::protobuf::int32 firstpixelptr() const;
+  inline void set_firstpixelptr(::google::protobuf::int32 value);
+
+  // required int32 pixelOffset = 3;
+  inline bool has_pixeloffset() const;
+  inline void clear_pixeloffset();
+  static const int kPixelOffsetFieldNumber = 3;
+  inline ::google::protobuf::int32 pixeloffset() const;
+  inline void set_pixeloffset(::google::protobuf::int32 value);
+
+  // repeated .Message.Color color = 4;
+  inline int color_size() const;
+  inline void clear_color();
+  static const int kColorFieldNumber = 4;
+  inline const ::Message::Color& color(int index) const;
+  inline ::Message::Color* mutable_color(int index);
+  inline ::Message::Color* add_color();
+  inline const ::google::protobuf::RepeatedPtrField< ::Message::Color >&
+      color() const;
+  inline ::google::protobuf::RepeatedPtrField< ::Message::Color >*
+      mutable_color();
+
+  // @@protoc_insertion_point(class_scope:Message.PIXEL)
+ private:
+  inline void set_has_iteration();
+  inline void clear_has_iteration();
+  inline void set_has_firstpixelptr();
+  inline void clear_has_firstpixelptr();
+  inline void set_has_pixeloffset();
+  inline void clear_has_pixeloffset();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::int32 iteration_;
+  ::google::protobuf::int32 firstpixelptr_;
+  ::google::protobuf::RepeatedPtrField< ::Message::Color > color_;
+  ::google::protobuf::int32 pixeloffset_;
+  friend void  protobuf_AddDesc_msg_2eproto();
+  friend void protobuf_AssignDesc_msg_2eproto();
+  friend void protobuf_ShutdownFile_msg_2eproto();
+
+  void InitAsDefaultInstance();
+  static PIXEL* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class START_RENDER : public ::google::protobuf::Message {
+ public:
+  START_RENDER();
+  virtual ~START_RENDER();
+
+  START_RENDER(const START_RENDER& from);
+
+  inline START_RENDER& operator=(const START_RENDER& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const START_RENDER& default_instance();
+
+  void Swap(START_RENDER* other);
+
+  // implements Message ----------------------------------------------
+
+  START_RENDER* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const START_RENDER& from);
+  void MergeFrom(const START_RENDER& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string viewer_ip = 1;
+  inline bool has_viewer_ip() const;
+  inline void clear_viewer_ip();
+  static const int kViewerIpFieldNumber = 1;
+  inline const ::std::string& viewer_ip() const;
+  inline void set_viewer_ip(const ::std::string& value);
+  inline void set_viewer_ip(const char* value);
+  inline void set_viewer_ip(const char* value, size_t size);
+  inline ::std::string* mutable_viewer_ip();
+  inline ::std::string* release_viewer_ip();
+  inline void set_allocated_viewer_ip(::std::string* viewer_ip);
+
+  // required int32 viewer_port = 2;
+  inline bool has_viewer_port() const;
+  inline void clear_viewer_port();
+  static const int kViewerPortFieldNumber = 2;
+  inline ::google::protobuf::int32 viewer_port() const;
+  inline void set_viewer_port(::google::protobuf::int32 value);
+
+  // required string leader_ip = 3;
+  inline bool has_leader_ip() const;
+  inline void clear_leader_ip();
+  static const int kLeaderIpFieldNumber = 3;
+  inline const ::std::string& leader_ip() const;
+  inline void set_leader_ip(const ::std::string& value);
+  inline void set_leader_ip(const char* value);
+  inline void set_leader_ip(const char* value, size_t size);
+  inline ::std::string* mutable_leader_ip();
+  inline ::std::string* release_leader_ip();
+  inline void set_allocated_leader_ip(::std::string* leader_ip);
+
+  // required int32 leader_port = 4;
+  inline bool has_leader_port() const;
+  inline void clear_leader_port();
+  static const int kLeaderPortFieldNumber = 4;
+  inline ::google::protobuf::int32 leader_port() const;
+  inline void set_leader_port(::google::protobuf::int32 value);
+
+  // required int32 no_renderer = 5;
+  inline bool has_no_renderer() const;
+  inline void clear_no_renderer();
+  static const int kNoRendererFieldNumber = 5;
+  inline ::google::protobuf::int32 no_renderer() const;
+  inline void set_no_renderer(::google::protobuf::int32 value);
+
+  // required int32 assigned_no = 6;
+  inline bool has_assigned_no() const;
+  inline void clear_assigned_no();
+  static const int kAssignedNoFieldNumber = 6;
+  inline ::google::protobuf::int32 assigned_no() const;
+  inline void set_assigned_no(::google::protobuf::int32 value);
+
+  // required int32 iteration = 7;
+  inline bool has_iteration() const;
+  inline void clear_iteration();
+  static const int kIterationFieldNumber = 7;
+  inline ::google::protobuf::int32 iteration() const;
+  inline void set_iteration(::google::protobuf::int32 value);
+
+  // required int32 width = 8;
+  inline bool has_width() const;
+  inline void clear_width();
+  static const int kWidthFieldNumber = 8;
+  inline ::google::protobuf::int32 width() const;
+  inline void set_width(::google::protobuf::int32 value);
+
+  // required int32 height = 9;
+  inline bool has_height() const;
+  inline void clear_height();
+  static const int kHeightFieldNumber = 9;
+  inline ::google::protobuf::int32 height() const;
+  inline void set_height(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:Message.START_RENDER)
+ private:
+  inline void set_has_viewer_ip();
+  inline void clear_has_viewer_ip();
+  inline void set_has_viewer_port();
+  inline void clear_has_viewer_port();
+  inline void set_has_leader_ip();
+  inline void clear_has_leader_ip();
+  inline void set_has_leader_port();
+  inline void clear_has_leader_port();
+  inline void set_has_no_renderer();
+  inline void clear_has_no_renderer();
+  inline void set_has_assigned_no();
+  inline void clear_has_assigned_no();
+  inline void set_has_iteration();
+  inline void clear_has_iteration();
+  inline void set_has_width();
+  inline void clear_has_width();
+  inline void set_has_height();
+  inline void clear_has_height();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* viewer_ip_;
+  ::std::string* leader_ip_;
+  ::google::protobuf::int32 viewer_port_;
+  ::google::protobuf::int32 leader_port_;
+  ::google::protobuf::int32 no_renderer_;
+  ::google::protobuf::int32 assigned_no_;
+  ::google::protobuf::int32 iteration_;
+  ::google::protobuf::int32 width_;
+  ::google::protobuf::int32 height_;
+  friend void  protobuf_AddDesc_msg_2eproto();
+  friend void protobuf_AssignDesc_msg_2eproto();
+  friend void protobuf_ShutdownFile_msg_2eproto();
+
+  void InitAsDefaultInstance();
+  static START_RENDER* default_instance_;
 };
 // ===================================================================
 
 
 // ===================================================================
 
-// Pixel
+// Color
 
 // required int32 r = 1;
-inline bool Pixel::has_r() const {
+inline bool Color::has_r() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void Pixel::set_has_r() {
+inline void Color::set_has_r() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void Pixel::clear_has_r() {
+inline void Color::clear_has_r() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void Pixel::clear_r() {
+inline void Color::clear_r() {
   r_ = 0;
   clear_has_r();
 }
-inline ::google::protobuf::int32 Pixel::r() const {
-  // @@protoc_insertion_point(field_get:Pixel.r)
+inline ::google::protobuf::int32 Color::r() const {
+  // @@protoc_insertion_point(field_get:Message.Color.r)
   return r_;
 }
-inline void Pixel::set_r(::google::protobuf::int32 value) {
+inline void Color::set_r(::google::protobuf::int32 value) {
   set_has_r();
   r_ = value;
-  // @@protoc_insertion_point(field_set:Pixel.r)
+  // @@protoc_insertion_point(field_set:Message.Color.r)
 }
 
 // required int32 g = 2;
-inline bool Pixel::has_g() const {
+inline bool Color::has_g() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void Pixel::set_has_g() {
+inline void Color::set_has_g() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void Pixel::clear_has_g() {
+inline void Color::clear_has_g() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void Pixel::clear_g() {
+inline void Color::clear_g() {
   g_ = 0;
   clear_has_g();
 }
-inline ::google::protobuf::int32 Pixel::g() const {
-  // @@protoc_insertion_point(field_get:Pixel.g)
+inline ::google::protobuf::int32 Color::g() const {
+  // @@protoc_insertion_point(field_get:Message.Color.g)
   return g_;
 }
-inline void Pixel::set_g(::google::protobuf::int32 value) {
+inline void Color::set_g(::google::protobuf::int32 value) {
   set_has_g();
   g_ = value;
-  // @@protoc_insertion_point(field_set:Pixel.g)
+  // @@protoc_insertion_point(field_set:Message.Color.g)
 }
 
 // required int32 b = 3;
-inline bool Pixel::has_b() const {
+inline bool Color::has_b() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void Pixel::set_has_b() {
+inline void Color::set_has_b() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void Pixel::clear_has_b() {
+inline void Color::clear_has_b() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void Pixel::clear_b() {
+inline void Color::clear_b() {
   b_ = 0;
   clear_has_b();
 }
-inline ::google::protobuf::int32 Pixel::b() const {
-  // @@protoc_insertion_point(field_get:Pixel.b)
+inline ::google::protobuf::int32 Color::b() const {
+  // @@protoc_insertion_point(field_get:Message.Color.b)
   return b_;
 }
-inline void Pixel::set_b(::google::protobuf::int32 value) {
+inline void Color::set_b(::google::protobuf::int32 value) {
   set_has_b();
   b_ = value;
-  // @@protoc_insertion_point(field_set:Pixel.b)
+  // @@protoc_insertion_point(field_set:Message.Color.b)
 }
 
 // -------------------------------------------------------------------
 
-// Packet
+// INIT
 
-// required uint32 type = 1;
-inline bool Packet::has_type() const {
+// required string viewer_ip = 1;
+inline bool INIT::has_viewer_ip() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void Packet::set_has_type() {
+inline void INIT::set_has_viewer_ip() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void Packet::clear_has_type() {
+inline void INIT::clear_has_viewer_ip() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void Packet::clear_type() {
-  type_ = 0u;
-  clear_has_type();
+inline void INIT::clear_viewer_ip() {
+  if (viewer_ip_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    viewer_ip_->clear();
+  }
+  clear_has_viewer_ip();
 }
-inline ::google::protobuf::uint32 Packet::type() const {
-  // @@protoc_insertion_point(field_get:Packet.type)
-  return type_;
+inline const ::std::string& INIT::viewer_ip() const {
+  // @@protoc_insertion_point(field_get:Message.INIT.viewer_ip)
+  return *viewer_ip_;
 }
-inline void Packet::set_type(::google::protobuf::uint32 value) {
-  set_has_type();
-  type_ = value;
-  // @@protoc_insertion_point(field_set:Packet.type)
+inline void INIT::set_viewer_ip(const ::std::string& value) {
+  set_has_viewer_ip();
+  if (viewer_ip_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    viewer_ip_ = new ::std::string;
+  }
+  viewer_ip_->assign(value);
+  // @@protoc_insertion_point(field_set:Message.INIT.viewer_ip)
+}
+inline void INIT::set_viewer_ip(const char* value) {
+  set_has_viewer_ip();
+  if (viewer_ip_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    viewer_ip_ = new ::std::string;
+  }
+  viewer_ip_->assign(value);
+  // @@protoc_insertion_point(field_set_char:Message.INIT.viewer_ip)
+}
+inline void INIT::set_viewer_ip(const char* value, size_t size) {
+  set_has_viewer_ip();
+  if (viewer_ip_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    viewer_ip_ = new ::std::string;
+  }
+  viewer_ip_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:Message.INIT.viewer_ip)
+}
+inline ::std::string* INIT::mutable_viewer_ip() {
+  set_has_viewer_ip();
+  if (viewer_ip_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    viewer_ip_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:Message.INIT.viewer_ip)
+  return viewer_ip_;
+}
+inline ::std::string* INIT::release_viewer_ip() {
+  clear_has_viewer_ip();
+  if (viewer_ip_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = viewer_ip_;
+    viewer_ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void INIT::set_allocated_viewer_ip(::std::string* viewer_ip) {
+  if (viewer_ip_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete viewer_ip_;
+  }
+  if (viewer_ip) {
+    set_has_viewer_ip();
+    viewer_ip_ = viewer_ip;
+  } else {
+    clear_has_viewer_ip();
+    viewer_ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:Message.INIT.viewer_ip)
 }
 
-// optional int32 tX = 2;
-inline bool Packet::has_tx() const {
+// required int32 viewer_port = 2;
+inline bool INIT::has_viewer_port() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void Packet::set_has_tx() {
+inline void INIT::set_has_viewer_port() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void Packet::clear_has_tx() {
+inline void INIT::clear_has_viewer_port() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void Packet::clear_tx() {
-  tx_ = 0;
-  clear_has_tx();
+inline void INIT::clear_viewer_port() {
+  viewer_port_ = 0;
+  clear_has_viewer_port();
 }
-inline ::google::protobuf::int32 Packet::tx() const {
-  // @@protoc_insertion_point(field_get:Packet.tX)
-  return tx_;
+inline ::google::protobuf::int32 INIT::viewer_port() const {
+  // @@protoc_insertion_point(field_get:Message.INIT.viewer_port)
+  return viewer_port_;
 }
-inline void Packet::set_tx(::google::protobuf::int32 value) {
-  set_has_tx();
-  tx_ = value;
-  // @@protoc_insertion_point(field_set:Packet.tX)
+inline void INIT::set_viewer_port(::google::protobuf::int32 value) {
+  set_has_viewer_port();
+  viewer_port_ = value;
+  // @@protoc_insertion_point(field_set:Message.INIT.viewer_port)
 }
 
-// optional int32 tY = 3;
-inline bool Packet::has_ty() const {
+// required int32 width = 3;
+inline bool INIT::has_width() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void Packet::set_has_ty() {
+inline void INIT::set_has_width() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void Packet::clear_has_ty() {
+inline void INIT::clear_has_width() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void Packet::clear_ty() {
-  ty_ = 0;
-  clear_has_ty();
+inline void INIT::clear_width() {
+  width_ = 0;
+  clear_has_width();
 }
-inline ::google::protobuf::int32 Packet::ty() const {
-  // @@protoc_insertion_point(field_get:Packet.tY)
-  return ty_;
+inline ::google::protobuf::int32 INIT::width() const {
+  // @@protoc_insertion_point(field_get:Message.INIT.width)
+  return width_;
 }
-inline void Packet::set_ty(::google::protobuf::int32 value) {
-  set_has_ty();
-  ty_ = value;
-  // @@protoc_insertion_point(field_set:Packet.tY)
+inline void INIT::set_width(::google::protobuf::int32 value) {
+  set_has_width();
+  width_ = value;
+  // @@protoc_insertion_point(field_set:Message.INIT.width)
 }
 
-// optional int32 tileSize = 4;
-inline bool Packet::has_tilesize() const {
+// required int32 height = 4;
+inline bool INIT::has_height() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void Packet::set_has_tilesize() {
+inline void INIT::set_has_height() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void Packet::clear_has_tilesize() {
+inline void INIT::clear_has_height() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void Packet::clear_tilesize() {
-  tilesize_ = 0;
-  clear_has_tilesize();
+inline void INIT::clear_height() {
+  height_ = 0;
+  clear_has_height();
 }
-inline ::google::protobuf::int32 Packet::tilesize() const {
-  // @@protoc_insertion_point(field_get:Packet.tileSize)
-  return tilesize_;
+inline ::google::protobuf::int32 INIT::height() const {
+  // @@protoc_insertion_point(field_get:Message.INIT.height)
+  return height_;
 }
-inline void Packet::set_tilesize(::google::protobuf::int32 value) {
-  set_has_tilesize();
-  tilesize_ = value;
-  // @@protoc_insertion_point(field_set:Packet.tileSize)
+inline void INIT::set_height(::google::protobuf::int32 value) {
+  set_has_height();
+  height_ = value;
+  // @@protoc_insertion_point(field_set:Message.INIT.height)
 }
 
-// repeated .Pixel pixel = 5;
-inline int Packet::pixel_size() const {
-  return pixel_.size();
+// -------------------------------------------------------------------
+
+// ACK
+
+// optional int32 rendererID = 1;
+inline bool ACK::has_rendererid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void Packet::clear_pixel() {
-  pixel_.Clear();
+inline void ACK::set_has_rendererid() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline const ::Pixel& Packet::pixel(int index) const {
-  // @@protoc_insertion_point(field_get:Packet.pixel)
-  return pixel_.Get(index);
+inline void ACK::clear_has_rendererid() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline ::Pixel* Packet::mutable_pixel(int index) {
-  // @@protoc_insertion_point(field_mutable:Packet.pixel)
-  return pixel_.Mutable(index);
+inline void ACK::clear_rendererid() {
+  rendererid_ = 0;
+  clear_has_rendererid();
 }
-inline ::Pixel* Packet::add_pixel() {
-  // @@protoc_insertion_point(field_add:Packet.pixel)
-  return pixel_.Add();
+inline ::google::protobuf::int32 ACK::rendererid() const {
+  // @@protoc_insertion_point(field_get:Message.ACK.rendererID)
+  return rendererid_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::Pixel >&
-Packet::pixel() const {
-  // @@protoc_insertion_point(field_list:Packet.pixel)
-  return pixel_;
+inline void ACK::set_rendererid(::google::protobuf::int32 value) {
+  set_has_rendererid();
+  rendererid_ = value;
+  // @@protoc_insertion_point(field_set:Message.ACK.rendererID)
 }
-inline ::google::protobuf::RepeatedPtrField< ::Pixel >*
-Packet::mutable_pixel() {
-  // @@protoc_insertion_point(field_mutable_list:Packet.pixel)
-  return &pixel_;
+
+// -------------------------------------------------------------------
+
+// PIXEL
+
+// required int32 iteration = 1;
+inline bool PIXEL::has_iteration() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void PIXEL::set_has_iteration() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void PIXEL::clear_has_iteration() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void PIXEL::clear_iteration() {
+  iteration_ = 0;
+  clear_has_iteration();
+}
+inline ::google::protobuf::int32 PIXEL::iteration() const {
+  // @@protoc_insertion_point(field_get:Message.PIXEL.iteration)
+  return iteration_;
+}
+inline void PIXEL::set_iteration(::google::protobuf::int32 value) {
+  set_has_iteration();
+  iteration_ = value;
+  // @@protoc_insertion_point(field_set:Message.PIXEL.iteration)
+}
+
+// required int32 firstPixelPtr = 2;
+inline bool PIXEL::has_firstpixelptr() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void PIXEL::set_has_firstpixelptr() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void PIXEL::clear_has_firstpixelptr() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void PIXEL::clear_firstpixelptr() {
+  firstpixelptr_ = 0;
+  clear_has_firstpixelptr();
+}
+inline ::google::protobuf::int32 PIXEL::firstpixelptr() const {
+  // @@protoc_insertion_point(field_get:Message.PIXEL.firstPixelPtr)
+  return firstpixelptr_;
+}
+inline void PIXEL::set_firstpixelptr(::google::protobuf::int32 value) {
+  set_has_firstpixelptr();
+  firstpixelptr_ = value;
+  // @@protoc_insertion_point(field_set:Message.PIXEL.firstPixelPtr)
+}
+
+// required int32 pixelOffset = 3;
+inline bool PIXEL::has_pixeloffset() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void PIXEL::set_has_pixeloffset() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void PIXEL::clear_has_pixeloffset() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void PIXEL::clear_pixeloffset() {
+  pixeloffset_ = 0;
+  clear_has_pixeloffset();
+}
+inline ::google::protobuf::int32 PIXEL::pixeloffset() const {
+  // @@protoc_insertion_point(field_get:Message.PIXEL.pixelOffset)
+  return pixeloffset_;
+}
+inline void PIXEL::set_pixeloffset(::google::protobuf::int32 value) {
+  set_has_pixeloffset();
+  pixeloffset_ = value;
+  // @@protoc_insertion_point(field_set:Message.PIXEL.pixelOffset)
+}
+
+// repeated .Message.Color color = 4;
+inline int PIXEL::color_size() const {
+  return color_.size();
+}
+inline void PIXEL::clear_color() {
+  color_.Clear();
+}
+inline const ::Message::Color& PIXEL::color(int index) const {
+  // @@protoc_insertion_point(field_get:Message.PIXEL.color)
+  return color_.Get(index);
+}
+inline ::Message::Color* PIXEL::mutable_color(int index) {
+  // @@protoc_insertion_point(field_mutable:Message.PIXEL.color)
+  return color_.Mutable(index);
+}
+inline ::Message::Color* PIXEL::add_color() {
+  // @@protoc_insertion_point(field_add:Message.PIXEL.color)
+  return color_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::Message::Color >&
+PIXEL::color() const {
+  // @@protoc_insertion_point(field_list:Message.PIXEL.color)
+  return color_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::Message::Color >*
+PIXEL::mutable_color() {
+  // @@protoc_insertion_point(field_mutable_list:Message.PIXEL.color)
+  return &color_;
+}
+
+// -------------------------------------------------------------------
+
+// START_RENDER
+
+// required string viewer_ip = 1;
+inline bool START_RENDER::has_viewer_ip() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void START_RENDER::set_has_viewer_ip() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void START_RENDER::clear_has_viewer_ip() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void START_RENDER::clear_viewer_ip() {
+  if (viewer_ip_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    viewer_ip_->clear();
+  }
+  clear_has_viewer_ip();
+}
+inline const ::std::string& START_RENDER::viewer_ip() const {
+  // @@protoc_insertion_point(field_get:Message.START_RENDER.viewer_ip)
+  return *viewer_ip_;
+}
+inline void START_RENDER::set_viewer_ip(const ::std::string& value) {
+  set_has_viewer_ip();
+  if (viewer_ip_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    viewer_ip_ = new ::std::string;
+  }
+  viewer_ip_->assign(value);
+  // @@protoc_insertion_point(field_set:Message.START_RENDER.viewer_ip)
+}
+inline void START_RENDER::set_viewer_ip(const char* value) {
+  set_has_viewer_ip();
+  if (viewer_ip_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    viewer_ip_ = new ::std::string;
+  }
+  viewer_ip_->assign(value);
+  // @@protoc_insertion_point(field_set_char:Message.START_RENDER.viewer_ip)
+}
+inline void START_RENDER::set_viewer_ip(const char* value, size_t size) {
+  set_has_viewer_ip();
+  if (viewer_ip_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    viewer_ip_ = new ::std::string;
+  }
+  viewer_ip_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:Message.START_RENDER.viewer_ip)
+}
+inline ::std::string* START_RENDER::mutable_viewer_ip() {
+  set_has_viewer_ip();
+  if (viewer_ip_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    viewer_ip_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:Message.START_RENDER.viewer_ip)
+  return viewer_ip_;
+}
+inline ::std::string* START_RENDER::release_viewer_ip() {
+  clear_has_viewer_ip();
+  if (viewer_ip_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = viewer_ip_;
+    viewer_ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void START_RENDER::set_allocated_viewer_ip(::std::string* viewer_ip) {
+  if (viewer_ip_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete viewer_ip_;
+  }
+  if (viewer_ip) {
+    set_has_viewer_ip();
+    viewer_ip_ = viewer_ip;
+  } else {
+    clear_has_viewer_ip();
+    viewer_ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:Message.START_RENDER.viewer_ip)
+}
+
+// required int32 viewer_port = 2;
+inline bool START_RENDER::has_viewer_port() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void START_RENDER::set_has_viewer_port() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void START_RENDER::clear_has_viewer_port() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void START_RENDER::clear_viewer_port() {
+  viewer_port_ = 0;
+  clear_has_viewer_port();
+}
+inline ::google::protobuf::int32 START_RENDER::viewer_port() const {
+  // @@protoc_insertion_point(field_get:Message.START_RENDER.viewer_port)
+  return viewer_port_;
+}
+inline void START_RENDER::set_viewer_port(::google::protobuf::int32 value) {
+  set_has_viewer_port();
+  viewer_port_ = value;
+  // @@protoc_insertion_point(field_set:Message.START_RENDER.viewer_port)
+}
+
+// required string leader_ip = 3;
+inline bool START_RENDER::has_leader_ip() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void START_RENDER::set_has_leader_ip() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void START_RENDER::clear_has_leader_ip() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void START_RENDER::clear_leader_ip() {
+  if (leader_ip_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    leader_ip_->clear();
+  }
+  clear_has_leader_ip();
+}
+inline const ::std::string& START_RENDER::leader_ip() const {
+  // @@protoc_insertion_point(field_get:Message.START_RENDER.leader_ip)
+  return *leader_ip_;
+}
+inline void START_RENDER::set_leader_ip(const ::std::string& value) {
+  set_has_leader_ip();
+  if (leader_ip_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    leader_ip_ = new ::std::string;
+  }
+  leader_ip_->assign(value);
+  // @@protoc_insertion_point(field_set:Message.START_RENDER.leader_ip)
+}
+inline void START_RENDER::set_leader_ip(const char* value) {
+  set_has_leader_ip();
+  if (leader_ip_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    leader_ip_ = new ::std::string;
+  }
+  leader_ip_->assign(value);
+  // @@protoc_insertion_point(field_set_char:Message.START_RENDER.leader_ip)
+}
+inline void START_RENDER::set_leader_ip(const char* value, size_t size) {
+  set_has_leader_ip();
+  if (leader_ip_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    leader_ip_ = new ::std::string;
+  }
+  leader_ip_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:Message.START_RENDER.leader_ip)
+}
+inline ::std::string* START_RENDER::mutable_leader_ip() {
+  set_has_leader_ip();
+  if (leader_ip_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    leader_ip_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:Message.START_RENDER.leader_ip)
+  return leader_ip_;
+}
+inline ::std::string* START_RENDER::release_leader_ip() {
+  clear_has_leader_ip();
+  if (leader_ip_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = leader_ip_;
+    leader_ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void START_RENDER::set_allocated_leader_ip(::std::string* leader_ip) {
+  if (leader_ip_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete leader_ip_;
+  }
+  if (leader_ip) {
+    set_has_leader_ip();
+    leader_ip_ = leader_ip;
+  } else {
+    clear_has_leader_ip();
+    leader_ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:Message.START_RENDER.leader_ip)
+}
+
+// required int32 leader_port = 4;
+inline bool START_RENDER::has_leader_port() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void START_RENDER::set_has_leader_port() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void START_RENDER::clear_has_leader_port() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void START_RENDER::clear_leader_port() {
+  leader_port_ = 0;
+  clear_has_leader_port();
+}
+inline ::google::protobuf::int32 START_RENDER::leader_port() const {
+  // @@protoc_insertion_point(field_get:Message.START_RENDER.leader_port)
+  return leader_port_;
+}
+inline void START_RENDER::set_leader_port(::google::protobuf::int32 value) {
+  set_has_leader_port();
+  leader_port_ = value;
+  // @@protoc_insertion_point(field_set:Message.START_RENDER.leader_port)
+}
+
+// required int32 no_renderer = 5;
+inline bool START_RENDER::has_no_renderer() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void START_RENDER::set_has_no_renderer() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void START_RENDER::clear_has_no_renderer() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void START_RENDER::clear_no_renderer() {
+  no_renderer_ = 0;
+  clear_has_no_renderer();
+}
+inline ::google::protobuf::int32 START_RENDER::no_renderer() const {
+  // @@protoc_insertion_point(field_get:Message.START_RENDER.no_renderer)
+  return no_renderer_;
+}
+inline void START_RENDER::set_no_renderer(::google::protobuf::int32 value) {
+  set_has_no_renderer();
+  no_renderer_ = value;
+  // @@protoc_insertion_point(field_set:Message.START_RENDER.no_renderer)
+}
+
+// required int32 assigned_no = 6;
+inline bool START_RENDER::has_assigned_no() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void START_RENDER::set_has_assigned_no() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void START_RENDER::clear_has_assigned_no() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void START_RENDER::clear_assigned_no() {
+  assigned_no_ = 0;
+  clear_has_assigned_no();
+}
+inline ::google::protobuf::int32 START_RENDER::assigned_no() const {
+  // @@protoc_insertion_point(field_get:Message.START_RENDER.assigned_no)
+  return assigned_no_;
+}
+inline void START_RENDER::set_assigned_no(::google::protobuf::int32 value) {
+  set_has_assigned_no();
+  assigned_no_ = value;
+  // @@protoc_insertion_point(field_set:Message.START_RENDER.assigned_no)
+}
+
+// required int32 iteration = 7;
+inline bool START_RENDER::has_iteration() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void START_RENDER::set_has_iteration() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void START_RENDER::clear_has_iteration() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void START_RENDER::clear_iteration() {
+  iteration_ = 0;
+  clear_has_iteration();
+}
+inline ::google::protobuf::int32 START_RENDER::iteration() const {
+  // @@protoc_insertion_point(field_get:Message.START_RENDER.iteration)
+  return iteration_;
+}
+inline void START_RENDER::set_iteration(::google::protobuf::int32 value) {
+  set_has_iteration();
+  iteration_ = value;
+  // @@protoc_insertion_point(field_set:Message.START_RENDER.iteration)
+}
+
+// required int32 width = 8;
+inline bool START_RENDER::has_width() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void START_RENDER::set_has_width() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void START_RENDER::clear_has_width() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline void START_RENDER::clear_width() {
+  width_ = 0;
+  clear_has_width();
+}
+inline ::google::protobuf::int32 START_RENDER::width() const {
+  // @@protoc_insertion_point(field_get:Message.START_RENDER.width)
+  return width_;
+}
+inline void START_RENDER::set_width(::google::protobuf::int32 value) {
+  set_has_width();
+  width_ = value;
+  // @@protoc_insertion_point(field_set:Message.START_RENDER.width)
+}
+
+// required int32 height = 9;
+inline bool START_RENDER::has_height() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void START_RENDER::set_has_height() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void START_RENDER::clear_has_height() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void START_RENDER::clear_height() {
+  height_ = 0;
+  clear_has_height();
+}
+inline ::google::protobuf::int32 START_RENDER::height() const {
+  // @@protoc_insertion_point(field_get:Message.START_RENDER.height)
+  return height_;
+}
+inline void START_RENDER::set_height(::google::protobuf::int32 value) {
+  set_has_height();
+  height_ = value;
+  // @@protoc_insertion_point(field_set:Message.START_RENDER.height)
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Message
 
 #ifndef SWIG
 namespace google {

@@ -39,19 +39,15 @@ int main(int argc, char** argv) {
 
 	initWinSock();
 	std::string ip = getSelfIP();
-	printInfo(ip, RECVPORT);
+	printInfo(ip, VIEW_RECVPORT);
 
-	PacketListener pRecv(RECVPORT);
-	PacketSender pSend;
+	PacketManager pMgr(VIEW_RECVPORT);
 
     // GLFW main loop
-	std::thread rthread = pRecv.getThread();
-	std::thread sthread = pSend.getThread();
-	std::thread mThread(mainLoop, &pRecv, &pSend, "158.130.104.23");
-	//std::thread mThread(mainLoop, &pRecv, &pSend, "127.0.0.1");
+	std::thread rthread = pMgr.getThread();
+	std::thread mThread(mainLoop, &pMgr, "158.130.104.23");
 
 	rthread.join();
-	sthread.join();
 	mThread.join();
 
 	WSACleanup();

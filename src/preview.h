@@ -4,4 +4,4 @@ extern GLuint pbo;
 
 std::string currentTimeString();
 bool init();
-void mainLoop(PacketListener* pRecv, PacketSender* pSend, std::string client_ip);
+void mainLoop(PacketManager* pMgr, std::string client_ip);
