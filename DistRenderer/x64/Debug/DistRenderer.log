@@ -1,0 +1,25 @@
+﻿Build started 12/7/2015 4:07:40 PM.
+     1>Project "C:\Users\Dome\Documents\GitHub\DistRenderer\DistRenderer\DistRenderer.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /Zi /nologo /W3 /WX- /Od /D WIN32 /D WIN64 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt preview.cpp
+         preview.cpp
+     1>preview.cpp(58): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Dome\Documents\GitHub\DistRenderer\x64\Debug\DistRenderer.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\lib\x64" iphlpapi.lib libprotobuf_d.lib libprotoc_d.lib glew32s.lib glfw3.lib opengl32.lib assimp.lib cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Dome\Documents\GitHub\DistRenderer\x64\Debug\DistRenderer.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Dome\Documents\GitHub\DistRenderer\x64\Debug\DistRenderer.lib" /MACHINE:X64 x64\Debug\CUDARenderer.cu.obj
+         x64\Debug\interactions.cu.obj
+         x64\Debug\intersections.cu.obj
+         x64\Debug\glslUtility.obj
+         x64\Debug\image.obj
+         x64\Debug\main.obj
+         x64\Debug\Mesh.obj
+         x64\Debug\preview.obj
+         x64\Debug\scene.obj
+         x64\Debug\stb.obj
+         x64\Debug\utilities.obj
+         "x64\Debug\DistRenderer.device-link.obj"
+     1>LINK : fatal error LNK1201: error writing to program database 'C:\Users\Dome\Documents\GitHub\DistRenderer\x64\Debug\DistRenderer.pdb'; check for insufficient disk space, invalid path, or insufficient privilege
+     1>Done Building Project "C:\Users\Dome\Documents\GitHub\DistRenderer\DistRenderer\DistRenderer.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.99

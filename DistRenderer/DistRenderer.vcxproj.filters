@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{782c3f25-aeb4-4cde-8822-1f07ffb384d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="header">
+      <UniqueIdentifier>{5e9beb66-18b3-4fb7-b748-3ede0f471cd6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="glslUtility.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="image.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="interactions.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="intersections.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="preview.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneStructs.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="CUDARenderer.h">
+      <Filter>header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="glslUtility.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="image.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="preview.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="scene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="stb.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="utilities.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="CUDARenderer.cu">
+      <Filter>src</Filter>
+    </CudaCompile>
+    <CudaCompile Include="interactions.cu">
+      <Filter>src</Filter>
+    </CudaCompile>
+    <CudaCompile Include="intersections.cu">
+      <Filter>src</Filter>
+    </CudaCompile>
+  </ItemGroup>
+</Project>

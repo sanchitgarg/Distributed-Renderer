@@ -1,0 +1,37 @@
+﻿Build started 12/7/2015 4:46:43 PM.
+     1>Project "C:\Users\Dome\Documents\GitHub\DistRenderer\DistRenderer\DistRenderer.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /Zi /nologo /W3 /WX- /O2 /Oi /GL /D WIN32 /D WIN64 /D NDEBUG /D _CONSOLE /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc120.pdb" /Gd /TP /errorReport:prompt preview.cpp
+         preview.cpp
+     1>preview.cpp(55): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Dome\Documents\GitHub\DistRenderer\x64\Release\DistRenderer.exe" /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\lib\x64" cudadevrt.lib iphlpapi.lib libprotobuf_r.lib libprotoc_r.lib glew32.lib glfw3.lib opengl32.lib assimp.lib cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Dome\Documents\GitHub\DistRenderer\x64\Release\DistRenderer.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Dome\Documents\GitHub\DistRenderer\x64\Release\DistRenderer.lib" /MACHINE:X64 x64\Release\CUDARenderer.cu.obj
+         x64\Release\interactions.cu.obj
+         x64\Release\intersections.cu.obj
+         x64\Release\glslUtility.obj
+         x64\Release\image.obj
+         x64\Release\main.obj
+         x64\Release\Mesh.obj
+         x64\Release\preview.obj
+         x64\Release\scene.obj
+         x64\Release\stb.obj
+         x64\Release\utilities.obj
+         "x64\Release\DistRenderer.device-link.obj"
+         Generating code
+         Finished generating code
+         DistRenderer.vcxproj -> C:\Users\Dome\Documents\GitHub\DistRenderer\x64\Release\DistRenderer.exe
+       PostBuildEvent:
+         echo copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Dome\Documents\GitHub\DistRenderer\x64\Release\"
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Dome\Documents\GitHub\DistRenderer\x64\Release\"
+         xcopy /y  /d  "C:\Users\Dome\Documents\GitHub\DistRenderer\lib\*.dll" "C:\Users\Dome\Documents\GitHub\DistRenderer\x64\Release\"
+         :VCEnd
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Dome\Documents\GitHub\DistRenderer\x64\Release\"
+         C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart32_75.dll
+         C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart64_75.dll
+                 2 file(s) copied.
+         0 File(s) copied
+     1>Done Building Project "C:\Users\Dome\Documents\GitHub\DistRenderer\DistRenderer\DistRenderer.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.41
