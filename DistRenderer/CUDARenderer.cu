@@ -15,13 +15,15 @@ void CUDARenderer::pathtraceInit(Scene* scene, int rendererNo_, int totalRendere
 
 	hst_scene = scene;
 	const Camera &cam = hst_scene->state.camera;
-	/*
+
+	rendererNo = rendererNo_;
+	totalRenderer = totalRenderer_;
+
 	pixelcount = (cam.resolution.x * cam.resolution.y) / totalRenderer;
 	if (cam.resolution.x * cam.resolution.y % totalRenderer > rendererNo)
 		pixelcount++;
-		*/
-	pixelcount = cam.resolution.x * cam.resolution.y;
-	std::cout << "Pixel Count: " << pixelcount << std::endl;
+		
+	std::cout << "Pixel to be rendered: " << pixelcount << std::endl;
 
 	//2D Pixel array to store image color
 	cudaMalloc(&dev_image, pixelcount * sizeof(glm::vec3));
@@ -90,11 +92,8 @@ void CUDARenderer::pathtrace(uchar4 *pbo, int frame, int iter) {
 	const int traceDepth = hst_scene->state.traceDepth;
 	const Camera &cam = hst_scene->state.camera;
 
-	const int blockSideLength = 8;
-	dim3 blockSize(blockSideLength, blockSideLength);
-	dim3 blocksPerGrid(
-		(cam.resolution.x + blockSize.x - 1) / blockSize.x,
-		(cam.resolution.y + blockSize.y - 1) / blockSize.y);
+	int blockSize = 64;
+	int blocksPerGrid = glm::ceil(pixelcount / (float)blockSize);
 
 	///////////////////////////////////////////////////////////////////////////
 
@@ -116,23 +115,28 @@ void CUDARenderer::pathtrace(uchar4 *pbo, int frame, int iter) {
 	// TODO: perform one iteration of path tracing
 
 	//Setup initial rays
-	kernGetRayDirections << < blocksPerGrid, blockSize >> >(dev_camera, dev_rays_begin, iter);
+	kernGetRayDirections << < blocksPerGrid, blockSize >> >(dev_camera, dev_rays_begin, iter, 
+		rendererNo, totalRenderer);
+	checkCUDAError("kernGetRayDirections");
 
 	//Jitter rays as per Depth of field
 	if (DOF)
 	{
-		kernJitterDOF << <blocksPerGrid, blockSize >> >(dev_camera, dev_rays_begin, iter);
+		kernJitterDOF << <blocksPerGrid, blockSize >> >(dev_camera, dev_rays_begin, iter,
+			rendererNo, totalRenderer);
+		checkCUDAError("kernJitterDOF");
 	}
 
 	dev_rays_end = dev_rays_begin + pixelcount;
 	int rayCount = pixelcount;
 	int numBlocks, numThreads = 128;
 
-	numBlocks = (rayCount + numThreads - 1) / numThreads;
-
 	for (int i = 0; (i<traceDepth && rayCount > 0); ++i)	//For Path Tracing
 		//for (int i = 0; i<1; ++i)							//For DI
 	{
+		//Calculate new number of blocks
+		numBlocks = (rayCount + numThreads - 1) / numThreads;
+
 		//    	cudaEvent_t start, stop;
 		//    	cudaEventCreate(&start);
 		//    	cudaEventCreate(&stop);
@@ -141,20 +145,18 @@ void CUDARenderer::pathtrace(uchar4 *pbo, int frame, int iter) {
 		//Take one step, should make dead rays as false
 		//std::cout << i << " tracedepth: " << traceDepth << " / raycount: " << rayCount << std::endl;
 		kernTracePath << <numBlocks, numThreads >> >(dev_camera, dev_rays_begin, dev_geoms, dev_geoms_count, dev_meshes, dev_meshes_count, dev_light_indices, dev_light_count, dev_materials, dev_image, iter, i, rayCount);
-		checkCUDAError("pathtrace step");
+		checkCUDAError("kernTracePath");
 
 		//If currDepth is > 2, play russian roullete
 		if (i > 2)
 		{
 			kernRussianRoullete << <numBlocks, numThreads >> >(dev_camera, dev_rays_begin, dev_image, iter, rayCount);
+			checkCUDAError("kernRussianRoullete");
 		}
 
 		// Compact rays, dev_rays_end points to the new end
 		dev_rays_end = thrust::remove_if(thrust::device, dev_rays_begin, dev_rays_end, isDead());
 		rayCount = dev_rays_end - dev_rays_begin;
-
-		//Calculate new number of blocks
-		numBlocks = (rayCount + numThreads - 1) / numThreads;
 
 		//    	cudaEventRecord(stop);
 		//    	cudaEventSynchronize(stop);
@@ -168,16 +170,19 @@ void CUDARenderer::pathtrace(uchar4 *pbo, int frame, int iter) {
 	if (rayCount > 0)
 	{
 		kernWritePixels << <numBlocks, numThreads >> >(dev_camera, dev_rays_begin, dev_image, rayCount);
+		checkCUDAError("kernWritePixels");
 	}
 
 	//Direct Illumination
 	if (DI && rayCount > 0)
 	{
 		kernDirectLightPath << <numBlocks, numThreads >> >(dev_camera, dev_rays_begin, dev_geoms, dev_light_indices, dev_light_count, dev_image, iter, traceDepth, rayCount);
+		checkCUDAError("kernDirectLightPath");
 	}
 
 	// Send results to OpenGL buffer for rendering
-	sendImageToPBO << <blocksPerGrid, blockSize >> >(pbo, cam.resolution, iter, dev_image);
+	sendImageToPBO << <blocksPerGrid, blockSize >> >(pbo, cam.resolution, iter, dev_image, rendererNo, totalRenderer);
+	checkCUDAError("sendImageToPBO");
 
 	// Retrieve image from GPU
 	cudaMemcpy(hst_scene->state.image.data(), dev_image,
@@ -249,14 +254,14 @@ __host__ __device__ thrust::default_random_engine makeSeededRandomEngine(int ite
 }
 
 //Kernel that writes the image to the OpenGL PBO directly.
-__global__ void sendImageToPBO(uchar4* pbo, glm::ivec2 resolution,
-	int iter, glm::vec3* image) {
-	int x = (blockIdx.x * blockDim.x) + threadIdx.x;
-	int y = (blockIdx.y * blockDim.y) + threadIdx.y;
-	int index = x + (y * resolution.x);
+__global__ void sendImageToPBO(uchar4* pbo, glm::ivec2 resolution, int iter, glm::vec3* image,
+	int rendererNo, int totalRenderer) 
+{
+	int ptr = (blockIdx.x * blockDim.x) + threadIdx.x;
+	int index = rendererNo + ptr * totalRenderer;
 
 	if (index < resolution.x * resolution.y) {
-		glm::vec3 pix = image[index];
+		glm::vec3 pix = image[ptr];
 
 		glm::ivec3 color;
 		color.x = glm::clamp((int)(pix.x / iter * 255.0), 0, 255);
@@ -272,22 +277,24 @@ __global__ void sendImageToPBO(uchar4* pbo, glm::ivec2 resolution,
 }
 
 //Kernel function that gets all the ray directions
-__global__ void kernGetRayDirections(Camera * camera, RayState* rays, int iter)
+__global__ void kernGetRayDirections(Camera * camera, RayState* rays, int iter, 
+	int rendererNo, int totalRenderer)
 {
-	int x = (blockIdx.x * blockDim.x) + threadIdx.x;
-	int y = (blockIdx.y * blockDim.y) + threadIdx.y;
+	int ptr = (blockIdx.x * blockDim.x) + threadIdx.x;
+	int index = rendererNo + ptr * totalRenderer;
 
-	if (x < camera->resolution.x && y < camera->resolution.y)
+	if (index < camera->resolution.x * camera->resolution.y)
 	{
-		int index = x + (y * camera->resolution.x);
-
 		//TODO : Tweak the random variable here if the image looks fuzzy
 		thrust::default_random_engine rng = makeSeededRandomEngine(iter, index, 0);
 		thrust::uniform_real_distribution<float> u01(0, 0.005);
 
 		//Find the ray direction
-		float sx = float(x) / ((float)(camera->resolution.x) - 1.0f);
-		float sy = float(y) / ((float)(camera->resolution.y) - 1.0f);
+		int p = index / camera->resolution.y;
+		float sy = float(p) / ((float)(camera->resolution.y) - 1.0f);
+
+		p = index - (p * camera->resolution.y);
+		float sx = float(p) / ((float)(camera->resolution.x) - 1.0f);
 
 		glm::vec3 rayDir = (camera->M - (2.0f*sx - 1.0f + u01(rng)) * camera->H - (2.0f*sy - 1.0f + u01(rng)) * camera->V);
 		//		glm::vec3 rayDir = (camera->M - (2.0f*sx - 1.0f) * camera->H - (2.0f*sy - 1.0f) * camera->V);
@@ -295,28 +302,27 @@ __global__ void kernGetRayDirections(Camera * camera, RayState* rays, int iter)
 		rayDir -= camera->position;
 		rayDir = glm::normalize(rayDir);
 
-		rays[index].ray.direction = rayDir;
-		rays[index].ray.origin = camera->position;
-		rays[index].isAlive = true;
-		rays[index].rayColor = glm::vec3(0);
-		rays[index].pixelIndex = index;
-		rays[index].rayThroughPut = 1.0f;
+		rays[ptr].ray.direction = rayDir;
+		rays[ptr].ray.origin = camera->position;
+		rays[ptr].isAlive = true;
+		rays[ptr].rayColor = glm::vec3(0);
+		rays[ptr].pixelIndex = ptr;
+		rays[ptr].rayThroughPut = 1.0f;
 
 		//		printf("%d %d : %f %f %f\n", x, y, rayDir.x, rayDir.y, rayDir.z);
 	}
 }
 
 //Kernel function that generates the Depth of field jitter
-__global__ void kernJitterDOF(Camera * camera, RayState* rays, int iter)
+__global__ void kernJitterDOF(Camera * camera, RayState* rays, int iter,
+	int rendererNo, int totalRenderer)
 {
-	int x = (blockIdx.x * blockDim.x) + threadIdx.x;
-	int y = (blockIdx.y * blockDim.y) + threadIdx.y;
+	int ptr = (blockIdx.x * blockDim.x) + threadIdx.x;
+	int index = rendererNo + ptr * totalRenderer;
 
-	if (x < camera->resolution.x && y < camera->resolution.y)
+	if (index < camera->resolution.x * camera->resolution.y)
 	{
-		int index = x + (y * camera->resolution.x);
-
-		Ray &r = rays[index].ray;
+		Ray &r = rays[ptr].ray;
 
 		glm::vec3 intersectionPoint, normal;
 

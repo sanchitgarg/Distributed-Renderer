@@ -1,80 +1,86 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="src">
+    <Filter Include="BackEnd">
+      <UniqueIdentifier>{1c93f0ec-5754-42f7-bd00-59f8604e73ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BackEnd\src">
       <UniqueIdentifier>{782c3f25-aeb4-4cde-8822-1f07ffb384d9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="header">
+    <Filter Include="BackEnd\header">
       <UniqueIdentifier>{5e9beb66-18b3-4fb7-b748-3ede0f471cd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrontEnd">
+      <UniqueIdentifier>{68ac6084-83fd-456e-8d1b-6e1c638a9508}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glslUtility.hpp">
-      <Filter>header</Filter>
+      <Filter>BackEnd\header</Filter>
     </ClInclude>
     <ClInclude Include="image.h">
-      <Filter>header</Filter>
+      <Filter>BackEnd\header</Filter>
     </ClInclude>
     <ClInclude Include="interactions.h">
-      <Filter>header</Filter>
+      <Filter>BackEnd\header</Filter>
     </ClInclude>
     <ClInclude Include="intersections.h">
-      <Filter>header</Filter>
+      <Filter>BackEnd\header</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
-      <Filter>header</Filter>
+      <Filter>BackEnd\header</Filter>
     </ClInclude>
     <ClInclude Include="preview.h">
-      <Filter>header</Filter>
+      <Filter>BackEnd\header</Filter>
     </ClInclude>
     <ClInclude Include="scene.h">
-      <Filter>header</Filter>
+      <Filter>BackEnd\header</Filter>
     </ClInclude>
     <ClInclude Include="sceneStructs.h">
-      <Filter>header</Filter>
+      <Filter>BackEnd\header</Filter>
     </ClInclude>
     <ClInclude Include="utilities.h">
-      <Filter>header</Filter>
+      <Filter>BackEnd\header</Filter>
     </ClInclude>
     <ClInclude Include="CUDARenderer.h">
-      <Filter>header</Filter>
+      <Filter>BackEnd\header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="utilities.cpp">
+      <Filter>BackEnd\src</Filter>
+    </ClCompile>
     <ClCompile Include="glslUtility.cpp">
-      <Filter>src</Filter>
+      <Filter>BackEnd\src</Filter>
     </ClCompile>
     <ClCompile Include="image.cpp">
-      <Filter>src</Filter>
+      <Filter>BackEnd\src</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>src</Filter>
+      <Filter>BackEnd\src</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
-      <Filter>src</Filter>
+      <Filter>BackEnd\src</Filter>
     </ClCompile>
     <ClCompile Include="preview.cpp">
-      <Filter>src</Filter>
+      <Filter>BackEnd\src</Filter>
     </ClCompile>
     <ClCompile Include="scene.cpp">
-      <Filter>src</Filter>
+      <Filter>BackEnd\src</Filter>
     </ClCompile>
     <ClCompile Include="stb.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="utilities.cpp">
-      <Filter>src</Filter>
+      <Filter>BackEnd\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="CUDARenderer.cu">
-      <Filter>src</Filter>
+      <Filter>BackEnd\src</Filter>
     </CudaCompile>
     <CudaCompile Include="interactions.cu">
-      <Filter>src</Filter>
+      <Filter>BackEnd\src</Filter>
     </CudaCompile>
     <CudaCompile Include="intersections.cu">
-      <Filter>src</Filter>
+      <Filter>BackEnd\src</Filter>
     </CudaCompile>
   </ItemGroup>
 </Project>

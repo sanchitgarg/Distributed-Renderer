@@ -1,4 +1,3 @@
-
 #include <glm/gtx/transform.hpp>
 
 #include "CUDARenderer.h"
@@ -45,7 +44,7 @@ void mainLoop(CUDARenderer *renderer, Viewer* viewer, int maxIteration)
 			viewer->update(iter);
 		}
 
-		//std::cout << "done iter " << iter << std::endl;
+		std::cout << "Iteration: " << iter  << " rendered." << std::endl;
 	}
 
 	viewer->saveImage(utilityCore::currentTimeString(), maxIteration);

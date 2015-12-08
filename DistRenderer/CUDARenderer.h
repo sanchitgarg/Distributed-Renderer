@@ -57,11 +57,13 @@ void checkCUDAErrorFn(const char *msg, const char *file, int line);
 
 __host__ __device__ thrust::default_random_engine makeSeededRandomEngine(int iter, int index, int depth);
 
-__global__ void sendImageToPBO(uchar4* pbo, glm::ivec2 resolution, int iter, glm::vec3* image);
+__global__ void sendImageToPBO(uchar4* pbo, glm::ivec2 resolution, int iter, glm::vec3* image,
+	int rendererNo, int totalRenderer);
 
-__global__ void kernGetRayDirections(Camera * camera, RayState* rays, int iter);
+__global__ void kernGetRayDirections(Camera * camera, RayState* rays, int iter, int rendererNo, 
+	int totalRenderer);
 
-__global__ void kernJitterDOF(Camera * camera, RayState* rays, int iter);
+__global__ void kernJitterDOF(Camera * camera, RayState* rays, int iter, int rendererNo, int totalRenderer);
 
 __global__ void kernTracePath(Camera * camera, RayState *ray, Geom * geoms, int *geomCount,
 	MeshGeom *meshGeoms, int *meshCount, int* lightIndices, int *lightCount, Material* materials,
