@@ -10,6 +10,7 @@
 #include <thrust/remove.h>
 
 #include "scene.h"
+#include "image.h"
 #include "interactions.h"
 
 #define DI 0
@@ -28,6 +29,8 @@ class CUDARenderer{
 		void pathtraceFree();
 		void pathtrace(uchar4 *pbo, int frame, int iteration);
 		int getPixelCount();
+
+		void saveImage(std::string startTime, int iteration);
 
 	private:
 		bool active;
@@ -49,6 +52,8 @@ class CUDARenderer{
 		int rendererNo;
 		int totalRenderer;
 		int pixelcount;
+		int width;
+		int height;
 		
 		void copyMeshes();
 };

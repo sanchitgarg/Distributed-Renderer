@@ -7,7 +7,6 @@
 
 #pragma comment(lib, "glew32.lib")
 
-#include "image.h"
 #include "scene.h"
 #include "glslUtility.hpp"
 
@@ -18,7 +17,6 @@ class Viewer{
 
 		bool init();
 		void update(int iteration);
-		void saveImage(std::string startTime, int iteration);
 		GLuint getPBO();
 
 	private:

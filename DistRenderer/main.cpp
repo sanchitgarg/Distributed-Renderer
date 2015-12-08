@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
 	Scene scene(sceneFile);
 	Viewer viewer(&scene);
 	CUDARenderer renderer;
-	renderer.pathtraceInit(&scene, 0, 10);
+	renderer.pathtraceInit(&scene, 5, 7);
 
 	int maxIteration = scene.state.iterations;
 
@@ -47,7 +47,7 @@ void mainLoop(CUDARenderer *renderer, Viewer* viewer, int maxIteration)
 		std::cout << "Iteration: " << iter  << " rendered." << std::endl;
 	}
 
-	viewer->saveImage(utilityCore::currentTimeString(), maxIteration);
+	renderer->saveImage(utilityCore::currentTimeString(), maxIteration);
 	renderer->pathtraceFree();
 	cudaDeviceReset();
 }

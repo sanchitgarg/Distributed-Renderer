@@ -19,8 +19,11 @@ void CUDARenderer::pathtraceInit(Scene* scene, int rendererNo_, int totalRendere
 	rendererNo = rendererNo_;
 	totalRenderer = totalRenderer_;
 
-	pixelcount = (cam.resolution.x * cam.resolution.y) / totalRenderer;
-	if (cam.resolution.x * cam.resolution.y % totalRenderer > rendererNo)
+	width = cam.resolution.x;
+	height = cam.resolution.y;
+
+	pixelcount = (width * height) / totalRenderer;
+	if (width * height % totalRenderer > rendererNo)
 		pixelcount++;
 		
 	std::cout << "Pixel to be rendered: " << pixelcount << std::endl;
@@ -181,10 +184,12 @@ void CUDARenderer::pathtrace(uchar4 *pbo, int frame, int iter) {
 	}
 
 	// Send results to OpenGL buffer for rendering
-	sendImageToPBO << <blocksPerGrid, blockSize >> >(pbo, cam.resolution, iter, dev_image, rendererNo, totalRenderer);
-	checkCUDAError("sendImageToPBO");
+	if (pbo != nullptr){
+		sendImageToPBO << <blocksPerGrid, blockSize >> >(pbo, cam.resolution, iter, dev_image, rendererNo, totalRenderer);
+		checkCUDAError("sendImageToPBO");
+	}
 
-	// Retrieve image from GPU
+	// TODO: Retrieve image from GPU
 	cudaMemcpy(hst_scene->state.image.data(), dev_image,
 		pixelcount * sizeof(glm::vec3), cudaMemcpyDeviceToHost);
 
@@ -193,6 +198,30 @@ void CUDARenderer::pathtrace(uchar4 *pbo, int frame, int iter) {
 
 int CUDARenderer::getPixelCount(){
 	return pixelcount;
+}
+
+void CUDARenderer::saveImage(std::string startTime, int iteration) {
+	float samples = iteration;
+	// output image file
+	image img(width, height);
+
+	for (int ptr = 0; ptr < pixelcount; ptr++) {
+		int index = rendererNo + ptr * totalRenderer;
+		int y = index / width;
+		int x = index - (y * width);
+
+		glm::vec3 pix = hst_scene->state.image[ptr];
+		img.setPixel(width - 1 - x, y, glm::vec3(pix) / samples);
+	}
+
+	std::string filename = hst_scene->state.imageName;
+	std::ostringstream ss;
+	ss << filename << "." << startTime << "." << samples << "samp";
+	filename = ss.str();
+
+	// CHECKITOUT
+	img.savePNG(filename);
+	//img.saveHDR(filename);  // Save a Radiance HDR file
 }
 
 void CUDARenderer::copyMeshes()
@@ -290,10 +319,10 @@ __global__ void kernGetRayDirections(Camera * camera, RayState* rays, int iter,
 		thrust::uniform_real_distribution<float> u01(0, 0.005);
 
 		//Find the ray direction
-		int p = index / camera->resolution.y;
+		int p = index / camera->resolution.x;
 		float sy = float(p) / ((float)(camera->resolution.y) - 1.0f);
 
-		p = index - (p * camera->resolution.y);
+		p = index - (p * camera->resolution.x);
 		float sx = float(p) / ((float)(camera->resolution.x) - 1.0f);
 
 		glm::vec3 rayDir = (camera->M - (2.0f*sx - 1.0f + u01(rng)) * camera->H - (2.0f*sy - 1.0f + u01(rng)) * camera->V);

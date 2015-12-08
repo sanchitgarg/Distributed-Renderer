@@ -51,29 +51,6 @@ void Viewer::update(int iteration) {
 	}
 }
 
-void Viewer::saveImage(std::string startTime, int iteration) {
-	float samples = iteration;
-	// output image file
-	image img(width, height);
-
-	for (int x = 0; x < width; x++) {
-		for (int y = 0; y < height; y++) {
-			int index = x + (y * width);
-			glm::vec3 pix = renderState->image[index];
-			img.setPixel(width - 1 - x, y, glm::vec3(pix) / samples);
-		}
-	}
-
-	std::string filename = renderState->imageName;
-	std::ostringstream ss;
-	ss << filename << "." << startTime << "." << samples << "samp";
-	filename = ss.str();
-
-	// CHECKITOUT
-	img.savePNG(filename);
-	//img.saveHDR(filename);  // Save a Radiance HDR file
-}
-
 GLuint Viewer::getPBO(){
 	return pbo;
 }
