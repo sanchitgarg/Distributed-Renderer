@@ -22,15 +22,6 @@ int main(int argc, char** argv) {
 
 	int maxIteration = scene.state.iterations;
 
-	Camera &cam = scene.state.camera;
-	glm::vec3 v = cam.view;
-	glm::vec3 u = cam.up;
-	glm::vec3 r = glm::cross(v, u);
-	glm::mat4 rotmat = glm::rotate(0.0f, r) * glm::rotate(0.0f, u);
-	cam.view = glm::vec3(rotmat * glm::vec4(v, 0.f));
-	cam.up = glm::vec3(rotmat * glm::vec4(u, 0.f));
-	scene.configureCamera();
-
 	mainLoop(&renderer, &viewer, maxIteration);
 
 	return 0;

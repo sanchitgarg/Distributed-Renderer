@@ -102,7 +102,6 @@ bool Viewer::init(){
 	// Initialize other stuff
 	initVAO();
 	initTextures();
-	initCuda();
 	initPBO();
 	GLuint passthroughProgram = initShader();
 
@@ -168,12 +167,8 @@ GLuint Viewer::initShader() {
 	return program;
 }
 
-void Viewer::initCuda() {
-	cudaGLSetGLDevice(0);
-}
-
 void Viewer::cleanupCuda() {
-	if (pbo) {
+	if (pbo != 0) {
 		// unregister this buffer object with CUDA
 		cudaGLUnregisterBufferObject(pbo);
 

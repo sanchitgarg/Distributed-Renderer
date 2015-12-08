@@ -251,7 +251,9 @@ __host__ __device__ thrust::default_random_engine makeSeededRandomEngine(int ite
 //Kernel that writes the image to the OpenGL PBO directly.
 __global__ void sendImageToPBO(uchar4* pbo, glm::ivec2 resolution,
 	int iter, glm::vec3* image) {
-	int index = (blockIdx.x * blockDim.x) + threadIdx.x;
+	int x = (blockIdx.x * blockDim.x) + threadIdx.x;
+	int y = (blockIdx.y * blockDim.y) + threadIdx.y;
+	int index = x + (y * resolution.x);
 
 	if (index < resolution.x * resolution.y) {
 		glm::vec3 pix = image[index];
