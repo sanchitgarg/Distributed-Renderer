@@ -1,5 +1,7 @@
 # Distributed-Renderer
 
+For the front end client: https://github.com/rpdome/Walnut-FrontEnd
+
 ### Project Proposal
 
 Work on a renderer that is more than a Cornell box. Aim to render a more realistic scene using 3D models (obj meshes). Distribute it over the network to gain significant speed up.
