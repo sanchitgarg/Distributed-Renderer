@@ -9,7 +9,9 @@ CUDARenderer::~CUDARenderer(){
 		pathtraceFree();
 };
 
-void CUDARenderer::pathtraceInit(Scene* scene, int rendererNo_, int totalRenderer_)
+void CUDARenderer::pathtraceInit(Scene* scene,			//Scene pointer
+								int rendererNo_,		//Render ID (starting at 0)
+								int totalRenderer_)		//Total number of renderers
 {
 	active = true;
 
@@ -513,7 +515,7 @@ __global__ void kernDirectLightPath(Camera * camera, RayState *ray, Geom * geoms
 	}
 }
 
-
+// Write the color of the rays that are still alive
 __global__ void kernWritePixels(Camera * camera, RayState *ray, glm::vec3* image, int rayCount)
 {
 	int index = (blockIdx.x * blockDim.x) + threadIdx.x;
@@ -527,6 +529,7 @@ __global__ void kernWritePixels(Camera * camera, RayState *ray, glm::vec3* image
 	}
 }
 
+//Kill rays based on the throughput and a random number generated between 0 and 1
 __global__ void kernRussianRoullete(Camera * camera, RayState *ray, glm::vec3* image, int iter, int rayCount)
 {
 	int index = (blockIdx.x * blockDim.x) + threadIdx.x;

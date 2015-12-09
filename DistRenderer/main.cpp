@@ -17,7 +17,9 @@ int main(int argc, char** argv) {
 	Scene scene(sceneFile);
 	Viewer viewer(&scene);
 	CUDARenderer renderer;
-	renderer.pathtraceInit(&scene, 5, 7);
+
+	// Set the render id (starting index 0) and the total number of renderers
+	renderer.pathtraceInit(&scene, 0, 1);
 
 	int maxIteration = scene.state.iterations;
 
@@ -44,7 +46,7 @@ void mainLoop(CUDARenderer *renderer, Viewer* viewer, int maxIteration)
 			viewer->update(iter);
 		}
 
-		std::cout << "Iteration: " << iter  << " rendered." << std::endl;
+		//std::cout << "Iteration: " << iter  << " rendered." << std::endl;
 	}
 
 	renderer->saveImage(utilityCore::currentTimeString(), maxIteration);

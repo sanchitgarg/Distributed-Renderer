@@ -80,10 +80,10 @@ CAMERA
 RES         800 800
 FOVY        45
 ITERATIONS  1000
-DEPTH      	5
+DEPTH      	3
 FILE        cornell
 FOCAL		21.92
-APER		1.3
+APER		5
 EYE         0.0 5 10.5
 VIEW        0 0 -1
 UP          0 1 0
@@ -138,11 +138,13 @@ SCALE       .01 10 10
 
 // Sphere
 OBJECT 6
+//mesh
 sphere
 material 4
 TRANS       -2 2 0
-ROTAT       0 45 0
-SCALE       3 3 3
+ROTAT       0 0 0
+SCALE       2 2 2
+//OBJFILE		C:\Users\Sanchit Garg\Desktop\GPU\DisRendererVS\scenes\objs\teapot.obj
 
 // Sphere
 OBJECT 7
