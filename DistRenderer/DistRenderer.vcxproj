@@ -19,29 +19,45 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CUDARenderer.h" />
+    <ClInclude Include="CUDAPathTracer.h" />
+    <ClInclude Include="FrontEnd.h" />
+    <ClInclude Include="GLDisplay.h" />
     <ClInclude Include="glslUtility.hpp" />
+    <ClInclude Include="Helper.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="interactions.h" />
     <ClInclude Include="intersections.h" />
+    <ClInclude Include="Leader.h" />
     <ClInclude Include="Mesh.h" />
-    <ClInclude Include="preview.h" />
+    <ClInclude Include="msg.pb.h" />
+    <ClInclude Include="Packet.h" />
+    <ClInclude Include="PacketManager.h" />
+    <ClInclude Include="Renderer.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="sceneStructs.h" />
     <ClInclude Include="utilities.h" />
+    <ClInclude Include="Viewer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FrontEnd.cpp" />
+    <ClCompile Include="GLDisplay.cpp" />
     <ClCompile Include="glslUtility.cpp" />
+    <ClCompile Include="Helper.cpp" />
     <ClCompile Include="image.cpp" />
+    <ClCompile Include="Leader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="preview.cpp" />
+    <ClCompile Include="msg.pb.cc" />
+    <ClCompile Include="Packet.cpp" />
+    <ClCompile Include="PacketManager.cpp" />
+    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="scene.cpp" />
     <ClCompile Include="stb.cpp" />
     <ClCompile Include="utilities.cpp" />
+    <ClCompile Include="Viewer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <CudaCompile Include="CUDARenderer.cu" />
+    <CudaCompile Include="CUDAPathTracer.cu" />
     <CudaCompile Include="interactions.cu" />
     <CudaCompile Include="intersections.cu" />
   </ItemGroup>

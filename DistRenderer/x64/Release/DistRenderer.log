@@ -1,303 +1,35 @@
-﻿Build started 12/9/2015 4:05:55 PM.
-     1>Project "C:\Users\Sanchit Garg\Desktop\GPU\DisRendererVS\DistRenderer\DistRenderer.vcxproj" on node 2 (Build target(s)).
-     1>AddCudaCompileDeps:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /DWIN64 /DNDEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /I. /FIcuda_runtime.h /c "C:\Users\Sanchit Garg\Desktop\GPU\DisRendererVS\DistRenderer\CUDARenderer.cu" 
-       CudaBuild:
-         Compiling CUDA source file CUDARenderer.cu...
-         cmd.exe /C "C:\Users\Sanchit Garg\AppData\Local\Temp\tmpcaf9f602e4b048ccbdb3e4877dbfe8eb.cmd"
-         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2013 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64" -rdc=true -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include"     --keep-dir x64\Release -maxrregcount=0  --machine 64 --compile -cudart static --verbose     -DWIN32 -DWIN64 -DNDEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /O2 /Zi  /MD " -o x64\Release\CUDARenderer.cu.obj "C:\Users\Sanchit Garg\Desktop\GPU\DisRendererVS\DistRenderer\CUDARenderer.cu"
-         
-         C:\Users\Sanchit Garg\Desktop\GPU\DisRendererVS\DistRenderer>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2013 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64" -rdc=true -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include"     --keep-dir x64\Release -maxrregcount=0  --machine 64 --compile -cudart static --verbose     -DWIN32 -DWIN64 -DNDEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /O2 /Zi  /MD " -o x64\Release\CUDARenderer.cu.obj "C:\Users\Sanchit Garg\Desktop\GPU\DisRendererVS\DistRenderer\CUDARenderer.cu" 
-         #$ _SPACE_= 
-         #$ _CUDART_=cudart
-         #$ _HERE_=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin
-         #$ _THERE_=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin
-         #$ _TARGET_SIZE_=
-         #$ _TARGET_DIR_=
-         #$ _TARGET_SIZE_=64
-         #$ _WIN_PLATFORM_=x64
-         #$ TOP=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin/..
-         #$ NVVMIR_LIBRARY_DIR=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin/../nvvm/libdevice
-         #$ PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin/../open64/bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin/../nvvm/bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin/../lib;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin;C:\Program Files (x86)\Windows Kits\8.1\bin\x86;;C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools;C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\bin;C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\tools;C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\ide;C:\Program Files (x86)\HTML Help Workshop;;C:\Program Files (x86)\MSBuild\12.0\bin\;C:\Windows\Microsoft.NET\Framework\v4.0.30319\;;C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\NativeBinaries/x86;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\libnvvp;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files (x86)\CMake\bin;
-         #$ INCLUDES="-IC:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin/../include"  
-         #$ LIBRARIES=  "/LIBPATH:C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin/../lib/x64"
-         #$ CUDAFE_FLAGS=--sdk_dir "C:\Program Files (x86)\Windows Kits\8.1"
-         #$ PTXAS_FLAGS=
-         CUDARenderer.cu
-         #$ cl.exe @"C:\Users\SANCHI~1\AppData\Local\Temp/tmpxft_000016f8_00000000-6.res" > "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-5_CUDARenderer.cpp1.ii" 
-         #$ erase C:\Users\SANCHI~1\AppData\Local\Temp/tmpxft_000016f8_00000000-6.res
-         #$ cudafe --allow_managed --m64 --microsoft_version=1800 --msvc_target_version=1800 --compiler_bindir "C:/Program Files (x86)/Microsoft Visual Studio 12.0/VC/bin/x86_amd64/../../.." -tused --no_remove_unneeded_entities --sdk_dir "C:\Program Files (x86)\Windows Kits\8.1" --device-c --gen_c_file_name "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-2_CUDARenderer.cudafe1.c" --stub_file_name "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-2_CUDARenderer.cudafe1.stub.c" --gen_device_file_name "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-2_CUDARenderer.cudafe1.gpu" --nv_arch "compute_20" --gen_module_id_file --module_id_file_name "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-1_CUDARenderer.module_id" --include_file_name "tmpxft_000016f8_00000000-0_CUDARenderer.fatbin.c" "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-5_CUDARenderer.cpp1.ii" 
-         #$ cl.exe @"C:\Users\SANCHI~1\AppData\Local\Temp/tmpxft_000016f8_00000000-8.res" > "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-7_CUDARenderer.cpp2.i" 
-         #$ erase C:\Users\SANCHI~1\AppData\Local\Temp/tmpxft_000016f8_00000000-8.res
-         #$ cudafe -w --allow_managed --m64 --microsoft_version=1800 --msvc_target_version=1800 --compiler_bindir "C:/Program Files (x86)/Microsoft Visual Studio 12.0/VC/bin/x86_amd64/../../.." --c --sdk_dir "C:\Program Files (x86)\Windows Kits\8.1" --device-c --gen_c_file_name "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-9_CUDARenderer.cudafe2.c" --stub_file_name "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-9_CUDARenderer.cudafe2.stub.c" --gen_device_file_name "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-9_CUDARenderer.cudafe2.gpu" --nv_arch "compute_20" --module_id_file_name "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-1_CUDARenderer.module_id" --include_file_name "tmpxft_000016f8_00000000-0_CUDARenderer.fatbin.c" "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-7_CUDARenderer.cpp2.i" 
-         #$ cl.exe @"C:\Users\SANCHI~1\AppData\Local\Temp/tmpxft_000016f8_00000000-11.res" > "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-10_CUDARenderer.cpp3.i" 
-         #$ erase C:\Users\SANCHI~1\AppData\Local\Temp/tmpxft_000016f8_00000000-11.res
-         #$ filehash -s "--compile-only " "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-10_CUDARenderer.cpp3.i" > "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-12_CUDARenderer.hash"
-         #$ cl.exe @"C:\Users\SANCHI~1\AppData\Local\Temp/tmpxft_000016f8_00000000-13.res" > "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-3_CUDARenderer.cpp4.ii" 
-         #$ erase C:\Users\SANCHI~1\AppData\Local\Temp/tmpxft_000016f8_00000000-13.res
-         #$ cudafe++ --allow_managed --m64 --microsoft_version=1800 --msvc_target_version=1800 --compiler_bindir "C:/Program Files (x86)/Microsoft Visual Studio 12.0/VC/bin/x86_amd64/../../.." --parse_templates --sdk_dir "C:\Program Files (x86)\Windows Kits\8.1" --device-c --gen_c_file_name "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-2_CUDARenderer.cudafe1.cpp" --stub_file_name "tmpxft_000016f8_00000000-2_CUDARenderer.cudafe1.stub.c" --module_id_file_name "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-1_CUDARenderer.module_id" "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-3_CUDARenderer.cpp4.ii" 
-         #$ cicc  -arch compute_20 -m64 -ftz=0 -prec_div=1 -prec_sqrt=1 -fmad=1 -nvvmir-library "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin/../nvvm/libdevice/libdevice.compute_20.10.bc"  --device-c --orig_src_file_name "C:/Users/Sanchit Garg/Desktop/GPU/DisRendererVS/DistRenderer/CUDARenderer.cu"  "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-10_CUDARenderer.cpp3.i" -o "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-4_CUDARenderer.ptx"
-         #$ ptxas  -arch=sm_20 -m64 --compile-only "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-4_CUDARenderer.ptx"  -o "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-15_CUDARenderer.sm_20.cubin" 
-         #$ fatbinary --create="C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-0_CUDARenderer.fatbin" -64 --key="dd1cd601a5631825" --cmdline="--compile-only " "--image=profile=sm_20,file=C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-15_CUDARenderer.sm_20.cubin" "--image=profile=compute_20,file=C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-4_CUDARenderer.ptx" --embedded-fatbin="C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-0_CUDARenderer.fatbin.c" --cuda --device-c
-         #$ erase C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-0_CUDARenderer.fatbin
-         #$ cl.exe @"C:\Users\SANCHI~1\AppData\Local\Temp/tmpxft_000016f8_00000000-17.res" > "C:/Users/SANCHI~1/AppData/Local/Temp/tmpxft_000016f8_00000000-16_CUDARenderer.ii" 
-         #$ erase C:\Users\SANCHI~1\AppData\Local\Temp/tmpxft_000016f8_00000000-17.res
-         #$ cl.exe @"C:\Users\SANCHI~1\AppData\Local\Temp/tmpxft_000016f8_00000000-18.res" -Fo"x64/Release/CUDARenderer.cu.obj" 
-         tmpxft_000016f8_00000000-16_CUDARenderer.ii
+﻿Build started 12/9/2015 5:52:21 PM.
+     1>Project "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\DistRenderer\DistRenderer.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /Zi /nologo /W3 /WX- /O2 /Oi /GL /D WIN32 /D WIN64 /D NDEBUG /D _CONSOLE /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc120.pdb" /Gd /TP /errorReport:prompt FrontEnd.cpp GLDisplay.cpp Renderer.cpp main.cpp
+         FrontEnd.cpp
+         GLDisplay.cpp
+     1>GLDisplay.cpp(157): warning C4267: 'initializing' : conversion from 'size_t' to 'GLint', possible loss of data
+     1>GLDisplay.cpp(163): warning C4267: 'initializing' : conversion from 'size_t' to 'GLint', possible loss of data
+     1>GLDisplay.cpp(186): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>GLDisplay.cpp(187): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+         Renderer.cpp
+     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/detail/error_category.inl(102): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\string.h(168) : see declaration of 'strerror'
      1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(241): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>::size_type', possible loss of data
      1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(303): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>::size_type', possible loss of data
      1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(319): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>::size_type', possible loss of data
      1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(439): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>::size_type', possible loss of data
-     1>C:/Users/Sanchit Garg/Desktop/GPU/DisRendererVS/DistRenderer/CUDARenderer.cu(42): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
-     1>C:/Users/Sanchit Garg/Desktop/GPU/DisRendererVS/DistRenderer/CUDARenderer.cu(69): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
-     1>C:/Users/Sanchit Garg/Desktop/GPU/DisRendererVS/DistRenderer/CUDARenderer.cu(101): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>C:/Users/Sanchit Garg/Desktop/GPU/DisRendererVS/DistRenderer/CUDARenderer.cu(164): warning C4244: '=' : conversion from '__int64' to 'int', possible loss of data
-     1>C:/Users/Sanchit Garg/Desktop/GPU/DisRendererVS/DistRenderer/CUDARenderer.cu(206): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-     1>C:/Users/Sanchit Garg/Desktop/GPU/DisRendererVS/DistRenderer/CUDARenderer.cu(232): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/detail/pointer_traits.hpp(55): warning C4800: 'unsigned int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>C:\Program Files (x86)\Windows Kits\8.1\Include\shared\minwindef.h(130): warning C4005: 'APIENTRY' : macro redefinition
+                 C:\Users\Dome\Documents\GitHub\Distributed-Renderer\include\GLFW/glfw3.h(85) : see previous definition of 'APIENTRY'
+     1>Renderer.cpp(130): warning C4553: '==' : operator has no effect; did you intend '='?
+     1>Renderer.cpp(174): warning C4553: '==' : operator has no effect; did you intend '='?
+     1>Renderer.cpp(196): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>Renderer.cpp(207): warning C4244: 'argument' : conversion from 'float' to 'google::protobuf::int32', possible loss of data
+     1>Renderer.cpp(208): warning C4244: 'argument' : conversion from 'float' to 'google::protobuf::int32', possible loss of data
+     1>Renderer.cpp(209): warning C4244: 'argument' : conversion from 'float' to 'google::protobuf::int32', possible loss of data
      1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(250): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>,0x00>::size_type', possible loss of data
                  C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(625) : see reference to function template instantiation 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>,0x00> thrust::system::cuda::detail::bulk_::par<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>>(ExecutionAgent,size_t)' being compiled
                  with
                  [
                      ExecutionAgent=thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>
                  ]
-     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/detail/cuda_launcher/cuda_launcher.hpp(155): warning C4267: 'return' : conversion from 'size_t' to 'int', possible loss of data
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/detail/cuda_launcher/cuda_launcher.hpp(148) : while compiling class template member function 'int thrust::system::cuda::detail::bulk_::detail::cuda_launcher_base<0,thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>,0x00>,Closure>::choose_group_size(int)'
-                 with
-                 [
-                     Closure=thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel,thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<0>,thrust::pointer<RayState,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>,thrust::detail::wrapped_function<thrust::detail::allocator_traits_detail::gozer,void>,unsigned int,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type>>
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/detail/cuda_launcher/cuda_launcher.hpp(305) : see reference to function template instantiation 'int thrust::system::cuda::detail::bulk_::detail::cuda_launcher_base<0,thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>,0x00>,Closure>::choose_group_size(int)' being compiled
-                 with
-                 [
-                     Closure=thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel,thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<0>,thrust::pointer<RayState,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>,thrust::detail::wrapped_function<thrust::detail::allocator_traits_detail::gozer,void>,unsigned int,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type>>
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/detail/cuda_launcher/cuda_launcher.hpp(228) : see reference to class template instantiation 'thrust::system::cuda::detail::bulk_::detail::cuda_launcher_base<0,thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>,0x00>,Closure>' being compiled
-                 with
-                 [
-                     Closure=thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel,thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<0>,thrust::pointer<RayState,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>,thrust::detail::wrapped_function<thrust::detail::allocator_traits_detail::gozer,void>,unsigned int,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type>>
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/detail/choose_sizes.inl(41) : see reference to class template instantiation 'thrust::system::cuda::detail::bulk_::detail::cuda_launcher<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>,0x00>,Closure>' being compiled
-                 with
-                 [
-                     Closure=thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel,thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<0>,thrust::pointer<RayState,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>,thrust::detail::wrapped_function<thrust::detail::allocator_traits_detail::gozer,void>,unsigned int,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type>>
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/detail/choose_sizes.inl(96) : see reference to function template instantiation 'thrust::pair<int,int> thrust::system::cuda::detail::bulk_::detail::choose_sizes<thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel,thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<0>,thrust::pointer<RayState,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>,thrust::detail::wrapped_function<thrust::detail::allocator_traits_detail::gozer,void>,unsigned int,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type>>>(thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>,0x00>,Closure)' being compiled
-                 with
-                 [
-                     Closure=thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel,thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<0>,thrust::pointer<RayState,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>,thrust::detail::wrapped_function<thrust::detail::allocator_traits_detail::gozer,void>,unsigned int,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type>>
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/for_each.inl(125) : see reference to function template instantiation 'thrust::pair<int,int> thrust::system::cuda::detail::bulk_::choose_sizes<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel,thrust::system::cuda::detail::bulk_::detail::cursor<0>,RandomAccessIterator,thrust::detail::wrapped_function<thrust::detail::allocator_traits_detail::gozer,void>,unsigned int>(thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>,0x00>,Function,Arg1,Arg2,Arg3,Arg4)' being compiled
-                 with
-                 [
-                     RandomAccessIterator=thrust::pointer<RayState,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>
-         ,            Function=thrust::system::cuda::detail::for_each_n_detail::for_each_kernel
-         ,            Arg1=thrust::system::cuda::detail::bulk_::detail::cursor<0>
-         ,            Arg2=thrust::pointer<RayState,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>
-         ,            Arg3=thrust::detail::wrapped_function<thrust::detail::allocator_traits_detail::gozer,void>
-         ,            Arg4=unsigned int
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/copy_if.inl(262) : see reference to function template instantiation 'OutputIterator thrust::copy_if<DerivedPolicy,InputIterator1,InputIterator2,OutputIterator,Predicate>(const thrust::detail::execution_policy_base<DerivedPolicy> &,InputIterator1,InputIterator1,InputIterator2,OutputIterator,Predicate)' being compiled
-                 with
-                 [
-                     OutputIterator=RayState *
-         ,            DerivedPolicy=thrust::detail::seq_t
-         ,            InputIterator1=thrust::detail::normal_iterator<thrust::pointer<RayState,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>>
-         ,            InputIterator2=thrust::detail::normal_iterator<thrust::pointer<RayState,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>>
-         ,            Predicate=thrust::detail::unary_negate<isDead>
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/detail/allocator/allocator_traits.inl(249) : while compiling class template member function 'void thrust::detail::allocator_traits<Alloc>::deallocate(thrust::detail::no_throw_allocator<thrust::detail::temporary_allocator<T,System>> &,thrust::pointer<RayState,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>,unsigned __int64)'
-                 with
-                 [
-                     Alloc=thrust::detail::no_throw_allocator<thrust::detail::temporary_allocator<RayState,thrust::system::cuda::detail::par_t>>
-         ,            T=RayState
-         ,            System=thrust::system::cuda::detail::par_t
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/detail/contiguous_storage.inl(172) : see reference to function template instantiation 'void thrust::detail::allocator_traits<Alloc>::deallocate(thrust::detail::no_throw_allocator<thrust::detail::temporary_allocator<T,System>> &,thrust::pointer<RayState,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>,unsigned __int64)' being compiled
-                 with
-                 [
-                     Alloc=thrust::detail::no_throw_allocator<thrust::detail::temporary_allocator<RayState,thrust::system::cuda::detail::par_t>>
-         ,            T=RayState
-         ,            System=thrust::system::cuda::detail::par_t
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/detail/contiguous_storage.inl(169) : while compiling class template member function 'void thrust::detail::contiguous_storage<T,thrust::detail::no_throw_allocator<thrust::detail::temporary_allocator<T,System>>>::deallocate(void)'
-                 with
-                 [
-                     T=RayState
-         ,            System=thrust::system::cuda::detail::par_t
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/detail/contiguous_storage.inl(64) : see reference to function template instantiation 'void thrust::detail::contiguous_storage<T,thrust::detail::no_throw_allocator<thrust::detail::temporary_allocator<T,System>>>::deallocate(void)' being compiled
-                 with
-                 [
-                     T=RayState
-         ,            System=thrust::system::cuda::detail::par_t
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/detail/contiguous_storage.inl(38) : while compiling class template member function 'thrust::detail::contiguous_storage<T,thrust::detail::no_throw_allocator<thrust::detail::temporary_allocator<T,System>>>::contiguous_storage(const thrust::detail::no_throw_allocator<thrust::detail::temporary_allocator<T,System>> &)'
-                 with
-                 [
-                     T=RayState
-         ,            System=thrust::system::cuda::detail::par_t
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/detail/temporary_array.inl(131) : see reference to function template instantiation 'thrust::detail::contiguous_storage<T,thrust::detail::no_throw_allocator<thrust::detail::temporary_allocator<T,System>>>::contiguous_storage(const thrust::detail::no_throw_allocator<thrust::detail::temporary_allocator<T,System>> &)' being compiled
-                 with
-                 [
-                     T=RayState
-         ,            System=thrust::system::cuda::detail::par_t
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/detail/contiguous_storage.inl(90) : while compiling class template member function 'thrust::detail::normal_iterator<thrust::pointer<RayState,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>> thrust::detail::contiguous_storage<T,thrust::detail::no_throw_allocator<thrust::detail::temporary_allocator<T,System>>>::begin(void)'
-                 with
-                 [
-                     T=RayState
-         ,            System=thrust::system::cuda::detail::par_t
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/detail/generic/remove.inl(89) : see reference to function template instantiation 'thrust::detail::normal_iterator<thrust::pointer<RayState,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>> thrust::detail::contiguous_storage<T,thrust::detail::no_throw_allocator<thrust::detail::temporary_allocator<T,System>>>::begin(void)' being compiled
-                 with
-                 [
-                     T=RayState
-         ,            System=thrust::system::cuda::detail::par_t
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/detail/temporary_array.h(38) : see reference to class template instantiation 'thrust::detail::contiguous_storage<T,thrust::detail::no_throw_allocator<thrust::detail::temporary_allocator<T,System>>>' being compiled
-                 with
-                 [
-                     T=RayState
-         ,            System=thrust::system::cuda::detail::par_t
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/detail/generic/remove.inl(86) : see reference to class template instantiation 'thrust::detail::temporary_array<RayState,DerivedPolicy>' being compiled
-                 with
-                 [
-                     DerivedPolicy=thrust::system::cuda::detail::par_t
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/detail/remove.inl(76) : see reference to function template instantiation 'ForwardIterator thrust::system::detail::generic::remove_if<Derived,ForwardIterator,Predicate>(thrust::execution_policy<Derived> &,ForwardIterator,ForwardIterator,Predicate)' being compiled
-                 with
-                 [
-                     ForwardIterator=RayState *
-         ,            Derived=thrust::system::cuda::detail::par_t
-         ,            Predicate=isDead
-                 ]
-                 C:/Users/Sanchit Garg/Desktop/GPU/DisRendererVS/DistRenderer/CUDARenderer.cu(163) : see reference to function template instantiation 'ForwardIterator thrust::remove_if<DerivedPolicy,RayState*,isDead>(const thrust::detail::execution_policy_base<DerivedPolicy> &,ForwardIterator,ForwardIterator,Predicate)' being compiled
-                 with
-                 [
-                     ForwardIterator=RayState *
-         ,            DerivedPolicy=thrust::system::cuda::detail::par_t
-         ,            Predicate=isDead
-                 ]
-     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/detail/cuda_launcher/cuda_launcher.hpp(85): warning C4267: 'return' : conversion from 'size_t' to 'int', possible loss of data
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/detail/cuda_launcher/cuda_launcher.hpp(84) : while compiling class template member function 'int thrust::system::cuda::detail::bulk_::detail::cuda_launcher_base<0,thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>,0x00>,Closure>::max_active_blocks_per_multiprocessor(const thrust::system::cuda::detail::bulk_::detail::device_properties_t &,const thrust::system::cuda::detail::bulk_::detail::function_attributes_t &,int,int)'
-                 with
-                 [
-                     Closure=thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel,thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<0>,thrust::pointer<RayState,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>,thrust::detail::wrapped_function<thrust::detail::allocator_traits_detail::gozer,void>,unsigned int,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type>>
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/detail/cuda_launcher/cuda_launcher.hpp(96) : see reference to function template instantiation 'int thrust::system::cuda::detail::bulk_::detail::cuda_launcher_base<0,thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>,0x00>,Closure>::max_active_blocks_per_multiprocessor(const thrust::system::cuda::detail::bulk_::detail::device_properties_t &,const thrust::system::cuda::detail::bulk_::detail::function_attributes_t &,int,int)' being compiled
-                 with
-                 [
-                     Closure=thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel,thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<0>,thrust::pointer<RayState,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>,thrust::detail::wrapped_function<thrust::detail::allocator_traits_detail::gozer,void>,unsigned int,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type>>
-                 ]
-     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(458): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x03>,0x0200>::size_type', possible loss of data
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(667) : see reference to function template instantiation 'thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x03>,0x0200> thrust::system::cuda::detail::bulk_::con<0x0200,0x03>(size_t)' being compiled
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/scan.inl(235) : see reference to function template instantiation 'thrust::system::cuda::detail::bulk_::async_launch<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x03>,0x0200>,0x00>> thrust::system::cuda::detail::bulk_::grid<0x0200,3>(size_t,size_t,cudaStream_t)' being compiled
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/scan.inl(406) : see reference to function template instantiation 'OutputIterator thrust::system::cuda::detail::scan_detail::inclusive_scan<thrust::system::cuda::detail::par_t,InputIterator,OutputIterator,AssociativeOperator>(thrust::system::cuda::detail::execution_policy<thrust::system::cuda::detail::par_t> &,InputIterator,InputIterator,OutputIterator,AssociativeOperator)' being compiled
-                 with
-                 [
-                     OutputIterator=thrust::detail::normal_iterator<thrust::pointer<__int64,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>>
-         ,            InputIterator=thrust::detail::normal_iterator<thrust::pointer<__int64,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>>
-         ,            AssociativeOperator=thrust::plus<__int64>
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/iterator/iterator_facade.h(309) : while compiling class template member function 'thrust::reference<Element,thrust::pointer<Element,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>,thrust::use_default> thrust::iterator_facade<Derived,__int64,thrust::system::cuda::detail::par_t,thrust::random_access_traversal_tag,thrust::reference<Element,thrust::pointer<Element,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>,thrust::use_default>,__int64>::operator *(void) const'
-                 with
-                 [
-                     Element=__int64
-         ,            Derived=thrust::detail::normal_iterator<thrust::pointer<__int64,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>>
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/iterator/iterator_facade.h(328) : see reference to function template instantiation 'thrust::reference<Element,thrust::pointer<Element,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>,thrust::use_default> thrust::iterator_facade<Derived,__int64,thrust::system::cuda::detail::par_t,thrust::random_access_traversal_tag,thrust::reference<Element,thrust::pointer<Element,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>,thrust::use_default>,__int64>::operator *(void) const' being compiled
-                 with
-                 [
-                     Element=__int64
-         ,            Derived=thrust::detail::normal_iterator<thrust::pointer<__int64,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>>
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/iterator/iterator_adaptor.h(121) : see reference to class template instantiation 'thrust::iterator_facade<Derived,__int64,thrust::system::cuda::detail::par_t,thrust::random_access_traversal_tag,thrust::reference<Element,thrust::pointer<Element,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>,thrust::use_default>,__int64>' being compiled
-                 with
-                 [
-                     Derived=thrust::detail::normal_iterator<thrust::pointer<__int64,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>>
-         ,            Element=__int64
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/iterator/detail/normal_iterator.h(36) : see reference to class template instantiation 'thrust::iterator_adaptor<thrust::detail::normal_iterator<thrust::pointer<__int64,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>>,Pointer,thrust::use_default,thrust::use_default,thrust::use_default,thrust::use_default,thrust::use_default>' being compiled
-                 with
-                 [
-                     Pointer=thrust::pointer<__int64,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/detail/tuple.inl(256) : see reference to class template instantiation 'thrust::detail::normal_iterator<thrust::pointer<__int64,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>>' being compiled
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/detail/tuple.inl(257) : see reference to class template instantiation 'thrust::detail::cons<T0,thrust::detail::cons<__int64,thrust::detail::cons<T0,thrust::detail::cons<thrust::plus<__int64>,thrust::detail::map_tuple_to_cons<thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type>::type>>>>' being compiled
-                 with
-                 [
-                     T0=thrust::detail::normal_iterator<thrust::pointer<__int64,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>>
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/tuple.h(197) : see reference to class template instantiation 'thrust::detail::cons<T0,thrust::detail::cons<thrust::detail::normal_iterator<thrust::pointer<__int64,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>>,thrust::detail::cons<__int64,thrust::detail::cons<thrust::detail::normal_iterator<thrust::pointer<__int64,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>>,thrust::detail::cons<thrust::plus<__int64>,thrust::detail::map_tuple_to_cons<thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type>::type>>>>>' being compiled
-                 with
-                 [
-                     T0=thrust::system::cuda::detail::bulk_::detail::cursor<1>
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/detail/closure.hpp(70) : see reference to class template instantiation 'thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<1>,thrust::detail::normal_iterator<thrust::pointer<__int64,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>>,__int64,thrust::detail::normal_iterator<thrust::pointer<__int64,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>>,thrust::plus<__int64>,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type>' being compiled
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/detail/cuda_task.hpp(61) : see reference to class template instantiation 'thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::scan_detail::inclusive_scan_n,thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<1>,thrust::detail::normal_iterator<thrust::pointer<__int64,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>>,__int64,thrust::detail::normal_iterator<thrust::pointer<__int64,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>>,thrust::plus<__int64>,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type>>' being compiled
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/detail/cuda_task.hpp(202) : see reference to class template instantiation 'thrust::system::cuda::detail::bulk_::detail::task_base<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x03>,0x0200>,0x00>,Closure>' being compiled
-                 with
-                 [
-                     Closure=thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::scan_detail::inclusive_scan_n,thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<1>,thrust::detail::normal_iterator<thrust::pointer<__int64,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>>,__int64,thrust::detail::normal_iterator<thrust::pointer<__int64,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>>,thrust::plus<__int64>,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type>>
-                 ]
-                 c:\users\sanchit garg\appdata\local\temp\tmpxft_000016f8_00000000-2_CUDARenderer.cudafe1.stub.c(65) : see reference to class template instantiation 'thrust::system::cuda::detail::bulk_::detail::cuda_task<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x03>,0x0200>,0x00>,thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::scan_detail::inclusive_scan_n,thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<1>,thrust::detail::normal_iterator<thrust::pointer<__int64,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>>,__int64,thrust::detail::normal_iterator<thrust::pointer<__int64,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>>,thrust::plus<__int64>,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type>>>' being compiled
-     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(458): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x09>,0x080>::size_type', possible loss of data
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(667) : see reference to function template instantiation 'thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x09>,0x080> thrust::system::cuda::detail::bulk_::con<0x080,0x09>(size_t)' being compiled
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/scan.inl(259) : see reference to function template instantiation 'thrust::system::cuda::detail::bulk_::async_launch<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x09>,0x080>,0x00>> thrust::system::cuda::detail::bulk_::grid<0x080,0x09>(size_t,size_t,cudaStream_t)' being compiled
-     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(458): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x03>,0x0100>::size_type', possible loss of data
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(667) : see reference to function template instantiation 'thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x03>,0x0100> thrust::system::cuda::detail::bulk_::con<0x0100,0x03>(size_t)' being compiled
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/scan.inl(267) : see reference to function template instantiation 'thrust::system::cuda::detail::bulk_::async_launch<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x03>,0x0100>,0x00>> thrust::system::cuda::detail::bulk_::grid<0x0100,0x03>(size_t,size_t,cudaStream_t)' being compiled
-     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/detail/pair.inl(46): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/detail/cuda_launcher/cuda_launcher.hpp(101) : see reference to function template instantiation 'thrust::pair<int,int>::pair<size_t,int>(const thrust::pair<size_t,int> &)' being compiled
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/detail/cuda_launcher/cuda_launcher.hpp(101) : see reference to function template instantiation 'thrust::pair<int,int>::pair<size_t,int>(const thrust::pair<size_t,int> &)' being compiled
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/detail/cuda_launcher/cuda_launcher.hpp(94) : while compiling class template member function 'thrust::pair<int,int> thrust::system::cuda::detail::bulk_::detail::cuda_launcher_base<0,thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>,0x00>,Closure>::dynamic_smem_occupancy_limit(const thrust::system::cuda::detail::bulk_::detail::device_properties_t &,const thrust::system::cuda::detail::bulk_::detail::function_attributes_t &,int,int)'
-                 with
-                 [
-                     Closure=thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel,thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<0>,thrust::pointer<RayState,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>,thrust::detail::wrapped_function<thrust::detail::allocator_traits_detail::gozer,void>,unsigned int,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type>>
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/detail/cuda_launcher/cuda_launcher.hpp(119) : see reference to function template instantiation 'thrust::pair<int,int> thrust::system::cuda::detail::bulk_::detail::cuda_launcher_base<0,thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>,0x00>,Closure>::dynamic_smem_occupancy_limit(const thrust::system::cuda::detail::bulk_::detail::device_properties_t &,const thrust::system::cuda::detail::bulk_::detail::function_attributes_t &,int,int)' being compiled
-                 with
-                 [
-                     Closure=thrust::system::cuda::detail::bulk_::detail::closure<thrust::system::cuda::detail::for_each_n_detail::for_each_kernel,thrust::tuple<thrust::system::cuda::detail::bulk_::detail::cursor<0>,thrust::pointer<RayState,thrust::system::cuda::detail::par_t,thrust::use_default,thrust::use_default>,thrust::detail::wrapped_function<thrust::detail::allocator_traits_detail::gozer,void>,unsigned int,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type,thrust::null_type>>
-                 ]
-     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(250): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x03>,0x0200>,0x00>::size_type', possible loss of data
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(311) : see reference to function template instantiation 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x03>,0x0200>,0x00> thrust::system::cuda::detail::bulk_::par<ExecutionAgent>(ExecutionAgent,size_t)' being compiled
-                 with
-                 [
-                     ExecutionAgent=thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x03>,0x0200>
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(667) : see reference to function template instantiation 'thrust::system::cuda::detail::bulk_::async_launch<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x03>,0x0200>,0x00>> thrust::system::cuda::detail::bulk_::par<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x03>,0x0200>>(cudaStream_t,ExecutionAgent,size_t)' being compiled
-                 with
-                 [
-                     ExecutionAgent=thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x03>,0x0200>
-                 ]
-     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(250): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x09>,0x080>,0x00>::size_type', possible loss of data
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(311) : see reference to function template instantiation 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x09>,0x080>,0x00> thrust::system::cuda::detail::bulk_::par<ExecutionAgent>(ExecutionAgent,size_t)' being compiled
-                 with
-                 [
-                     ExecutionAgent=thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x09>,0x080>
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(667) : see reference to function template instantiation 'thrust::system::cuda::detail::bulk_::async_launch<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x09>,0x080>,0x00>> thrust::system::cuda::detail::bulk_::par<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x09>,0x080>>(cudaStream_t,ExecutionAgent,size_t)' being compiled
-                 with
-                 [
-                     ExecutionAgent=thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x09>,0x080>
-                 ]
-     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(250): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x03>,0x0100>,0x00>::size_type', possible loss of data
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(311) : see reference to function template instantiation 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x03>,0x0100>,0x00> thrust::system::cuda::detail::bulk_::par<ExecutionAgent>(ExecutionAgent,size_t)' being compiled
-                 with
-                 [
-                     ExecutionAgent=thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x03>,0x0100>
-                 ]
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(667) : see reference to function template instantiation 'thrust::system::cuda::detail::bulk_::async_launch<thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x03>,0x0100>,0x00>> thrust::system::cuda::detail::bulk_::par<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x03>,0x0100>>(cudaStream_t,ExecutionAgent,size_t)' being compiled
-                 with
-                 [
-                     ExecutionAgent=thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x03>,0x0100>
-                 ]
-         #$ erase C:\Users\SANCHI~1\AppData\Local\Temp/tmpxft_000016f8_00000000-18.res
-       ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /Zi /nologo /W3 /WX- /O2 /Oi /GL /D WIN32 /D WIN64 /D NDEBUG /D _CONSOLE /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc120.pdb" /Gd /TP /errorReport:prompt main.cpp
          main.cpp
      1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/detail/error_category.inl(102): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\string.h(168) : see declaration of 'strerror'
@@ -306,69 +38,78 @@
      1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(319): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>::size_type', possible loss of data
      1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(439): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>::size_type', possible loss of data
      1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/detail/pointer_traits.hpp(55): warning C4800: 'unsigned int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>C:\Program Files (x86)\Windows Kits\8.1\Include\shared\minwindef.h(130): warning C4005: 'APIENTRY' : macro redefinition
+                 C:\Users\Dome\Documents\GitHub\Distributed-Renderer\include\GLFW/glfw3.h(85) : see previous definition of 'APIENTRY'
      1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(250): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>,0x00>::size_type', possible loss of data
                  C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(625) : see reference to function template instantiation 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>,0x00> thrust::system::cuda::detail::bulk_::par<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>>(ExecutionAgent,size_t)' being compiled
                  with
                  [
                      ExecutionAgent=thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>
                  ]
-       CudaLink:
-         cmd.exe /C "C:\Users\Sanchit Garg\AppData\Local\Temp\tmp5d0365618c2d4940bb056ce5fc96b191.cmd"
-         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -dlink -o x64\Release\DistRenderer.device-link.obj -Xcompiler "/EHsc /W3 /nologo /O2 /Zi  /MD " -L"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\lib\x64" cudadevrt.lib iphlpapi.lib libprotobuf_r.lib libprotoc_r.lib glew32.lib glfw3.lib opengl32.lib assimp.lib cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib  -gencode=arch=compute_20,code=sm_20  --machine 64 x64\Release\CUDARenderer.cu.obj x64\Release\interactions.cu.obj x64\Release\intersections.cu.obj
-         
-         C:\Users\Sanchit Garg\Desktop\GPU\DisRendererVS\DistRenderer>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\nvcc.exe" -dlink -o x64\Release\DistRenderer.device-link.obj -Xcompiler "/EHsc /W3 /nologo /O2 /Zi  /MD " -L"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\lib\x64" cudadevrt.lib iphlpapi.lib libprotobuf_r.lib libprotoc_r.lib glew32.lib glfw3.lib opengl32.lib assimp.lib cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib  -gencode=arch=compute_20,code=sm_20  --machine 64 x64\Release\CUDARenderer.cu.obj x64\Release\interactions.cu.obj x64\Release\intersections.cu.obj 
-         cudadevrt.lib
-         iphlpapi.lib
-         libprotobuf_r.lib
-         libprotoc_r.lib
-         glew32.lib
-         glfw3.lib
-         opengl32.lib
-         assimp.lib
-         cudart.lib
-         kernel32.lib
-         user32.lib
-         gdi32.lib
-         winspool.lib
-         comdlg32.lib
-         advapi32.lib
-         shell32.lib
-         ole32.lib
-         oleaut32.lib
-         uuid.lib
-         odbc32.lib
-         odbccp32.lib
-         CUDARenderer.cu.obj
-         interactions.cu.obj
-         intersections.cu.obj
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Sanchit Garg\Desktop\GPU\DisRendererVS\x64\Release\DistRenderer.exe" /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\lib\x64" cudadevrt.lib iphlpapi.lib libprotobuf_r.lib libprotoc_r.lib glew32.lib glfw3.lib opengl32.lib assimp.lib cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Sanchit Garg\Desktop\GPU\DisRendererVS\x64\Release\DistRenderer.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Sanchit Garg\Desktop\GPU\DisRendererVS\x64\Release\DistRenderer.lib" /MACHINE:X64 x64\Release\CUDARenderer.cu.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\DistRenderer.exe" /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\lib\x64" cudadevrt.lib iphlpapi.lib libprotobuf_r.lib libprotoc_r.lib glew32.lib glfw3.lib opengl32.lib assimp.lib cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\DistRenderer.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\DistRenderer.lib" /MACHINE:X64 x64\Release\CUDARenderingEngine.cu.obj
          x64\Release\interactions.cu.obj
          x64\Release\intersections.cu.obj
+         x64\Release\FrontEnd.obj
+         x64\Release\GLDisplay.obj
          x64\Release\glslUtility.obj
+         x64\Release\Helper.obj
          x64\Release\image.obj
          x64\Release\main.obj
          x64\Release\Mesh.obj
-         x64\Release\preview.obj
+         x64\Release\msg.pb.obj
+         x64\Release\Packet.obj
+         x64\Release\PacketManager.obj
+         x64\Release\Renderer.obj
          x64\Release\scene.obj
          x64\Release\stb.obj
          x64\Release\utilities.obj
+         x64\Release\Viewer.obj
          "x64\Release\DistRenderer.device-link.obj"
          Generating code
          Finished generating code
-         DistRenderer.vcxproj -> C:\Users\Sanchit Garg\Desktop\GPU\DisRendererVS\x64\Release\DistRenderer.exe
+     1>libprotobuf_r.lib(descriptor.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(descriptor.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(descriptor.pb.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(descriptor.pb.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(descriptor_database.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(descriptor_database.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(dynamic_message.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(dynamic_message.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(extension_set.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(extension_set.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(extension_set_heavy.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(extension_set_heavy.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(generated_message_reflection.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(generated_message_reflection.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(generated_message_util.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(generated_message_util.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(coded_stream.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(coded_stream.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(strtod.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(strtod.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(tokenizer.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(tokenizer.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(zero_copy_stream.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(zero_copy_stream.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(zero_copy_stream_impl.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(zero_copy_stream_impl.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(zero_copy_stream_impl_lite.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(zero_copy_stream_impl_lite.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(message.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(message.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(message_lite.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(message_lite.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(reflection_ops.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(reflection_ops.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(repeated_field.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(repeated_field.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(atomicops_internals_x86_msvc.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(atomicops_internals_x86_msvc.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(common.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(common.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(once.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(once.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(stringprintf.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(stringprintf.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(structurally_valid.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(structurally_valid.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(strutil.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(strutil.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(substitute.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(substitute.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(text_format.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(text_format.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(unknown_field_set.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(unknown_field_set.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(wire_format.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(wire_format.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+     1>libprotobuf_r.lib(wire_format_lite.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(wire_format_lite.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
+         DistRenderer.vcxproj -> C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\DistRenderer.exe
        PostBuildEvent:
-         echo copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Sanchit Garg\Desktop\GPU\DisRendererVS\x64\Release\"
-         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Sanchit Garg\Desktop\GPU\DisRendererVS\x64\Release\"
-         xcopy /y  /d  "C:\Users\Sanchit Garg\Desktop\GPU\DisRendererVS\lib\*.dll" "C:\Users\Sanchit Garg\Desktop\GPU\DisRendererVS\x64\Release\"
+         echo copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\"
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\"
+         xcopy /y  /d  "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\lib\*.dll" "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\"
          :VCEnd
-         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Sanchit Garg\Desktop\GPU\DisRendererVS\x64\Release\"
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\"
          C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart32_75.dll
          C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart64_75.dll
                  2 file(s) copied.
          0 File(s) copied
-     1>Done Building Project "C:\Users\Sanchit Garg\Desktop\GPU\DisRendererVS\DistRenderer\DistRenderer.vcxproj" (Build target(s)).
+     1>Done Building Project "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\DistRenderer\DistRenderer.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:23.62
+Time Elapsed 00:00:06.99

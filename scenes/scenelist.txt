@@ -1,0 +1,3 @@
+cornellDiff.txt
+objs/sphere.obj
+objs/cube.obj

@@ -1,86 +1,152 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="BackEnd">
+    <Filter Include="Code">
+      <UniqueIdentifier>{2b2e4abe-a2c8-4238-b0a3-b3522041207c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\BackEnd">
       <UniqueIdentifier>{1c93f0ec-5754-42f7-bd00-59f8604e73ff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BackEnd\src">
+    <Filter Include="Code\BackEnd\src">
       <UniqueIdentifier>{782c3f25-aeb4-4cde-8822-1f07ffb384d9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BackEnd\header">
+    <Filter Include="Code\BackEnd\header">
       <UniqueIdentifier>{5e9beb66-18b3-4fb7-b748-3ede0f471cd6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FrontEnd">
+    <Filter Include="Code\Networking">
       <UniqueIdentifier>{68ac6084-83fd-456e-8d1b-6e1c638a9508}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Networking\header">
+      <UniqueIdentifier>{eee9e36c-3751-4b8d-9c76-85963db32522}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Networking\src">
+      <UniqueIdentifier>{d3e85cb0-3fe2-4d94-9c63-1a043caee7d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\FrontEnd">
+      <UniqueIdentifier>{921770ec-116b-4459-9c8c-04bb6d96df20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\FrontEnd\header">
+      <UniqueIdentifier>{99067a82-0d15-4337-9d33-315ec59e1897}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\FrontEnd\src">
+      <UniqueIdentifier>{013dce8b-e5dc-4bb5-9268-3b891b60ed4c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glslUtility.hpp">
-      <Filter>BackEnd\header</Filter>
+      <Filter>Code\BackEnd\header</Filter>
     </ClInclude>
     <ClInclude Include="image.h">
-      <Filter>BackEnd\header</Filter>
+      <Filter>Code\BackEnd\header</Filter>
     </ClInclude>
     <ClInclude Include="interactions.h">
-      <Filter>BackEnd\header</Filter>
+      <Filter>Code\BackEnd\header</Filter>
     </ClInclude>
     <ClInclude Include="intersections.h">
-      <Filter>BackEnd\header</Filter>
+      <Filter>Code\BackEnd\header</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
-      <Filter>BackEnd\header</Filter>
-    </ClInclude>
-    <ClInclude Include="preview.h">
-      <Filter>BackEnd\header</Filter>
+      <Filter>Code\BackEnd\header</Filter>
     </ClInclude>
     <ClInclude Include="scene.h">
-      <Filter>BackEnd\header</Filter>
+      <Filter>Code\BackEnd\header</Filter>
     </ClInclude>
     <ClInclude Include="sceneStructs.h">
-      <Filter>BackEnd\header</Filter>
+      <Filter>Code\BackEnd\header</Filter>
     </ClInclude>
     <ClInclude Include="utilities.h">
-      <Filter>BackEnd\header</Filter>
+      <Filter>Code\BackEnd\header</Filter>
     </ClInclude>
-    <ClInclude Include="CUDARenderer.h">
-      <Filter>BackEnd\header</Filter>
+    <ClInclude Include="Renderer.h">
+      <Filter>Code\BackEnd\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper.h">
+      <Filter>Code\Networking\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet.h">
+      <Filter>Code\Networking\header</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketManager.h">
+      <Filter>Code\Networking\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewer.h">
+      <Filter>Code\BackEnd\header</Filter>
+    </ClInclude>
+    <ClInclude Include="msg.pb.h">
+      <Filter>Code\Networking\header</Filter>
+    </ClInclude>
+    <ClInclude Include="GLDisplay.h">
+      <Filter>Code\FrontEnd\header</Filter>
+    </ClInclude>
+    <ClInclude Include="FrontEnd.h">
+      <Filter>Code\FrontEnd\header</Filter>
+    </ClInclude>
+    <ClInclude Include="CUDAPathTracer.h">
+      <Filter>Code\BackEnd\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Leader.h">
+      <Filter>Code\BackEnd\header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="utilities.cpp">
-      <Filter>BackEnd\src</Filter>
+      <Filter>Code\BackEnd\src</Filter>
     </ClCompile>
     <ClCompile Include="glslUtility.cpp">
-      <Filter>BackEnd\src</Filter>
+      <Filter>Code\BackEnd\src</Filter>
     </ClCompile>
     <ClCompile Include="image.cpp">
-      <Filter>BackEnd\src</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>BackEnd\src</Filter>
+      <Filter>Code\BackEnd\src</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
-      <Filter>BackEnd\src</Filter>
-    </ClCompile>
-    <ClCompile Include="preview.cpp">
-      <Filter>BackEnd\src</Filter>
+      <Filter>Code\BackEnd\src</Filter>
     </ClCompile>
     <ClCompile Include="scene.cpp">
-      <Filter>BackEnd\src</Filter>
+      <Filter>Code\BackEnd\src</Filter>
     </ClCompile>
     <ClCompile Include="stb.cpp">
-      <Filter>BackEnd\src</Filter>
+      <Filter>Code\BackEnd\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Code\BackEnd\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Packet.cpp">
+      <Filter>Code\Networking\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Helper.cpp">
+      <Filter>Code\Networking\src</Filter>
+    </ClCompile>
+    <ClCompile Include="PacketManager.cpp">
+      <Filter>Code\Networking\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewer.cpp">
+      <Filter>Code\BackEnd\src</Filter>
+    </ClCompile>
+    <ClCompile Include="msg.pb.cc">
+      <Filter>Code\Networking\src</Filter>
+    </ClCompile>
+    <ClCompile Include="GLDisplay.cpp">
+      <Filter>Code\FrontEnd\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FrontEnd.cpp">
+      <Filter>Code\FrontEnd\src</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Code</Filter>
+    </ClCompile>
+    <ClCompile Include="Leader.cpp">
+      <Filter>Code\BackEnd\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CudaCompile Include="CUDARenderer.cu">
-      <Filter>BackEnd\src</Filter>
-    </CudaCompile>
     <CudaCompile Include="interactions.cu">
-      <Filter>BackEnd\src</Filter>
+      <Filter>Code\BackEnd\src</Filter>
     </CudaCompile>
     <CudaCompile Include="intersections.cu">
-      <Filter>BackEnd\src</Filter>
+      <Filter>Code\BackEnd\src</Filter>
+    </CudaCompile>
+    <CudaCompile Include="CUDAPathTracer.cu">
+      <Filter>Code\BackEnd\src</Filter>
     </CudaCompile>
   </ItemGroup>
 </Project>

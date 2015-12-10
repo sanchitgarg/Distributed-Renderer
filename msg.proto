@@ -1,0 +1,58 @@
+package Message;
+
+message Color
+{
+	required int32 r = 1;
+	required int32 g = 2;
+	required int32 b = 3;
+}
+
+message INIT{
+	required string viewer_ip = 1;
+	required int32 viewer_port = 2;
+}
+
+message DONE{
+	optional int32 assigned_no = 1;
+}
+
+message FILE_DATA{
+	required string dirPath = 1;
+	repeated string fileName = 2;
+	repeated int32 fileSize = 3;
+}
+
+message HALT{
+	required int32 assigned_no = 1;
+}
+
+message ACK{
+	required int32 ack_code = 1;
+}
+
+message CAM_MOVE{
+	required float theta= 1;
+	required float phi= 2;
+	required float cammove_x= 3;
+	required float cammove_y= 4;
+	required float cammove_z= 5;
+}
+
+message PIXEL{
+	required int32 firstPixelPtr = 1;
+	required int32 pixelOffset = 2;
+	repeated Color color = 3;
+}
+
+message START_RENDER{
+
+	required string viewer_ip = 1;
+	required int32 viewer_port = 2;
+
+	required string leader_ip = 3;
+	required int32 leader_port = 4;
+
+	required int32 no_renderer = 5;
+	required int32 assigned_no = 6;
+	required int32 iteration = 7;
+}

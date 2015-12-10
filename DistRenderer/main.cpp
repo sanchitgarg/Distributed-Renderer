@@ -1,55 +1,71 @@
 #include <glm/gtx/transform.hpp>
 
-#include "CUDARenderer.h"
-#include "preview.h"
+#include "Renderer.h"
+#include "Leader.h"
+#include "Viewer.h"
+#include "FrontEnd.h"
 
-void mainLoop(CUDARenderer *renderer, Viewer* viewer, int maxIteration);
+#define NO_DUMMYRENDERER 1
+#define DUMMYRECVPORT 12345
+
+#define debug true
+
+void debugFunc(const char *dirPath, const char* listFile);
 
 int main(int argc, char** argv) {
-	if (argc < 2) {
-		printf("Usage: %s SCENEFILE.txt\n", argv[0]);
+	if (argc != 3) {
+		std::cout << "Argument List:" << std::endl;
+		std::cout << "1: The directory containing the scene file" << std::endl;
+		std::cout << "2: The text file containing all the file associated" << 
+			"with the target scene, the first file in the list is " <<
+			"the SCENEFILE.txt itself." << std::endl;
+
 		return 1;
 	}
 
-	const char *sceneFile = argv[1];
+	initWinSock();
 
-	// Load scene file
-	Scene scene(sceneFile);
-	Viewer viewer(&scene);
-	CUDARenderer renderer;
+	if (debug)
+		debugFunc(argv[1], argv[2]);
 
-	// Set the render id (starting index 0) and the total number of renderers
-	renderer.pathtraceInit(&scene, 0, 1);
-
-	int maxIteration = scene.state.iterations;
-
-	mainLoop(&renderer, &viewer, maxIteration);
-
+	WSACleanup();
 	return 0;
 }
 
-void mainLoop(CUDARenderer *renderer, Viewer* viewer, int maxIteration)
+void debugMainThread(Leader* leader, Renderer** dummy, FrontEnd* fEnd){
+	while (true){
+		leader->step();
+		for (int i = 0; i < NO_DUMMYRENDERER; i++)
+			dummy[i]->step();
+		fEnd->step();
+	}
+}
+void debugFunc(const char *dirPath, const char* listFile)
 {
-	for (int iter = 0; iter < maxIteration; iter++){
-		uchar4 *pbo_dptr = NULL;
+	printInfo(getSelfIP(), DUMMYRECVPORT);
+	std::vector<std::thread> threads;
 
-		if (viewer != nullptr)
-			cudaGLMapBufferObject((void**)&pbo_dptr, viewer->getPBO());
+	PacketManager pMgrLeader(DUMMYRECVPORT - 1);
+	threads.push_back(pMgrLeader.getThread());
+	Leader leader(&pMgrLeader);
 
-		// execute the kernel
-		int frame = 0;
-		renderer->pathtrace(pbo_dptr, frame, iter);
+	Renderer* dummy[NO_DUMMYRENDERER];
+	for (int i = 0; i < NO_DUMMYRENDERER; i++){
+		PacketManager *pMgrTmp = new PacketManager(DUMMYRECVPORT + i);
+		threads.push_back(pMgrTmp->getThread());
 
-		// unmap buffer object
-		if (viewer != nullptr){
-			cudaGLUnmapBufferObject(viewer->getPBO());
-			viewer->update(iter);
-		}
+		leader.addRendererIPPort(pMgrTmp->getIP(), pMgrTmp->getPort());
 
-		//std::cout << "Iteration: " << iter  << " rendered." << std::endl;
+		dummy[i] = new Renderer(pMgrTmp, false);
 	}
 
-	renderer->saveImage(utilityCore::currentTimeString(), maxIteration);
-	renderer->pathtraceFree();
-	cudaDeviceReset();
+	PacketManager pMgr(VIEW_RECVPORT);
+	FrontEnd fEnd(&pMgr, dirPath, listFile);
+	fEnd.setLeaderIPPort(pMgrLeader.getIP(), pMgrLeader.getPort());
+
+	threads.push_back(pMgr.getThread());
+	threads.push_back(std::thread(debugMainThread, &leader, dummy, &fEnd));
+
+	for (int i = 0; i < threads.size(); i++)
+		threads[i].join();
 }
