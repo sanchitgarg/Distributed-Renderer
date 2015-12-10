@@ -5,8 +5,7 @@ CUDAPathTracer::CUDAPathTracer(){
 }
 
 CUDAPathTracer::~CUDAPathTracer(){
-	if (active)
-		pathtraceFree();
+	pathtraceFree();
 };
 
 void CUDAPathTracer::pathtraceInit(Scene* scene, int rendererNo_, int totalRenderer_)
@@ -30,7 +29,9 @@ void CUDAPathTracer::pathtraceInit(Scene* scene, int rendererNo_, int totalRende
 
 	//2D Pixel array to store image color
 	cudaMalloc(&dev_image, pixelcount * sizeof(glm::vec3));
+	checkCUDAError("pathtraceInit");
 	cudaMemset(dev_image, 0, pixelcount * sizeof(glm::vec3));
+	checkCUDAError("pathtraceInit");
 
 	//Copy Camera
 	cudaMalloc((void**)&dev_camera, sizeof(Camera));
@@ -173,7 +174,7 @@ void CUDAPathTracer::pathtrace(uchar4 *pbo, int iter) {
 		//If currDepth is > 2, play russian roullete
 		if (i > 2)
 		{
-			kernRussianRoullete << <numBlocks, numThreads >> >(dev_camera, dev_rays_begin, dev_image, iter, rayCount);
+			//kernRussianRoullete << <numBlocks, numThreads >> >(dev_camera, dev_rays_begin, dev_image, iter, rayCount);
 			checkCUDAError("kernRussianRoullete");
 		}
 

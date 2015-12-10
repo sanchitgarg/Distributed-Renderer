@@ -8,8 +8,6 @@
 #define NO_DUMMYRENDERER 1
 #define DUMMYRECVPORT 12345
 
-#define debug false
-
 void debugFunc(const char *dirPath, const char* listFile);
 
 int main(int argc, char** argv) {
@@ -20,91 +18,98 @@ int main(int argc, char** argv) {
 	}
 
 	initWinSock();
-
 	printInfo(getSelfIP(), VIEW_RECVPORT);
 
-	if (*argv[1] == 'f'){
-		if (argc != 4){
-			std::cout << "Argument Needed for FrontEnd Viewer:" << std::endl;
-			std::cout << "2: The directory containing the scene file" << std::endl;
-			std::cout << "3: The text file containing all the file associated" <<
-				"with the target scene, the first file in the list is " <<
-				"the SCENEFILE.txt itself." << std::endl;
-		}
-
-		PacketManager pMgr(VIEW_RECVPORT);
-		FrontEnd fe(&pMgr, argv[2], argv[3]);
-		
-		//ask for the leader's IP:Port
-		std::string ip;
-		uint32_t port;
-		
-		std::cout << "Leader's IP: ";
-		std::cin >> ip;
-
-		std::cout << "Leader's port: ";
-		std::cin >> port;
-
-		fe.setLeaderIPPort(ip, port);
-
-		std::thread pmThread = pMgr.getThread();
-		std::thread feThread = fe.getThread();
-
-		pmThread.join();
-		feThread.join();
+	bool debug = false;
+	if (debug){
+		debugFunc(argv[2], argv[3]);
 	}
-	else if (*argv[1] == 'l'){
+	else{
 
-		PacketManager pMgrLeader(VIEW_RECVPORT - 1);
-		PacketManager pMgrRenderer(VIEW_RECVPORT);
-		Leader leader(&pMgrLeader);
-		Renderer rend(&pMgrRenderer, true);
+		if (*argv[1] == 'f'){
+			if (argc != 4){
+				std::cout << "Argument Needed for FrontEnd Viewer:" << std::endl;
+				std::cout << "2: The directory containing the scene file" << std::endl;
+				std::cout << "3: The text file containing all the file associated" <<
+					"with the target scene, the first file in the list is " <<
+					"the SCENEFILE.txt itself." << std::endl;
+			}
 
-		leader.addRendererIPPort(pMgrRenderer.getIP(), pMgrRenderer.getPort());
+			PacketManager pMgr(VIEW_RECVPORT);
+			FrontEnd fe(&pMgr, argv[2], argv[3]);
 
-		std::thread pmOneThread = pMgrLeader.getThread();
-		std::thread pmTwoThread = pMgrRenderer.getThread();
-		std::thread lThread = leader.getThread();
-		std::thread rThread = rend.getThread();
+			//ask for the leader's IP:Port
+			std::string ip;
+			uint32_t port;
 
-		int rendNo;
-		std::cout << "No of renderers: ";
-		std::cin >> rendNo;
-
-		std::string ip;
-		uint32_t port;
-		for (int i = 0; i < rendNo; i++){
-			std::cout << "Renderer #" << rendNo;
-			std::cout << "IP: ";
+			std::cout << "Leader's IP: ";
 			std::cin >> ip;
 
-			std::cout << "port: ";
+			std::cout << "Leader's port: ";
 			std::cin >> port;
 
-			leader.addRendererIPPort(ip, port);
+			fe.setLeaderIPPort(ip, port);
+
+			std::thread pmThread = pMgr.getThread();
+			std::thread feThread = fe.getThread();
+
+			pmThread.join();
+			feThread.join();
 		}
+		else if (*argv[1] == 'l'){
 
-		pmOneThread.join();
-		pmTwoThread.join();
-		lThread.join();
-		rThread.join();
-	}
-	else if (*argv[1] == 'r'){
-		PacketManager pMgrRenderer(VIEW_RECVPORT);
-		Renderer rend(&pMgrRenderer, true);
+			PacketManager pMgrLeader(VIEW_RECVPORT);
+			PacketManager pMgrRenderer(VIEW_RECVPORT - 1);
+			Leader leader(&pMgrLeader);
+			Renderer rend(&pMgrRenderer, true);
 
-		std::thread pmThread = pMgrRenderer.getThread();
-		std::thread rThread = rend.getThread();
+			leader.addRendererIPPort(pMgrRenderer.getIP(), pMgrRenderer.getPort());
 
-		pmThread.join();
-		rThread.join();
+			int rendNo;
+			std::cout << "No of renderers: ";
+			std::cin >> rendNo;
+
+			std::string ip;
+			uint32_t port;
+			for (int i = 0; i < rendNo; i++){
+				std::cout << "Renderer #" << rendNo;
+				std::cout << "IP: ";
+				std::cin >> ip;
+
+				std::cout << "port: ";
+				std::cin >> port;
+
+				leader.addRendererIPPort(ip, port);
+			}
+
+			std::cout << "Waiting for incoming connection... " << std::endl;
+			std::thread pmOneThread = pMgrLeader.getThread();
+			std::thread pmTwoThread = pMgrRenderer.getThread();
+			std::thread lThread = leader.getThread();
+			std::thread rThread = rend.getThread();
+
+			pmOneThread.join();
+			pmTwoThread.join();
+			lThread.join();
+			rThread.join();
+		}
+		else if (*argv[1] == 'r'){
+			PacketManager pMgrRenderer(VIEW_RECVPORT);
+			Renderer rend(&pMgrRenderer, true);
+
+			std::thread pmThread = pMgrRenderer.getThread();
+			std::thread rThread = rend.getThread();
+
+			pmThread.join();
+			rThread.join();
+		}
 	}
 
 	WSACleanup();
 	return 0;
 }
 
-/*
+
 void debugMainThread(Leader* leader, Renderer** dummy, FrontEnd* fEnd){
 	while (true){
 		leader->step();
@@ -115,7 +120,6 @@ void debugMainThread(Leader* leader, Renderer** dummy, FrontEnd* fEnd){
 }
 void debugFunc(const char *dirPath, const char* listFile)
 {
-	printInfo(getSelfIP(), DUMMYRECVPORT);
 	std::vector<std::thread> threads;
 
 	PacketManager pMgrLeader(DUMMYRECVPORT - 1);
@@ -142,4 +146,3 @@ void debugFunc(const char *dirPath, const char* listFile)
 	for (int i = 0; i < threads.size(); i++)
 		threads[i].join();
 }
-*/

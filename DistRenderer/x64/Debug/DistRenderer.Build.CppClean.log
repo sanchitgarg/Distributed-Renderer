@@ -16,9 +16,6 @@ c:\users\dome\documents\github\distributed-renderer\distrenderer\x64\debug\scene
 c:\users\dome\documents\github\distributed-renderer\distrenderer\x64\debug\stb.obj
 c:\users\dome\documents\github\distributed-renderer\distrenderer\x64\debug\utilities.obj
 c:\users\dome\documents\github\distributed-renderer\distrenderer\x64\debug\viewer.obj
-c:\users\dome\documents\github\distributed-renderer\x64\debug\distrenderer.ilk
-c:\users\dome\documents\github\distributed-renderer\x64\debug\distrenderer.exe
-c:\users\dome\documents\github\distributed-renderer\x64\debug\distrenderer.pdb
 c:\users\dome\documents\github\distributed-renderer\distrenderer\x64\debug\cudapathtracer.cu.cache
 c:\users\dome\documents\github\distributed-renderer\distrenderer\x64\debug\interactions.cu.cache
 c:\users\dome\documents\github\distributed-renderer\distrenderer\x64\debug\intersections.cu.cache
@@ -26,6 +23,8 @@ c:\users\dome\documents\github\distributed-renderer\distrenderer\x64\debug\cudap
 c:\users\dome\documents\github\distributed-renderer\distrenderer\x64\debug\distrenderer.device-link.obj
 c:\users\dome\documents\github\distributed-renderer\distrenderer\x64\debug\interactions.cu.obj
 c:\users\dome\documents\github\distributed-renderer\distrenderer\x64\debug\intersections.cu.obj
+c:\users\dome\documents\github\distributed-renderer\x64\debug\distrenderer.pdb
+c:\users\dome\documents\github\distributed-renderer\x64\debug\distrenderer.ilk
 c:\users\dome\documents\github\distributed-renderer\distrenderer\x64\debug\distrenderer.tlog\cl.command.1.tlog
 c:\users\dome\documents\github\distributed-renderer\distrenderer\x64\debug\distrenderer.tlog\cl.read.1.tlog
 c:\users\dome\documents\github\distributed-renderer\distrenderer\x64\debug\distrenderer.tlog\cl.write.1.tlog

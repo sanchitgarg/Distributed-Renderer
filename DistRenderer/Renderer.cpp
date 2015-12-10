@@ -103,6 +103,10 @@ void Renderer::initRenderer(){
 			sendIteration = smsg->iteration();
 			assigned_no = smsg->assigned_no();
 			no_renderer = smsg->no_renderer();
+
+			setViewerIPPort(smsg->viewer_ip(), smsg->viewer_port());
+			setLeaderIPPort(smsg->leader_ip(), smsg->leader_port());
+
 			cudaEngine->pathtraceInit(scn, assigned_no, no_renderer);
 
 			if (hasViewer)
@@ -138,7 +142,7 @@ void Renderer::rendering(){
 			cudaEngine->pathtrace(nullptr, iteration);
 		}
 
-		if (iteration % sendIteration == 0){
+		if (iteration != 0 && iteration % sendIteration == 0){
 			sendPixel();
 
 			//TODO: check if IT LOST CONTACT WITH THE VIEWER HENCE THIS RENDER SHOULD BE HALTED.
@@ -190,9 +194,9 @@ void Renderer::sendPixel(){
 			Message::Color* c = p->add_color();
 			glm::vec3 pix = pixels[ptr + i * PIXEL_PER_MSG];
 
-			c->set_r(pix.r);
-			c->set_g(pix.g);
-			c->set_b(pix.b);
+			c->set_r(glm::clamp((int)(pix.x / iteration * 255.0), 0, 255));
+			c->set_g(glm::clamp((int)(pix.y / iteration * 255.0), 0, 255));
+			c->set_b(glm::clamp((int)(pix.z / iteration * 255.0), 0, 255));
 
 			offset += no_renderer;
 		}
@@ -201,4 +205,6 @@ void Renderer::sendPixel(){
 	}
 
 	pMgr->sendPackets(viewerIP, viewerPort);
+
+	//std::cout << viewerPort << std::endl;
 }

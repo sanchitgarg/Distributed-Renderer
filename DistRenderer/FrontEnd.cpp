@@ -125,18 +125,23 @@ void FrontEnd::fetchPixels(){
 	Message::PIXEL* px;
 
 	while (pkt = pMgr->getPacket()){
-		px = pkt->get_pixel();
-		int offset = px->firstpixelptr();
+		if (pkt->get_type() == PacketType::PIXEL){
+			px = pkt->get_pixel();
+			int offset = px->firstpixelptr();
 
-		for (int i = 0; i < px->color_size(); i++){
-			const Message::Color clr = px->color(i);
+			for (int i = 0; i < px->color_size(); i++){
+				const Message::Color clr = px->color(i);
 
-			int y = offset / WIDTH;
-			int x = offset - (y * WIDTH);
+				int y = offset / WIDTH;
+				int x = offset - (y * WIDTH);
 
-			display->setPixelColor(x, y, clr.r(), clr.g(), clr.b());
+				display->setPixelColor(x, y, clr.r(), clr.g(), clr.b());
 
-			offset += px->pixeloffset();
+				//std::cout << "x:" << x << " y:" << y << std::endl;
+				//std::cout << clr.r() << " " << clr.g() << " " << clr.b() << std::endl;
+
+				offset += px->pixeloffset();
+			}
 		}
 
 		delete pkt;

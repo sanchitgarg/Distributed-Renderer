@@ -1,35 +1,12 @@
-﻿Build started 12/9/2015 5:52:21 PM.
+﻿Build started 12/10/2015 6:50:30 PM.
      1>Project "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\DistRenderer\DistRenderer.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /Zi /nologo /W3 /WX- /O2 /Oi /GL /D WIN32 /D WIN64 /D NDEBUG /D _CONSOLE /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc120.pdb" /Gd /TP /errorReport:prompt FrontEnd.cpp GLDisplay.cpp Renderer.cpp main.cpp
-         FrontEnd.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /Zi /nologo /W3 /WX- /O2 /Oi /GL /D WIN32 /D WIN64 /D NDEBUG /D _CONSOLE /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc120.pdb" /Gd /TP /errorReport:prompt GLDisplay.cpp main.cpp
          GLDisplay.cpp
      1>GLDisplay.cpp(157): warning C4267: 'initializing' : conversion from 'size_t' to 'GLint', possible loss of data
      1>GLDisplay.cpp(163): warning C4267: 'initializing' : conversion from 'size_t' to 'GLint', possible loss of data
      1>GLDisplay.cpp(186): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
      1>GLDisplay.cpp(187): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-         Renderer.cpp
-     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/detail/error_category.inl(102): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\string.h(168) : see declaration of 'strerror'
-     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(241): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>::size_type', possible loss of data
-     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(303): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>::size_type', possible loss of data
-     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(319): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>::size_type', possible loss of data
-     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(439): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>::size_type', possible loss of data
-     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/detail/pointer_traits.hpp(55): warning C4800: 'unsigned int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>C:\Program Files (x86)\Windows Kits\8.1\Include\shared\minwindef.h(130): warning C4005: 'APIENTRY' : macro redefinition
-                 C:\Users\Dome\Documents\GitHub\Distributed-Renderer\include\GLFW/glfw3.h(85) : see previous definition of 'APIENTRY'
-     1>Renderer.cpp(130): warning C4553: '==' : operator has no effect; did you intend '='?
-     1>Renderer.cpp(174): warning C4553: '==' : operator has no effect; did you intend '='?
-     1>Renderer.cpp(196): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>Renderer.cpp(207): warning C4244: 'argument' : conversion from 'float' to 'google::protobuf::int32', possible loss of data
-     1>Renderer.cpp(208): warning C4244: 'argument' : conversion from 'float' to 'google::protobuf::int32', possible loss of data
-     1>Renderer.cpp(209): warning C4244: 'argument' : conversion from 'float' to 'google::protobuf::int32', possible loss of data
-     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(250): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>,0x00>::size_type', possible loss of data
-                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(625) : see reference to function template instantiation 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>,0x00> thrust::system::cuda::detail::bulk_::par<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>>(ExecutionAgent,size_t)' being compiled
-                 with
-                 [
-                     ExecutionAgent=thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>
-                 ]
          main.cpp
      1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/detail/error_category.inl(102): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\string.h(168) : see declaration of 'strerror'
@@ -47,7 +24,7 @@
                      ExecutionAgent=thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>
                  ]
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\DistRenderer.exe" /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\lib\x64" cudadevrt.lib iphlpapi.lib libprotobuf_r.lib libprotoc_r.lib glew32.lib glfw3.lib opengl32.lib assimp.lib cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\DistRenderer.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\DistRenderer.lib" /MACHINE:X64 x64\Release\CUDARenderingEngine.cu.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\DistRenderer.exe" /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\lib\x64" cudadevrt.lib iphlpapi.lib libprotobuf_r.lib libprotoc_r.lib glew32.lib glfw3.lib opengl32.lib assimp.lib cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\DistRenderer.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\DistRenderer.lib" /MACHINE:X64 x64\Release\CUDAPathTracer.cu.obj
          x64\Release\interactions.cu.obj
          x64\Release\intersections.cu.obj
          x64\Release\FrontEnd.obj
@@ -55,6 +32,7 @@
          x64\Release\glslUtility.obj
          x64\Release\Helper.obj
          x64\Release\image.obj
+         x64\Release\Leader.obj
          x64\Release\main.obj
          x64\Release\Mesh.obj
          x64\Release\msg.pb.obj
@@ -112,4 +90,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:06.99
+Time Elapsed 00:00:05.16

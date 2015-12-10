@@ -187,8 +187,8 @@ void PacketManager::run(){
 						//read the file and save it!
 						Message::FILE_DATA *fData = packet->get_fileData();
 						std::string dir = fData->dirpath();
-						mkdir(dir.c_str());
-						mkdir((dir + "/objs").c_str());
+						mkdir((dir + "/" + std::to_string(port)).c_str());
+						mkdir((dir + "/" + std::to_string(port) + "/objs").c_str());
 
 						for (int i = 0; i < fData->filename_size(); i++)
 						{
