@@ -15,11 +15,15 @@
 
 We have implemented a Distributed Renderer. The idea is divide the final image into parts, render parts on different systems and then accumulate the final image on one system. The rendering method being used on the back end is a CUDA based Multiple Importance Sampling (MIS) path tracer. TCP is used for communication between the viewer and the renderers.
 
+### Use of the project
+* Rendering takes a lot of time. We wanted to speed up the rendering. On top of CUDA parallelization, we added another distributed system level parallelization. This gives up more rendering computer to get the final image faster.
+* This allows a CUDA renderer to be initiated from a none NVIDIA graphics card system.
+
 ### Slides
 
 Project Proposal : <a href="Slides/CIS565 Final Project.pdf">LINK</a>
 
-Progress Report 1 :
+Progress Report 1 : <a href="Slides/Progress report 1 CIS565 Final Project.pdf">LINK</a>
 
 Progress Report 2 : <a href="Slides/Progress report 2 CIS565 Final Project.pdf">LINK</a>
 
