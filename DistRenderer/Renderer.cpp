@@ -181,7 +181,6 @@ void Renderer::renderDone(){
 
 void Renderer::sendPixel(){
 	if (viewerIP == "") return;
-
 	int offset = assigned_no;
 
 	const std::vector<glm::vec3> pixels = cudaEngine->getPixels();
@@ -195,8 +194,8 @@ void Renderer::sendPixel(){
 
 		for (int ptr = 0; ptr < PIXEL_PER_MSG; ptr++){
 			Message::Color* c = p->add_color();
-			glm::vec3 pix = pixels[ptr + i * PIXEL_PER_MSG];
 
+			glm::vec3 pix = pixels[ptr + i * PIXEL_PER_MSG];
 			c->set_r(glm::clamp((int)(pix.x / iteration * 255.0), 0, 255));
 			c->set_g(glm::clamp((int)(pix.y / iteration * 255.0), 0, 255));
 			c->set_b(glm::clamp((int)(pix.z / iteration * 255.0), 0, 255));

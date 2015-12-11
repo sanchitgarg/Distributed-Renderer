@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
 	initWinSock();
 	printInfo(getSelfIP(), VIEW_RECVPORT);
 
-	bool debug = true;
+	bool debug = false;
 	if (debug){
 		debugFunc(argv[2], argv[3]);
 	}

@@ -19,6 +19,7 @@ class GLDisplay{
 		void saveImage(std::string startTime, int iteration);
 
 	private:
+		bool updated;
 		GLubyte* pixels;
 		GLuint displayImage;
 

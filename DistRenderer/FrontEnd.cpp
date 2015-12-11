@@ -39,8 +39,6 @@ void FrontEnd::step(){
 		fetchPixels();
 		display->update();
 		display->draw();
-
-		display->saveImage("Now", 1);
 	}
 }
 

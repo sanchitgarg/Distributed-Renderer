@@ -1,5 +1,6 @@
 #pragma once
 
+#include <random>
 #include "CUDAPathTracer.h"
 #include "Viewer.h"
 #include "PacketManager.h"

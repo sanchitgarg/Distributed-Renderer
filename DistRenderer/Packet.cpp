@@ -111,12 +111,12 @@ void Packet::set_pixel(Message::PIXEL *msg){
 }
 
 void Packet::set_done(Message::DONE *msg){
-	type = PacketType::PIXEL;
+	type = PacketType::DONE;
 	done_msg = msg;
 }
 
 void Packet::set_halt(Message::HALT *msg){
-	type = PacketType::PIXEL;
+	type = PacketType::HALT;
 	halt_msg = msg;
 }
 

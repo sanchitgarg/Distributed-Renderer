@@ -14,6 +14,7 @@ GLDisplay::GLDisplay(){
 	}
 
 	initialized = true;
+	updated = false;
 	
 	windowInit();
 	glInit();
@@ -34,12 +35,21 @@ void GLDisplay::setPixelColor(int px, int py, int r, int g, int b){
 	pixels[offset + 1] = g;
 	pixels[offset + 2] = b;
 
+	updated = true;
+
 	//std::cout << r << " " << g << " " << b << std::endl;
+	//std::cout << pixels[offset] << " " << pixels[offset + 1] << " " << pixels[offset + 2] << std::endl;
 }
 
 void GLDisplay::update(){
+	if (!updated) return;
+
 	glfwPollEvents();
-	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, WIDTH, HEIGHT, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+	glBindTexture(GL_TEXTURE_2D, displayImage);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, WIDTH, HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+
+	saveImage("Now", 1);
+	updated = false;
 }
 
 void GLDisplay::draw(){
@@ -60,11 +70,13 @@ void GLDisplay::saveImage(std::string startTime, int iteration) {
 		int y = ptr / WIDTH;
 		int x = ptr - (y * WIDTH);
 
-		glm::vec3 pix;
+		glm::ivec3 pix;
 		pix.r = pixels[offset];
 		pix.g = pixels[offset + 1];
 		pix.b = pixels[offset + 2];
-		img.setPixel(WIDTH - 1 - x, y, glm::vec3(pix) / samples);
+
+		//std::cout << pix.r << " " << pix.g << " " << pix.b << std::endl;
+		img.setPixel(WIDTH - 1 - x, y, glm::vec3(pix) / (255.0f * iteration));
 	}
 
 	std::string filename = "Saved";
