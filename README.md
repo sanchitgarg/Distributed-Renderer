@@ -1,4 +1,4 @@
-# Distributed-Renderer
+﻿# Distributed-Renderer
 
 **University of Pennsylvania, CIS 565: GPU Programming and Architecture, FINAL PROJECT**
 
@@ -15,15 +15,11 @@
 
 We have implemented a Distributed Renderer. The idea is divide the final image into parts, render parts on different systems and then accumulate the final image on one system. The rendering method being used on the back end is a CUDA based Multiple Importance Sampling (MIS) path tracer. TCP is used for communication between the viewer and the renderers.
 
-### Use of the project
-* Rendering takes a lot of time. We wanted to speed up the rendering. On top of CUDA parallelization, we added another distributed system level parallelization. This gives up more rendering computer to get the final image faster.
-* This allows a CUDA renderer to be initiated from a none NVIDIA graphics card system.
-
 ### Slides
 
 Project Proposal : <a href="Slides/CIS565 Final Project.pdf">LINK</a>
 
-Progress Report 1 : <a href="Slides/Progress report 1 CIS565 Final Project.pdf">LINK</a>
+Progress Report 1 :
 
 Progress Report 2 : <a href="Slides/Progress report 2 CIS565 Final Project.pdf">LINK</a>
 
@@ -31,7 +27,7 @@ Progress Report 3 : <a href="Slides/Progress report 3 CIS565 Final Project.pdf">
 
 Final Report : <a href="Slides/Final Report CIS565 Final Project.pdf">LINK</a>
 
-Video : <a href="https://youtu.be/TMPTr0WPd7I">LINK</a>
+Video : <a href="https://youtu.be/uMpehTyZpr0">LINK</a>
 
 
 ## Networking
@@ -121,17 +117,7 @@ The major bottlenecks for this project is the network latency. So we need to fin
 
 A good iterations to update the viewer looked to be 50 iterations. It takes about 42 seconds to do 50 iterations including the data sending to the viewer. So the viewer updates around every 40 seconds.
 
-We compared the performance of our system when we send the image to the viewer at different number of iterations. As expected, when we send the image more frequently, the network latency overshadows the performance. So there is a tradeoff between how frequent we want the viewer image to be refreshed against how much time we want to spend on sending the image.
-
-<img src="Analysis/networkLatencyTable.png">
-
-<img src="Analysis/networkLatency.png">
-
-Comparing the performance of the system with different number of renderers, we can see a gain with more render nodes. We could test it with only 1 or 2 render nodes and here are the results. The performance increases if we have more render nodes.
-
-<img src="Analysis/comparisonNumRenderersTable.png">
-
-<img src="Analysis/comparisonNumRenderers.png">
+We are unable to test it with multiple render nodes as we are not able to get those many laptops with GPU's and admin access for networking.
 
 
 ## References
