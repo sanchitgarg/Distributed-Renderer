@@ -31,7 +31,8 @@ class PacketManager{
 		void push(Message::DONE *msg);
 		void push(Message::HALT *msg);
 		void push(Message::CAM_MOVE *msg);
-		void push(std::string dir, std::vector<std::string> filename);
+		void push(std::string orig_dir, std::string target_dir, 
+			std::vector<std::string> filename);
 
 		//return true if the sending is successful.
 		bool sendPackets(const std::string ip, const uint32_t port);

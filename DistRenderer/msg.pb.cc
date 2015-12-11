@@ -106,8 +106,9 @@ void protobuf_AssignDesc_msg_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(DONE));
   FILE_DATA_descriptor_ = file->message_type(3);
-  static const int FILE_DATA_offsets_[3] = {
+  static const int FILE_DATA_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FILE_DATA, dirpath_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FILE_DATA, targetdir_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FILE_DATA, filename_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FILE_DATA, filesize_),
   };
@@ -274,18 +275,19 @@ void protobuf_AddDesc_msg_2eproto() {
     "\n\tmsg.proto\022\007Message\"(\n\005Color\022\t\n\001r\030\001 \002(\005"
     "\022\t\n\001g\030\002 \002(\005\022\t\n\001b\030\003 \002(\005\".\n\004INIT\022\021\n\tviewer"
     "_ip\030\001 \002(\t\022\023\n\013viewer_port\030\002 \002(\005\"\033\n\004DONE\022\023"
-    "\n\013assigned_no\030\001 \001(\005\"@\n\tFILE_DATA\022\017\n\007dirP"
-    "ath\030\001 \002(\t\022\020\n\010fileName\030\002 \003(\t\022\020\n\010fileSize\030"
-    "\003 \003(\005\"\033\n\004HALT\022\023\n\013assigned_no\030\001 \002(\005\"\027\n\003AC"
-    "K\022\020\n\010ack_code\030\001 \002(\005\"_\n\010CAM_MOVE\022\r\n\005theta"
-    "\030\001 \002(\002\022\013\n\003phi\030\002 \002(\002\022\021\n\tcammove_x\030\003 \002(\002\022\021"
-    "\n\tcammove_y\030\004 \002(\002\022\021\n\tcammove_z\030\005 \002(\002\"R\n\005"
-    "PIXEL\022\025\n\rfirstPixelPtr\030\001 \002(\005\022\023\n\013pixelOff"
-    "set\030\002 \002(\005\022\035\n\005color\030\003 \003(\0132\016.Message.Color"
-    "\"\233\001\n\014START_RENDER\022\021\n\tviewer_ip\030\001 \002(\t\022\023\n\013"
-    "viewer_port\030\002 \002(\005\022\021\n\tleader_ip\030\003 \002(\t\022\023\n\013"
-    "leader_port\030\004 \002(\005\022\023\n\013no_renderer\030\005 \002(\005\022\023"
-    "\n\013assigned_no\030\006 \002(\005\022\021\n\titeration\030\007 \002(\005", 598);
+    "\n\013assigned_no\030\001 \001(\005\"S\n\tFILE_DATA\022\017\n\007dirP"
+    "ath\030\001 \002(\t\022\021\n\ttargetDir\030\002 \002(\t\022\020\n\010fileName"
+    "\030\003 \003(\t\022\020\n\010fileSize\030\004 \003(\005\"\033\n\004HALT\022\023\n\013assi"
+    "gned_no\030\001 \002(\005\"\027\n\003ACK\022\020\n\010ack_code\030\001 \002(\005\"_"
+    "\n\010CAM_MOVE\022\r\n\005theta\030\001 \002(\002\022\013\n\003phi\030\002 \002(\002\022\021"
+    "\n\tcammove_x\030\003 \002(\002\022\021\n\tcammove_y\030\004 \002(\002\022\021\n\t"
+    "cammove_z\030\005 \002(\002\"R\n\005PIXEL\022\025\n\rfirstPixelPt"
+    "r\030\001 \002(\005\022\023\n\013pixelOffset\030\002 \002(\005\022\035\n\005color\030\003 "
+    "\003(\0132\016.Message.Color\"\233\001\n\014START_RENDER\022\021\n\t"
+    "viewer_ip\030\001 \002(\t\022\023\n\013viewer_port\030\002 \002(\005\022\021\n\t"
+    "leader_ip\030\003 \002(\t\022\023\n\013leader_port\030\004 \002(\005\022\023\n\013"
+    "no_renderer\030\005 \002(\005\022\023\n\013assigned_no\030\006 \002(\005\022\021"
+    "\n\titeration\030\007 \002(\005", 617);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "msg.proto", &protobuf_RegisterTypes);
   Color::default_instance_ = new Color();
@@ -1140,6 +1142,7 @@ void DONE::Swap(DONE* other) {
 
 #ifndef _MSC_VER
 const int FILE_DATA::kDirPathFieldNumber;
+const int FILE_DATA::kTargetDirFieldNumber;
 const int FILE_DATA::kFileNameFieldNumber;
 const int FILE_DATA::kFileSizeFieldNumber;
 #endif  // !_MSC_VER
@@ -1164,6 +1167,7 @@ void FILE_DATA::SharedCtor() {
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   dirpath_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  targetdir_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1175,6 +1179,9 @@ FILE_DATA::~FILE_DATA() {
 void FILE_DATA::SharedDtor() {
   if (dirpath_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete dirpath_;
+  }
+  if (targetdir_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete targetdir_;
   }
   if (this != default_instance_) {
   }
@@ -1202,9 +1209,16 @@ FILE_DATA* FILE_DATA::New() const {
 }
 
 void FILE_DATA::Clear() {
-  if (has_dirpath()) {
-    if (dirpath_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-      dirpath_->clear();
+  if (_has_bits_[0 / 32] & 3) {
+    if (has_dirpath()) {
+      if (dirpath_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        dirpath_->clear();
+      }
+    }
+    if (has_targetdir()) {
+      if (targetdir_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        targetdir_->clear();
+      }
     }
   }
   filename_.Clear();
@@ -1235,13 +1249,30 @@ bool FILE_DATA::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(18)) goto parse_fileName;
+        if (input->ExpectTag(18)) goto parse_targetDir;
         break;
       }
 
-      // repeated string fileName = 2;
+      // required string targetDir = 2;
       case 2: {
         if (tag == 18) {
+         parse_targetDir:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_targetdir()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->targetdir().data(), this->targetdir().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "targetdir");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_fileName;
+        break;
+      }
+
+      // repeated string fileName = 3;
+      case 3: {
+        if (tag == 26) {
          parse_fileName:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->add_filename()));
@@ -1253,26 +1284,26 @@ bool FILE_DATA::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(18)) goto parse_fileName;
-        if (input->ExpectTag(24)) goto parse_fileSize;
+        if (input->ExpectTag(26)) goto parse_fileName;
+        if (input->ExpectTag(32)) goto parse_fileSize;
         break;
       }
 
-      // repeated int32 fileSize = 3;
-      case 3: {
-        if (tag == 24) {
+      // repeated int32 fileSize = 4;
+      case 4: {
+        if (tag == 32) {
          parse_fileSize:
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 1, 24, input, this->mutable_filesize())));
-        } else if (tag == 26) {
+                 1, 32, input, this->mutable_filesize())));
+        } else if (tag == 34) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, this->mutable_filesize())));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(24)) goto parse_fileSize;
+        if (input->ExpectTag(32)) goto parse_fileSize;
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -1312,20 +1343,30 @@ void FILE_DATA::SerializeWithCachedSizes(
       1, this->dirpath(), output);
   }
 
-  // repeated string fileName = 2;
+  // required string targetDir = 2;
+  if (has_targetdir()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->targetdir().data(), this->targetdir().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "targetdir");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->targetdir(), output);
+  }
+
+  // repeated string fileName = 3;
   for (int i = 0; i < this->filename_size(); i++) {
   ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
     this->filename(i).data(), this->filename(i).length(),
     ::google::protobuf::internal::WireFormat::SERIALIZE,
     "filename");
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      2, this->filename(i), output);
+      3, this->filename(i), output);
   }
 
-  // repeated int32 fileSize = 3;
+  // repeated int32 fileSize = 4;
   for (int i = 0; i < this->filesize_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(
-      3, this->filesize(i), output);
+      4, this->filesize(i), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -1349,20 +1390,31 @@ void FILE_DATA::SerializeWithCachedSizes(
         1, this->dirpath(), target);
   }
 
-  // repeated string fileName = 2;
+  // required string targetDir = 2;
+  if (has_targetdir()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->targetdir().data(), this->targetdir().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "targetdir");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->targetdir(), target);
+  }
+
+  // repeated string fileName = 3;
   for (int i = 0; i < this->filename_size(); i++) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->filename(i).data(), this->filename(i).length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "filename");
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteStringToArray(2, this->filename(i), target);
+      WriteStringToArray(3, this->filename(i), target);
   }
 
-  // repeated int32 fileSize = 3;
+  // repeated int32 fileSize = 4;
   for (int i = 0; i < this->filesize_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt32ToArray(3, this->filesize(i), target);
+      WriteInt32ToArray(4, this->filesize(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -1384,15 +1436,22 @@ int FILE_DATA::ByteSize() const {
           this->dirpath());
     }
 
+    // required string targetDir = 2;
+    if (has_targetdir()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->targetdir());
+    }
+
   }
-  // repeated string fileName = 2;
+  // repeated string fileName = 3;
   total_size += 1 * this->filename_size();
   for (int i = 0; i < this->filename_size(); i++) {
     total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
       this->filename(i));
   }
 
-  // repeated int32 fileSize = 3;
+  // repeated int32 fileSize = 4;
   {
     int data_size = 0;
     for (int i = 0; i < this->filesize_size(); i++) {
@@ -1433,6 +1492,9 @@ void FILE_DATA::MergeFrom(const FILE_DATA& from) {
     if (from.has_dirpath()) {
       set_dirpath(from.dirpath());
     }
+    if (from.has_targetdir()) {
+      set_targetdir(from.targetdir());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -1450,7 +1512,7 @@ void FILE_DATA::CopyFrom(const FILE_DATA& from) {
 }
 
 bool FILE_DATA::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   return true;
 }
@@ -1458,6 +1520,7 @@ bool FILE_DATA::IsInitialized() const {
 void FILE_DATA::Swap(FILE_DATA* other) {
   if (other != this) {
     std::swap(dirpath_, other->dirpath_);
+    std::swap(targetdir_, other->targetdir_);
     filename_.Swap(&other->filename_);
     filesize_.Swap(&other->filesize_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);

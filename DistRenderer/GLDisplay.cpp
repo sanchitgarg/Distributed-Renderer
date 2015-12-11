@@ -14,7 +14,7 @@ GLDisplay::GLDisplay(){
 	}
 
 	initialized = true;
-	updated = false;
+	modified = false;
 	
 	windowInit();
 	glInit();
@@ -24,32 +24,33 @@ GLDisplay::GLDisplay(){
 	draw();
 }
 
-void GLDisplay::setPixelColor(int px, int py, int r, int g, int b){
-	if (px < 0 || py < 0 || px >= WIDTH || py >= HEIGHT){
-		std::cout << "px or py is out of range." << std::endl;
-		exit(EXIT_FAILURE);
+void GLDisplay::setPixelColor(int index, int r, int g, int b){
+	if (index < 0 || index >= WIDTH * HEIGHT){
+		std::cout << "index is out of range : " << index << std::endl;
+		//exit(EXIT_FAILURE);
+		return;
 	}
 
-	int offset = py * (WIDTH * 3) + px * 3;
+	int offset = index * 3;
 	pixels[offset] = r;
 	pixels[offset + 1] = g;
 	pixels[offset + 2] = b;
 
-	updated = true;
+	modified = true;
 
 	//std::cout << r << " " << g << " " << b << std::endl;
 	//std::cout << pixels[offset] << " " << pixels[offset + 1] << " " << pixels[offset + 2] << std::endl;
 }
 
-void GLDisplay::update(){
-	if (!updated) return;
+bool GLDisplay::update(){
+	if (!modified) return false;
 
 	glfwPollEvents();
 	glBindTexture(GL_TEXTURE_2D, displayImage);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, WIDTH, HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
 
-	saveImage("Now", 1);
-	updated = false;
+	modified = false;
+	return true;
 }
 
 void GLDisplay::draw(){
@@ -60,10 +61,9 @@ void GLDisplay::draw(){
 }
 
 
-void GLDisplay::saveImage(std::string startTime, int iteration) {
-	float samples = iteration;
+void GLDisplay::saveImage(std::string title) {
 	// output image file
-	image img(WIDTH, WIDTH);
+	image img(WIDTH, HEIGHT);
 	int pixelcount = WIDTH * HEIGHT;
 	for (int ptr = 0; ptr < pixelcount; ptr++) {
 		int offset = ptr * 3;
@@ -76,13 +76,12 @@ void GLDisplay::saveImage(std::string startTime, int iteration) {
 		pix.b = pixels[offset + 2];
 
 		//std::cout << pix.r << " " << pix.g << " " << pix.b << std::endl;
-		img.setPixel(WIDTH - 1 - x, y, glm::vec3(pix) / (255.0f * iteration));
+		img.setPixel(WIDTH - 1 - x, y, glm::vec3(pix) / 255.0f);
 	}
 
 	std::string filename = "Saved";
-	std::ostringstream ss;
-	ss << filename << "." << startTime << "." << samples << "samp";
-	filename = ss.str();
+	filename = filename + "." + title;
+
 
 	// CHECKITOUT
 	img.savePNG(filename);

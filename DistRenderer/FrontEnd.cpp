@@ -37,7 +37,8 @@ void FrontEnd::step(){
 	}
 	else if (state == FrontEndState::READY){
 		fetchPixels();
-		display->update();
+		if(display->update())
+			display->saveImage("FrontEnd");
 		display->draw();
 	}
 }
@@ -104,8 +105,9 @@ void FrontEnd::sendSceneInfo(){
 		myfile.close();
 
 	}
+	std::string target_dir = dirPath + "/FrontEnd";
 
-	pMgr->push(dirPath, fileList);
+	pMgr->push(dirPath, target_dir, fileList);
 	bool sent = pMgr->sendPackets(leaderIP, leaderPort);
 
 	if (!sent){
@@ -132,16 +134,16 @@ void FrontEnd::fetchPixels(){
 			for (int i = 0; i < px->color_size(); i++){
 				const Message::Color clr = px->color(i);
 
-				int y = offset / WIDTH;
-				int x = offset - (y * WIDTH);
-
-				display->setPixelColor(x, y, clr.r(), clr.g(), clr.b());
+				display->setPixelColor(offset, clr.r(), clr.g(), clr.b());
 
 				//std::cout << "x:" << x << " y:" << y << std::endl;
 				//std::cout << clr.r() << " " << clr.g() << " " << clr.b() << std::endl;
 
 				offset += px->pixeloffset();
 			}
+		}
+		else if (pkt->get_type() == PacketType::DONE){
+			std::cout << "[Front End] Rendering Done." << std::endl;
 		}
 
 		delete pkt;

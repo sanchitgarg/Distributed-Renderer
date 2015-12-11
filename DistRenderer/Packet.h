@@ -39,7 +39,8 @@ class Packet{
 		void set_done(Message::DONE *msg);
 		void set_halt(Message::HALT *msg);
 		void set_cam_move(Message::CAM_MOVE *msg);
-		void set_fileData(std::string dir, std::vector<std::string> fileName);
+		void set_fileData(std::string orig_dir, std::string target_dir,
+			std::vector<std::string> filename);
 
 		bool serializePacket(std::vector<char> &buf);
 		bool parseFromArray(PacketType type_, 

@@ -152,10 +152,10 @@ void Renderer::rendering(){
 		iteration++;
 	}
 	else{
-		std::cout << "Rendering Finished" << std::endl;
-		state == RendererState::RDONE;
+		std::cout << "[Renderer #" << assigned_no << "] Rendering Finished" << std::endl;
+		state = RendererState::RDONE;
 
-		cudaEngine->saveImage("Now", iteration);
+		cudaEngine->saveImage(std::to_string(assigned_no), iteration);
 
 		Message::DONE *dmsg = new Message::DONE();
 		dmsg->set_assigned_no(assigned_no);
@@ -184,8 +184,10 @@ void Renderer::sendPixel(){
 
 	const std::vector<glm::vec3> pixels = cudaEngine->getPixels();
 
-	int numPackets = glm::ceil(pixels.size() / (float)PIXEL_PER_MSG);
+	int numPackets = glm::ceil(cudaEngine->getPixelCount() / (float)PIXEL_PER_MSG);
 
+	//std::cout << "pixels.size() " << cudaEngine->getPixelCount() << std::endl;
+	//std::cout << "numPackets " << numPackets << std::endl;
 	for (int i = 0; i < numPackets; i++){
 		Message::PIXEL* p = new Message::PIXEL();
 		p->set_firstpixelptr(offset);
@@ -208,11 +210,13 @@ void Renderer::sendPixel(){
 		}
 
 		offset += PIXEL_PER_MSG * no_renderer;
-
+		//std::cout << "offset " << offset << std::endl;
+		//std::cout << "i " << i << std::endl;
 		pMgr->push(p);
 	}
 
 	pMgr->sendPackets(viewerIP, viewerPort);
 
-	//std::cout << viewerPort << std::endl;
+	std::cout << "[Renderer #" << assigned_no << "] send pixels back to the front end viewer." << std::endl;
+
 }

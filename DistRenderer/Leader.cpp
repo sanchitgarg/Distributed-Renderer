@@ -105,7 +105,7 @@ void Leader::recvSceneFiles(){
 
 			//forward the scene to every renderers.
 			Message::FILE_DATA *fmsg = pkt->get_fileData();
-			std::string dirPath = fmsg->dirpath();
+			std::string orig_dir = fmsg->targetdir();
 			std::vector<std::string> fileList;
 			for (int i = 0; i < fmsg->filename_size(); i++){
 				fileList.push_back(fmsg->filename(i));
@@ -114,7 +114,8 @@ void Leader::recvSceneFiles(){
 			int count = 0;
 			for (auto i = rendererMap.begin(); i != rendererMap.end(); i++){
 				//start sending (including self!)
-				pMgr->push(dirPath, fileList);
+				std::string target_dir = fmsg->targetdir() + "/" + std::to_string(count);
+				pMgr->push(orig_dir, target_dir, fileList);
 				bool sent = pMgr->sendPackets(i->first, i->second);
 				if (sent){
 					activeRenderer[count] = { i->first, i->second };
@@ -208,16 +209,20 @@ void Leader::monitorRenderers(){
 		//check if any renderer sends a message saying.... IM DONE!
 		else if (pkt->get_type() == PacketType::DONE){
 			finishedRendering++;
+
+			//check if the rendering is done.
+			if (finishedRendering == activeRenderer.size()){
+				std::cout << "[Leader] rendering done." << std::endl;
+
+				Message::DONE *dmsg = new Message::DONE();
+				pMgr->push(dmsg);
+				pMgr->sendPackets(viewerIP, viewerPort);
+			}
+
 		}
 
 		//TODO: check if any renderer sends a message saying.... 
 		//I LOST CONTACT WITH THE VIEWER HENCE THIS RENDER SHOULD BE HALTED.
-
-		//check if the rendering is done.
-		if (finishedRendering == activeRenderer.size()){
-			std::cout << "[monitorRenderers] rendering done (you can still move the camera to get a new image) ";
-		}
-
 		delete pkt;
 	}
 }

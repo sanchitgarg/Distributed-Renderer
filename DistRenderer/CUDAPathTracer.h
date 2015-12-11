@@ -31,9 +31,10 @@ class CUDAPathTracer{
 		void pathtrace(uchar4 *pbo, int iteration);
 
 		void setCamera(float theta, float phi, glm::vec3 cammove);
-		void saveImage(std::string startTime, int iteration);
+		void saveImage(std::string title, int iteration);
 		const std::vector<glm::vec3>& getPixels();
 		bool isActive();
+		int getPixelCount();
 
 	private:
 		bool active;

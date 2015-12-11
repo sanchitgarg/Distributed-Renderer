@@ -12,14 +12,14 @@
 class GLDisplay{
 	public:
 		GLDisplay();
-		void setPixelColor(int px, int py, int r, int g, int b);
-		void update();
+		void setPixelColor(int index, int r, int g, int b);
+		bool update();
 		void draw();
 
-		void saveImage(std::string startTime, int iteration);
+		void saveImage(std::string text);
 
 	private:
-		bool updated;
+		bool modified;
 		GLubyte* pixels;
 		GLuint displayImage;
 

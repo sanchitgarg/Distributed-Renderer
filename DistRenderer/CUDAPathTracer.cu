@@ -8,6 +8,10 @@ CUDAPathTracer::~CUDAPathTracer(){
 	pathtraceFree();
 };
 
+int CUDAPathTracer::getPixelCount(){
+	return pixelcount;
+}
+
 void CUDAPathTracer::pathtraceInit(Scene* scene, int rendererNo_, int totalRenderer_)
 {
 	active = true;
@@ -174,7 +178,7 @@ void CUDAPathTracer::pathtrace(uchar4 *pbo, int iter) {
 		//If currDepth is > 2, play russian roullete
 		if (i > 2)
 		{
-			//kernRussianRoullete << <numBlocks, numThreads >> >(dev_camera, dev_rays_begin, dev_image, iter, rayCount);
+			kernRussianRoullete << <numBlocks, numThreads >> >(dev_camera, dev_rays_begin, dev_image, iter, rayCount);
 			checkCUDAError("kernRussianRoullete");
 		}
 
@@ -217,7 +221,7 @@ void CUDAPathTracer::pathtrace(uchar4 *pbo, int iter) {
 	checkCUDAError("pathtrace");
 }
 
-void CUDAPathTracer::saveImage(std::string startTime, int iteration) {
+void CUDAPathTracer::saveImage(std::string title, int iteration) {
 	float samples = iteration;
 	// output image file
 	image img(width, height);
@@ -232,9 +236,7 @@ void CUDAPathTracer::saveImage(std::string startTime, int iteration) {
 	}
 
 	std::string filename = hst_scene->state.imageName;
-	std::ostringstream ss;
-	ss << filename << "." << startTime << "." << samples << "samp";
-	filename = ss.str();
+	filename = filename + "." + title + "." + std::to_string(iteration) + "samp";
 
 	// CHECKITOUT
 	img.savePNG(filename);

@@ -18,8 +18,9 @@ message DONE{
 
 message FILE_DATA{
 	required string dirPath = 1;
-	repeated string fileName = 2;
-	repeated int32 fileSize = 3;
+	required string targetDir = 2;
+	repeated string fileName = 3;
+	repeated int32 fileSize = 4;
 }
 
 message HALT{

@@ -5,7 +5,7 @@
 #include "Viewer.h"
 #include "FrontEnd.h"
 
-#define NO_DUMMYRENDERER 1
+#define NO_DUMMYRENDERER 4
 #define DUMMYRECVPORT 12345
 
 void debugFunc(const char *dirPath, const char* listFile);
@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
 	initWinSock();
 	printInfo(getSelfIP(), VIEW_RECVPORT);
 
-	bool debug = false;
+	bool debug = true;
 	if (debug){
 		debugFunc(argv[2], argv[3]);
 	}

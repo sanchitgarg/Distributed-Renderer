@@ -1,4 +1,4 @@
-# Distributed-Renderer
+﻿# Distributed-Renderer
 
 **University of Pennsylvania, CIS 565: GPU Programming and Architecture, FINAL PROJECT**
 
@@ -109,4 +109,21 @@ The major bottlenecks for this project is the network latency. So we need to fin
 ## References
 * PBRT
 * Adam Mally’s Slides for CIS 450/560 Fall 2015
+* Google Protocol Buffer documentation
+* WinSock 2 starting guide
 
+## Google Protocol Buffer
+To compile protobuf API, Simply download a Windows binary from its website and set the directory to PATH,
+and install google protocol buffer on the machine you wants to compile.
+
+If you want to make any change to the message class, edit the [.proto] file and compile it with
+
+	protoc -I=$SRC_DIR --cpp_out=$DST_DIR $SRC_DIR/message.proto
+
+	where 
+		$SRC_DIR = the directory containing .proto
+		$DST_DIR = destination directory (cpp files dir) 
+
+	ie. protoc -I=C:\Users\Dome\Documents\GitHub\Walnut-FrontEnd --cpp_out=C:\Users\Dome\Documents\GitHub\Walnut-FrontEnd\Walnut-FrontEnd C:\Users\Dome\Documents\GitHub\Walnut-FrontEnd\msg.proto
+
+To compile the source file, dont forget to put in the [.pb.cc] file and [-lprotobuf] flag

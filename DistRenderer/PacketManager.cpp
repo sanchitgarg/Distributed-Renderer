@@ -86,9 +86,10 @@ void PacketManager::push(Message::CAM_MOVE *msg){
 	qSend.push(p);
 }
 
-void PacketManager::push(std::string dir, std::vector<std::string> filename){
+void PacketManager::push(std::string orig_dir, std::string target_dir,
+	std::vector<std::string> filename){
 	Packet* p = new Packet();
-	p->set_fileData(dir, filename);
+	p->set_fileData(orig_dir, target_dir, filename);
 	qSend.push(p);
 }
 
@@ -185,7 +186,7 @@ void PacketManager::run(){
 						if (pType == PacketType::FILE_DATA){
 							//read the file and save it!
 							Message::FILE_DATA *fData = packet->get_fileData();
-							std::string dir = fData->dirpath();
+							std::string dir = fData->targetdir();
 							mkdir(dir.c_str());
 							mkdir((dir + "/objs").c_str());
 

@@ -382,10 +382,22 @@ class FILE_DATA : public ::google::protobuf::Message {
   inline ::std::string* release_dirpath();
   inline void set_allocated_dirpath(::std::string* dirpath);
 
-  // repeated string fileName = 2;
+  // required string targetDir = 2;
+  inline bool has_targetdir() const;
+  inline void clear_targetdir();
+  static const int kTargetDirFieldNumber = 2;
+  inline const ::std::string& targetdir() const;
+  inline void set_targetdir(const ::std::string& value);
+  inline void set_targetdir(const char* value);
+  inline void set_targetdir(const char* value, size_t size);
+  inline ::std::string* mutable_targetdir();
+  inline ::std::string* release_targetdir();
+  inline void set_allocated_targetdir(::std::string* targetdir);
+
+  // repeated string fileName = 3;
   inline int filename_size() const;
   inline void clear_filename();
-  static const int kFileNameFieldNumber = 2;
+  static const int kFileNameFieldNumber = 3;
   inline const ::std::string& filename(int index) const;
   inline ::std::string* mutable_filename(int index);
   inline void set_filename(int index, const ::std::string& value);
@@ -398,10 +410,10 @@ class FILE_DATA : public ::google::protobuf::Message {
   inline const ::google::protobuf::RepeatedPtrField< ::std::string>& filename() const;
   inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_filename();
 
-  // repeated int32 fileSize = 3;
+  // repeated int32 fileSize = 4;
   inline int filesize_size() const;
   inline void clear_filesize();
-  static const int kFileSizeFieldNumber = 3;
+  static const int kFileSizeFieldNumber = 4;
   inline ::google::protobuf::int32 filesize(int index) const;
   inline void set_filesize(int index, ::google::protobuf::int32 value);
   inline void add_filesize(::google::protobuf::int32 value);
@@ -414,12 +426,15 @@ class FILE_DATA : public ::google::protobuf::Message {
  private:
   inline void set_has_dirpath();
   inline void clear_has_dirpath();
+  inline void set_has_targetdir();
+  inline void clear_has_targetdir();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
   ::std::string* dirpath_;
+  ::std::string* targetdir_;
   ::google::protobuf::RepeatedPtrField< ::std::string> filename_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > filesize_;
   friend void  protobuf_AddDesc_msg_2eproto();
@@ -1248,7 +1263,83 @@ inline void FILE_DATA::set_allocated_dirpath(::std::string* dirpath) {
   // @@protoc_insertion_point(field_set_allocated:Message.FILE_DATA.dirPath)
 }
 
-// repeated string fileName = 2;
+// required string targetDir = 2;
+inline bool FILE_DATA::has_targetdir() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void FILE_DATA::set_has_targetdir() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void FILE_DATA::clear_has_targetdir() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void FILE_DATA::clear_targetdir() {
+  if (targetdir_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    targetdir_->clear();
+  }
+  clear_has_targetdir();
+}
+inline const ::std::string& FILE_DATA::targetdir() const {
+  // @@protoc_insertion_point(field_get:Message.FILE_DATA.targetDir)
+  return *targetdir_;
+}
+inline void FILE_DATA::set_targetdir(const ::std::string& value) {
+  set_has_targetdir();
+  if (targetdir_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    targetdir_ = new ::std::string;
+  }
+  targetdir_->assign(value);
+  // @@protoc_insertion_point(field_set:Message.FILE_DATA.targetDir)
+}
+inline void FILE_DATA::set_targetdir(const char* value) {
+  set_has_targetdir();
+  if (targetdir_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    targetdir_ = new ::std::string;
+  }
+  targetdir_->assign(value);
+  // @@protoc_insertion_point(field_set_char:Message.FILE_DATA.targetDir)
+}
+inline void FILE_DATA::set_targetdir(const char* value, size_t size) {
+  set_has_targetdir();
+  if (targetdir_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    targetdir_ = new ::std::string;
+  }
+  targetdir_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:Message.FILE_DATA.targetDir)
+}
+inline ::std::string* FILE_DATA::mutable_targetdir() {
+  set_has_targetdir();
+  if (targetdir_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    targetdir_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:Message.FILE_DATA.targetDir)
+  return targetdir_;
+}
+inline ::std::string* FILE_DATA::release_targetdir() {
+  clear_has_targetdir();
+  if (targetdir_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = targetdir_;
+    targetdir_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void FILE_DATA::set_allocated_targetdir(::std::string* targetdir) {
+  if (targetdir_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete targetdir_;
+  }
+  if (targetdir) {
+    set_has_targetdir();
+    targetdir_ = targetdir;
+  } else {
+    clear_has_targetdir();
+    targetdir_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:Message.FILE_DATA.targetDir)
+}
+
+// repeated string fileName = 3;
 inline int FILE_DATA::filename_size() const {
   return filename_.size();
 }
@@ -1302,7 +1393,7 @@ FILE_DATA::mutable_filename() {
   return &filename_;
 }
 
-// repeated int32 fileSize = 3;
+// repeated int32 fileSize = 4;
 inline int FILE_DATA::filesize_size() const {
   return filesize_.size();
 }

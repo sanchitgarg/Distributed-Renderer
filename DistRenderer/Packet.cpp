@@ -125,23 +125,25 @@ void Packet::set_cam_move(Message::CAM_MOVE *msg){
 	cam_msg = msg;
 }
 
-void Packet::set_fileData(std::string dir, std::vector<std::string> fileName){
+void Packet::set_fileData(std::string orig_dir, std::string target_dir,
+	std::vector<std::string> filename){
 	type = PacketType::FILE_DATA;
 	file_msg = new Message::FILE_DATA();
-	file_msg->set_dirpath(dir);
-	for (int i = 0; i < fileName.size(); i++)
+	file_msg->set_dirpath(orig_dir);
+	file_msg->set_targetdir(target_dir);
+	for (int i = 0; i < filename.size(); i++)
 	{
-		std::ifstream in(dir + "/" + fileName[i]);
+		std::ifstream in(orig_dir + "/" + filename[i]);
 		in.seekg(0, std::ios::end);
 		int fileSize = in.tellg();
 		in.close();
 
 		if (fileSize == 0){
-			std::cout << "[Packet::set_fileData] This file has 0 byte size:" << fileName[i] << std::endl;
+			std::cout << "[Packet::set_fileData] This file has 0 byte size:" << filename[i] << std::endl;
 			continue;
 		}
 
-		file_msg->add_filename(fileName[i]);
+		file_msg->add_filename(filename[i]);
 		file_msg->add_filesize(fileSize);
 	}
 }
