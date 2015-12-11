@@ -29,6 +29,8 @@ Progress Report 3 :
 Our renderer has 3 modes as follows
 * Front End Viewer: This mode will send scene files (.txt/ .obj) to the leader to initialize the render. Please note that this mode runs on any machines that runs OpenGL (no CUDA card requires) To run in this mode, set argument as “f scene_file_dir scene_list”, while scene_file_dir is the path to the directory storing the scene files, and scene_list are the file listing every scene files that needs to be transferred to the leader node.
 
+Front-end user can also navigate around the scene using the keyboard (W,A,S,D).
+
 * Renderer: This mode will initialize a renderer that will be in standby until it receives scene files and a command from the leader to render. It will periodically send the pixels it’s responsible for back to the Front End Viewer. To run in this mode, set argument as “r”.
 
 * Leader + Renderer: This mode will initialize both a Leader and a Renderer. The Leader will be responsible for receiving a render job from the Front End Viewer and distribute the work to the renderers. To run in this mode, set argument as “f”.
