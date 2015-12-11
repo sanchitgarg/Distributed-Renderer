@@ -1,10 +1,13 @@
 #pragma once
 
+#include <sstream> 
+#include "image.h"
 #include "msg.pb.h"
 #include "Helper.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
+#include "glslUtility.hpp"
 
 class GLDisplay{
 	public:
@@ -13,13 +16,15 @@ class GLDisplay{
 		void update();
 		void draw();
 
+		void saveImage(std::string startTime, int iteration);
+
 	private:
 		GLubyte* pixels;
 		GLuint displayImage;
 
 		void glInit();
+		GLuint initShader();
 		void initProgram();
-		GLuint initShaderProgram(std::string VSsource, std::string FSSource);
 		
 	//static variables-functions: basically everything related to GLFW
 		static bool initialized;

@@ -130,7 +130,8 @@ void Renderer::rendering(){
 		delete pkt;
 	}
 
-	if (cudaEngine->isActive()){
+	if (cudaEngine->isActive() &&
+		iteration < scn->state.iterations){
 		if (view != nullptr){
 			uchar4 *pbo_dptr = NULL;
 			cudaGLMapBufferObject((void**)&pbo_dptr, view->getPBO());
@@ -154,6 +155,8 @@ void Renderer::rendering(){
 	else{
 		std::cout << "Rendering Finished" << std::endl;
 		state == RendererState::RDONE;
+
+		cudaEngine->saveImage("Now", iteration);
 
 		Message::DONE *dmsg = new Message::DONE();
 		dmsg->set_assigned_no(assigned_no);

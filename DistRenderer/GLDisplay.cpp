@@ -33,11 +33,13 @@ void GLDisplay::setPixelColor(int px, int py, int r, int g, int b){
 	pixels[offset] = r;
 	pixels[offset + 1] = g;
 	pixels[offset + 2] = b;
+
+	//std::cout << r << " " << g << " " << b << std::endl;
 }
 
 void GLDisplay::update(){
 	glfwPollEvents();
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, WIDTH, HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, WIDTH, HEIGHT, GL_RGB, GL_UNSIGNED_BYTE, pixels);
 }
 
 void GLDisplay::draw(){
@@ -47,6 +49,34 @@ void GLDisplay::draw(){
 	glfwSwapBuffers(window);
 }
 
+
+void GLDisplay::saveImage(std::string startTime, int iteration) {
+	float samples = iteration;
+	// output image file
+	image img(WIDTH, WIDTH);
+	int pixelcount = WIDTH * HEIGHT;
+	for (int ptr = 0; ptr < pixelcount; ptr++) {
+		int offset = ptr * 3;
+		int y = ptr / WIDTH;
+		int x = ptr - (y * WIDTH);
+
+		glm::vec3 pix;
+		pix.r = pixels[offset];
+		pix.g = pixels[offset + 1];
+		pix.b = pixels[offset + 2];
+		img.setPixel(WIDTH - 1 - x, y, glm::vec3(pix) / samples);
+	}
+
+	std::string filename = "Saved";
+	std::ostringstream ss;
+	ss << filename << "." << startTime << "." << samples << "samp";
+	filename = ss.str();
+
+	// CHECKITOUT
+	img.savePNG(filename);
+	//img.saveHDR(filename);  // Save a Radiance HDR file
+
+}
 void GLDisplay::windowInit(){
 	glfwSetErrorCallback(errorCallBack);
 
@@ -76,34 +106,25 @@ void GLDisplay::glInit(){
 
 	initProgram();
 }
+GLuint GLDisplay::initShader() {
+	const char *attribLocations[] = { "Position", "Texcoords" };
+	GLuint program = glslUtility::createDefaultProgram(attribLocations, 2);
+	GLint location;
+
+	//glUseProgram(program);
+	if ((location = glGetUniformLocation(program, "u_image")) != -1) {
+		glUniform1i(location, 0);
+	}
+
+	return program;
+}
 
 //TODO:: add local shader program implementation.
 void GLDisplay::initProgram(){
-	std::string VSsource_RayTrace =
-		"	attribute vec4 Position; \n"
-		"	attribute vec2 Texcoords; \n"
-		"	varying vec2 v_Texcoords; \n"
-		"	\n"
-		"	void main(void){ \n"
-		"		v_Texcoords = Texcoords; \n"
-		"		gl_Position = Position; \n"
-		"	}";
+	GLuint passthroughProgram = initShader();
 
-	std::string FSSource_RayTrace =
-		"	varying vec2 v_Texcoords; \n"
-		"	\n"
-		"	uniform sampler2D u_Image; \n"
-		"	\n"
-		"	void main(void){ \n"
-		"		gl_FragColor = texture2D(u_Image, v_Texcoords); \n"
-		"	}";
-
-	GLuint program_rayTrace = initShaderProgram(VSsource_RayTrace, FSSource_RayTrace);
-	glUseProgram(program_rayTrace);
-
-	GLuint vao_rayTrace;
-	glGenVertexArrays(1, &vao_rayTrace);
-	glBindVertexArray(vao_rayTrace);
+	glUseProgram(passthroughProgram);
+	glActiveTexture(GL_TEXTURE0);
 
 	//set up VBOs
 	GLfloat vertices[] = {
@@ -123,19 +144,19 @@ void GLDisplay::initProgram(){
 	GLushort indices[] = { 0, 1, 3, 3, 1, 2 };
 
 	GLuint vbo[3];
-	GLuint posLocation = glGetAttribLocation(program_rayTrace, "Position");
-	GLuint texLocation = glGetAttribLocation(program_rayTrace, "Texcoords");
+	GLuint posLocation = 0;
+	GLuint texLocation = 1;
 
 	glGenBuffers(3, vbo);
 
 	glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	glVertexAttribPointer(posLocation, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	glVertexAttribPointer((GLuint)posLocation, 2, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(posLocation);
 
 	glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(texcoords), texcoords, GL_STATIC_DRAW);
-	glVertexAttribPointer(texLocation, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	glVertexAttribPointer((GLuint)texLocation, 2, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(texLocation);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo[2]);
@@ -143,33 +164,10 @@ void GLDisplay::initProgram(){
 
 	//init texture
 	glGenTextures(1, &displayImage);
-	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, displayImage);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, WIDTH, HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-}
-
-GLuint GLDisplay::initShaderProgram(std::string VSsource, std::string FSSource){
-	GLuint program = glCreateProgram();
-
-	GLuint vertex = glCreateShader(GL_VERTEX_SHADER);
-	GLint vslen = VSsource.length();
-	const char* vs = &VSsource[0];
-	glShaderSource(vertex, 1, &vs, &vslen);
-	glCompileShader(vertex);
-
-	GLuint fragment = glCreateShader(GL_FRAGMENT_SHADER);
-	GLint fslen = FSSource.length();
-	const char* fs = &FSSource[0];
-	glShaderSource(fragment, 1, &fs, &fslen);
-	glCompileShader(fragment);
-
-	glAttachShader(program, vertex);
-	glAttachShader(program, fragment);
-	glLinkProgram(program);
-
-	return program;
 }
 
 void GLDisplay::errorCallBack(int error, const char* description){
