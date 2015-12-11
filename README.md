@@ -27,6 +27,9 @@ Progress Report 3 : <a href="Slides/Progress report 3 CIS565 Final Project.pdf">
 
 Final Report : <a href="Slides/Final Report CIS565 Final Project.pdf">LINK</a>
 
+Video : <a href="https://youtu.be/uMpehTyZpr0">LINK</a>
+
+
 ## Networking
 
 ##### Modes
@@ -112,12 +115,17 @@ Here is the final image with indirect illumination.
 ## Performance Analysis
 The major bottlenecks for this project is the network latency. So we need to find the optimal frequency of sending data (Too often = Slower, but the rendered image on the Front End Viewer is more up-to-date). Taking from Monte Carlo rendering, to get twice a better image, we need to render 4 times more samples. This would be used to decide the frequency of sending data.
 
+A good iterations to update the viewer looked to be 50 iterations. It takes about 42 seconds to do 50 iterations including the data sending to the viewer. So the viewer updates around every 40 seconds.
+
+We are unable to test it with multiple render nodes as we are not able to get those many laptops with GPU's and admin access for networking.
+
 
 ## References
-* PBRT
-* Adam Mally’s Slides for CIS 450/560 Fall 2015
-* Google Protocol Buffer documentation
-* Getting Started with Winsock (Windows)
+* <a href="http://www.pbrt.org/">Physically Based Rendering Techniques</a>
+* Adam Mally’s Slides for CIS 450/560 Fall 2015 : <a href="http://www.cis.upenn.edu/~badler/courses/cis560.html">Link to Course Page</a>
+* <a href="https://developers.google.com/protocol-buffers/docs/overview?hl=en">Google Protocol Buffer documentation</a>
+* <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms738545(v=vs.85).aspx">Getting Started with Winsock (Windows)</a>
+
 
 ## Google Protocol Buffer
 To compile protobuf API, Simply download a Windows binary from its website and set the directory to PATH,
