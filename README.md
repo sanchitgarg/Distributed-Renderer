@@ -5,7 +5,7 @@
 #### Team : Dome Pongmongkol and Sanchit Garg
 
 
-<img src="images/DOF.png"  height="400" width="400">
+<img src="images/DOF.png"  height="800" width="800">
 
 
 ### Project outline
@@ -22,26 +22,32 @@ Progress Report 2 :
 
 Progress Report 3 :
 
-## Modes
+## Networking
+
+##### Modes
+
 Our renderer has 3 modes as follows
-Front End Viewer: This mode will send scene files (.txt/ .obj) to the leader to initialize the render. Please note that this mode runs on any machines that runs OpenGL (no CUDA card requires) To run in this mode, set argument as “f scene_file_dir scene_list”, while scene_file_dir is the path to the directory storing the scene files, and scene_list are the file listing every scene files that needs to be transferred to the leader node.
-Renderer: This mode will initialize a renderer that will be in standby until it receives scene files and a command from the leader to render. It will periodically send the pixels it’s responsible for back to the Front End Viewer. To run in this mode, set argument as “r”.
-Leader + Renderer: This mode will initialize both a Leader and a Renderer. The Leader will be responsible for receiving a render job from the Front End Viewer and distribute the work to the renderers. To run in this mode, set argument as “f”.
+* Front End Viewer: This mode will send scene files (.txt/ .obj) to the leader to initialize the render. Please note that this mode runs on any machines that runs OpenGL (no CUDA card requires) To run in this mode, set argument as “f scene_file_dir scene_list”, while scene_file_dir is the path to the directory storing the scene files, and scene_list are the file listing every scene files that needs to be transferred to the leader node.
+
+* Renderer: This mode will initialize a renderer that will be in standby until it receives scene files and a command from the leader to render. It will periodically send the pixels it’s responsible for back to the Front End Viewer. To run in this mode, set argument as “r”.
+
+* Leader + Renderer: This mode will initialize both a Leader and a Renderer. The Leader will be responsible for receiving a render job from the Front End Viewer and distribute the work to the renderers. To run in this mode, set argument as “f”.
 The user will have to manually type in the IP address of the running Renderer nodes while initializing the program in this mode.
 
-## How the workload distribution works.
+##### How the workload distribution works.
 **Please note that this system assumes that the network environment is stable. It will tolerate minor packet loss (as it was built on top of TCP), but if it cannot connect to its receiver after trying for a certain amount of time, it will give up and exit.
 **For more information about the packets/commands used. please see msg.proto (Google Protobuf Format)
 
-Initiate rendering nodes (RN)
-Initiate the leader node (LN), fetch in the IP address and port of the running rendering nodes.
-Initiate the front end viewer (FV), fetch in the IP address and port of the leader node.
-FV contacts LN asking if it’s available, if it is not in the middle of rendering, it will send back an ACK with the code OK, if not, it will also send back an ACK, but with the code NO
-if the FV is given OK, it will proceed and send scene files to LN, if not, it will repeat step 4 again.
+* Initiate rendering nodes (RN)
+* Initiate the leader node (LN), fetch in the IP address and port of the running rendering nodes.
+* Initiate the front end viewer (FV), fetch in the IP address and port of the leader node.
+* FV contacts LN asking if it’s available, if it is not in the middle of rendering, it will send back an ACK with the code OK, if not, it will also send back an ACK, but with the code NO
+* if the FV is given OK, it will proceed and send scene files to LN, if not, it will repeat step 4 again.
 after LN receives scene files from FV, it will propagate these scene files to the renderers in its list and mark those as “active”. RN receives scene files and initialize itself.
-LN will go through the active RN list and divide the work equally to all of them. For example, if there are 2 active RNs and 640,000 pixels, each of them will be responsible for rendering 320,000 each. it will also decides in every iterations the RN has to send back data to the FV
-Rendering starts
-Once a RN is done with rendering. It will stop, send a message to tell LN, and stay standby.
+* LN will go through the active RN list and divide the work equally to all of them. For example, if there are 2 active RNs and 640,000 pixels, each of them will be responsible for rendering 320,000 each. it will also decides in every iterations the RN has to send back data to the FV
+* Rendering starts
+* Once a RN is done with rendering. It will stop, send a message to tell LN, and stay standby.
+
 
 ## Multiple Importance Sampling
 
@@ -95,10 +101,12 @@ Here is the final image with indirect illumination.
 
 <img src="images/MIS indirect illumination.png"  height="400" width="400">
 
+
 ## Performance Analysis
 The major bottlenecks for this project is the network latency. So we need to find the optimal frequency of sending data (Too often = Slower, but the rendered image on the Front End Viewer is more up-to-date). Taking from Monte Carlo rendering, to get twice a better image, we need to render 4 times more samples. This would be used to decide the frequency of sending data.
 
+
 ## References
-PBRT
-Adam Mally’s Slides for CIS 450/560 Fall 2015
+* PBRT
+* Adam Mally’s Slides for CIS 450/560 Fall 2015
 
