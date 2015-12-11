@@ -121,7 +121,7 @@ void Leader::recvSceneFiles(){
 				if (sent){
 					activeRenderer[count] = { i->first, i->second };
 					count++;
-				}
+				}3
 				else{
 					std::cout << "[recvSceneFiles] can't reach this node: " <<
 						i->first << ":" << i->second << std::endl;
