@@ -2,7 +2,9 @@
 
 **University of Pennsylvania, CIS 565: GPU Programming and Architecture, FINAL PROJECT**
 
-#### Team : Dome Pongmongkol and Sanchit Garg
+#### Team : 
+ * Dome Pongmongkol : <a href="http://www.rpdome.com">Website</a>
+ * Sanchit Garg : <a href="http://www.sanchitgarg.com">Website</a>
 
 <img src="images/DistributedRenderer.png"  height="471.5" width="1031">
 
