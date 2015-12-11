@@ -1,0 +1,57 @@
+﻿Build started 12/11/2015 8:43:51 AM.
+     1>Project "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\DistRenderer\DistRenderer.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /Zi /nologo /W3 /WX- /Od /D WIN32 /D WIN64 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt main.cpp
+         main.cpp
+     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/detail/error_category.inl(102): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\string.h(168) : see declaration of 'strerror'
+     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(241): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>::size_type', possible loss of data
+     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(303): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>::size_type', possible loss of data
+     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(319): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>::size_type', possible loss of data
+     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(439): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>::size_type', possible loss of data
+     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/detail/pointer_traits.hpp(55): warning C4800: 'unsigned int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>C:\Program Files (x86)\Windows Kits\8.1\Include\shared\minwindef.h(130): warning C4005: 'APIENTRY' : macro redefinition
+                 C:\Users\Dome\Documents\GitHub\Distributed-Renderer\include\GLFW/glfw3.h(85) : see previous definition of 'APIENTRY'
+     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(250): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>,0x00>::size_type', possible loss of data
+                 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(625) : see reference to function template instantiation 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>,0x00> thrust::system::cuda::detail::bulk_::par<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>>(ExecutionAgent,size_t)' being compiled
+                 with
+                 [
+                     ExecutionAgent=thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>
+                 ]
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Debug\DistRenderer.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\lib\x64" iphlpapi.lib libprotobuf_d.lib libprotoc_d.lib glew32s.lib glfw3.lib opengl32.lib assimp.lib cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Debug\DistRenderer.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Debug\DistRenderer.lib" /MACHINE:X64 x64\Debug\CUDAPathTracer.cu.obj
+         x64\Debug\interactions.cu.obj
+         x64\Debug\intersections.cu.obj
+         x64\Debug\FrontEnd.obj
+         x64\Debug\GLDisplay.obj
+         x64\Debug\glslUtility.obj
+         x64\Debug\Helper.obj
+         x64\Debug\image.obj
+         x64\Debug\Leader.obj
+         x64\Debug\main.obj
+         x64\Debug\Mesh.obj
+         x64\Debug\msg.pb.obj
+         x64\Debug\Packet.obj
+         x64\Debug\PacketManager.obj
+         x64\Debug\Renderer.obj
+         x64\Debug\scene.obj
+         x64\Debug\stb.obj
+         x64\Debug\utilities.obj
+         x64\Debug\Viewer.obj
+         "x64\Debug\DistRenderer.device-link.obj"
+         DistRenderer.vcxproj -> C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Debug\DistRenderer.exe
+       PostBuildEvent:
+         echo copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Debug\"
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Debug\"
+         xcopy /y  /d  "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\lib\*.dll" "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Debug\"
+         :VCEnd
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Debug\"
+         C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart32_75.dll
+         C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart64_75.dll
+                 2 file(s) copied.
+         0 File(s) copied
+     1>Done Building Project "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\DistRenderer\DistRenderer.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.26

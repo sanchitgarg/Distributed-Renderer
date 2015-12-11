@@ -177,12 +177,6 @@ void PacketManager::run(){
 				if (readStreamToBuffer(sd, buffer, pSize)){
 					if (packet->parseFromArray(pType, buffer, pSize)){
 
-						mutexRecv.lock();
-						{
-							qRecv.push(packet);
-						}
-						mutexRecv.unlock();
-
 						if (pType == PacketType::FILE_DATA){
 							//read the file and save it!
 							Message::FILE_DATA *fData = packet->get_fileData();
@@ -214,6 +208,12 @@ void PacketManager::run(){
 								}
 							}
 						}
+
+						mutexRecv.lock();
+						{
+							qRecv.push(packet);
+						}
+						mutexRecv.unlock();
 					}
 					else{
 						std::cout << "Packet isn't parsed correctly" << std::endl;
