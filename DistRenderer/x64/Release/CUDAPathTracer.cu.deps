@@ -378,7 +378,7 @@ c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\host_defines.h
 c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\vector_functions.h
 c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\device_launch_parameters.h
 c:\program files\nvidia gpu computing toolkit\cuda\v7.5\include\vector_types.h
-c:\users\dome\documents\github\distributed-renderer\distrenderer\CUDAPathTracer.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\distrenderer\CUDAPathTracer.h
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\cstdio
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
@@ -1319,168 +1319,168 @@ C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/random/no
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/random/detail/normal_distribution_base.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\thrust/random/detail/normal_distribution.inl
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\math_constants.h
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtx\../glm.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/_fixes.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtx\../glm.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/_fixes.hpp
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\cassert
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\assert.h
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
-c:\users\dome\documents\github\distributed-renderer\include\glm\fwd.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/type_int.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\setup.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\fwd.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/type_int.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\setup.hpp
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\cassert
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\assert.h
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/type_float.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/type_vec.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\precision.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/type_mat.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\vec2.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/type_vec2.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\type_vec2.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\vec3.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/type_vec3.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\type_vec3.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\vec4.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/type_vec4.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\type_vec4.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\mat2x2.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/type_mat2x2.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\type_mat2x2.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\mat2x3.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/type_mat2x3.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\type_mat2x3.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\mat2x4.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/type_mat2x4.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\type_mat2x4.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\mat3x2.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/type_mat3x2.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\type_mat3x2.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\mat3x3.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/type_mat3x3.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\type_mat3x3.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\mat3x4.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/type_mat3x4.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\type_mat3x4.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\mat4x2.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/type_mat4x2.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\type_mat4x2.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\mat4x3.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/type_mat4x3.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\type_mat4x3.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\mat4x4.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/type_mat4x4.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\type_mat4x4.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\trigonometric.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/func_trigonometric.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\func_trigonometric.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\_vectorize.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\type_vec1.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\type_vec1.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\exponential.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/func_exponential.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\func_exponential.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\func_vector_relational.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\func_vector_relational.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/type_float.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/type_vec.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\precision.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/type_mat.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\vec2.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/type_vec2.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\type_vec2.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\vec3.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/type_vec3.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\type_vec3.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\vec4.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/type_vec4.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\type_vec4.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\mat2x2.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/type_mat2x2.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\type_mat2x2.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\mat2x3.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/type_mat2x3.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\type_mat2x3.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\mat2x4.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/type_mat2x4.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\type_mat2x4.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\mat3x2.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/type_mat3x2.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\type_mat3x2.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\mat3x3.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/type_mat3x3.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\type_mat3x3.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\mat3x4.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/type_mat3x4.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\type_mat3x4.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\mat4x2.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/type_mat4x2.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\type_mat4x2.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\mat4x3.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/type_mat4x3.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\type_mat4x3.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\mat4x4.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/type_mat4x4.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\type_mat4x4.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\trigonometric.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/func_trigonometric.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\func_trigonometric.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\_vectorize.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\type_vec1.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\type_vec1.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\exponential.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/func_exponential.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\func_exponential.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\func_vector_relational.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\func_vector_relational.inl
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\cassert
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\assert.h
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
-c:\users\dome\documents\github\distributed-renderer\include\glm\common.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/func_common.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\_fixes.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\func_common.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\packing.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/func_packing.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\func_packing.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\type_half.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\type_half.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\geometric.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/func_geometric.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\func_geometric.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\matrix.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/func_matrix.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\func_matrix.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\vector_relational.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\integer.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail/func_integer.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\detail\func_integer.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtx\../gtx/transform.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtx\../gtc/matrix_transform.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtc\../gtc/constants.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtc\constants.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtc\matrix_transform.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtx\transform.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtx\rotate_vector.inl
-c:\users\dome\documents\github\distributed-renderer\distrenderer\scene.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\common.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/func_common.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\_fixes.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\func_common.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\packing.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/func_packing.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\func_packing.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\type_half.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\type_half.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\geometric.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/func_geometric.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\func_geometric.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\matrix.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/func_matrix.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\func_matrix.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\vector_relational.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\integer.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail/func_integer.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\detail\func_integer.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtx\../gtx/transform.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtx\../gtc/matrix_transform.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtc\../gtc/constants.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtc\constants.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtc\matrix_transform.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtx\transform.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtx\rotate_vector.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\distrenderer\scene.h
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\vector
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sstream
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\fstream
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtc\matrix_inverse.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtx\../gtc/type_precision.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtc\../gtc/quaternion.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtc\quaternion.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtc\../gtc/vec1.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtc\vec1.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtc\type_precision.inl
-c:\users\dome\documents\github\distributed-renderer\distrenderer\utilities.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtc\matrix_inverse.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtx\../gtc/type_precision.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtc\../gtc/quaternion.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtc\quaternion.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtc\../gtc/vec1.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtc\vec1.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtc\type_precision.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\distrenderer\utilities.h
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\ctime
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\algorithm
-c:\users\dome\documents\github\distributed-renderer\distrenderer\sceneStructs.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\distrenderer\sceneStructs.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\cuda_runtime.h
-c:\users\dome\documents\github\distributed-renderer\distrenderer\Mesh.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\types.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\distrenderer\Mesh.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\types.h
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\sys/types.h
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\memory.h
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\math.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\defs.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\vector3.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\./Compiler/pushpack1.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\./Compiler/poppack1.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\vector2.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\./Compiler/pushpack1.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\./Compiler/poppack1.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\color4.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\./Compiler/pushpack1.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\./Compiler/poppack1.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\matrix3x3.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\./Compiler/pushpack1.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\./Compiler/poppack1.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\matrix4x4.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\./Compiler/pushpack1.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\./Compiler/poppack1.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\quaternion.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\./Compiler/pushpack1.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\./Compiler/poppack1.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\vector2.inl
-c:\users\dome\documents\github\distributed-renderer\include\assimp\vector3.inl
-c:\users\dome\documents\github\distributed-renderer\include\assimp\color4.inl
-c:\users\dome\documents\github\distributed-renderer\include\assimp\quaternion.inl
-c:\users\dome\documents\github\distributed-renderer\include\assimp\matrix3x3.inl
-c:\users\dome\documents\github\distributed-renderer\include\assimp\matrix4x4.inl
-c:\users\dome\documents\github\distributed-renderer\include\assimp\texture.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\./Compiler/pushpack1.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\./Compiler/poppack1.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\mesh.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\light.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\camera.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\material.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\./Compiler/pushpack1.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\./Compiler/poppack1.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\material.inl
-c:\users\dome\documents\github\distributed-renderer\include\assimp\anim.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\metadata.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\defs.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\vector3.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\./Compiler/pushpack1.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\./Compiler/poppack1.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\vector2.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\./Compiler/pushpack1.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\./Compiler/poppack1.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\color4.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\./Compiler/pushpack1.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\./Compiler/poppack1.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\matrix3x3.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\./Compiler/pushpack1.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\./Compiler/poppack1.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\matrix4x4.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\./Compiler/pushpack1.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\./Compiler/poppack1.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\quaternion.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\./Compiler/pushpack1.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\./Compiler/poppack1.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\vector2.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\vector3.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\color4.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\quaternion.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\matrix3x3.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\matrix4x4.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\texture.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\./Compiler/pushpack1.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\./Compiler/poppack1.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\mesh.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\light.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\camera.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\material.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\./Compiler/pushpack1.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\./Compiler/poppack1.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\material.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\anim.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\metadata.h
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\assert.h
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
-c:\users\dome\documents\github\distributed-renderer\include\assimp\config.h
-c:\users\dome\documents\github\distributed-renderer\distrenderer\image.h
-c:\users\dome\documents\github\distributed-renderer\distrenderer\interactions.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\assimp\config.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\distrenderer\image.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\distrenderer\interactions.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\cuda_runtime.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include\device_launch_parameters.h
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtx\component_wise.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtx\../gtx/quaternion.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtx\quaternion.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtx\norm.inl
-c:\users\dome\documents\github\distributed-renderer\distrenderer\intersections.h
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtx\../gtx/closest_point.hpp
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtx\closest_point.inl
-c:\users\dome\documents\github\distributed-renderer\include\glm\gtx\intersect.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtx\component_wise.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtx\../gtx/quaternion.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtx\quaternion.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtx\norm.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\distrenderer\intersections.h
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtx\../gtx/closest_point.hpp
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtx\closest_point.inl
+c:\users\sanchit garg\desktop\gpu\distributed renderer\include\glm\gtx\intersect.inl

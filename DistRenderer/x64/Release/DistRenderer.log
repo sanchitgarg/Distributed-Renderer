@@ -1,78 +1,19 @@
-﻿Build started 12/11/2015 10:23:29 AM.
-     1>Project "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\DistRenderer\DistRenderer.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /Zi /nologo /W3 /WX- /O2 /Oi /GL /D WIN32 /D WIN64 /D NDEBUG /D _CONSOLE /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc120.pdb" /Gd /TP /errorReport:prompt PacketManager.cpp
-         PacketManager.cpp
-     1>PacketManager.cpp(126): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
-     1>PacketManager.cpp(184): warning C4996: 'mkdir': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _mkdir. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\direct.h(140) : see declaration of 'mkdir'
-     1>PacketManager.cpp(185): warning C4996: 'mkdir': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _mkdir. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\direct.h(140) : see declaration of 'mkdir'
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\DistRenderer.exe" /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\lib\x64" cudadevrt.lib iphlpapi.lib libprotobuf_r.lib libprotoc_r.lib glew32.lib glfw3.lib opengl32.lib assimp.lib cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\DistRenderer.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\DistRenderer.lib" /MACHINE:X64 x64\Release\CUDAPathTracer.cu.obj
-         x64\Release\interactions.cu.obj
-         x64\Release\intersections.cu.obj
-         x64\Release\FrontEnd.obj
-         x64\Release\GLDisplay.obj
-         x64\Release\glslUtility.obj
-         x64\Release\Helper.obj
-         x64\Release\image.obj
-         x64\Release\Leader.obj
-         x64\Release\main.obj
-         x64\Release\Mesh.obj
-         x64\Release\msg.pb.obj
-         x64\Release\Packet.obj
-         x64\Release\PacketManager.obj
-         x64\Release\Renderer.obj
-         x64\Release\scene.obj
-         x64\Release\stb.obj
-         x64\Release\utilities.obj
-         x64\Release\Viewer.obj
-         "x64\Release\DistRenderer.device-link.obj"
-         Generating code
-         Finished generating code
-     1>libprotobuf_r.lib(descriptor.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(descriptor.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(descriptor.pb.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(descriptor.pb.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(descriptor_database.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(descriptor_database.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(dynamic_message.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(dynamic_message.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(extension_set.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(extension_set.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(extension_set_heavy.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(extension_set_heavy.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(generated_message_reflection.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(generated_message_reflection.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(generated_message_util.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(generated_message_util.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(coded_stream.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(coded_stream.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(strtod.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(strtod.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(tokenizer.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(tokenizer.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(zero_copy_stream.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(zero_copy_stream.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(zero_copy_stream_impl.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(zero_copy_stream_impl.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(zero_copy_stream_impl_lite.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(zero_copy_stream_impl_lite.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(message.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(message.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(message_lite.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(message_lite.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(reflection_ops.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(reflection_ops.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(repeated_field.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(repeated_field.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(atomicops_internals_x86_msvc.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(atomicops_internals_x86_msvc.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(common.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(common.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(once.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(once.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(stringprintf.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(stringprintf.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(structurally_valid.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(structurally_valid.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(strutil.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(strutil.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(substitute.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(substitute.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(text_format.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(text_format.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(unknown_field_set.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(unknown_field_set.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(wire_format.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(wire_format.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-     1>libprotobuf_r.lib(wire_format_lite.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'libprotobuf_r.lib(wire_format_lite.obj)' or at 'C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\vc120.pdb'; linking object as if no debug info
-         DistRenderer.vcxproj -> C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\DistRenderer.exe
+﻿Build started 12/11/2015 12:47:13 PM.
+     1>Project "C:\Users\Sanchit Garg\Desktop\GPU\Distributed Renderer\DistRenderer\DistRenderer.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         DistRenderer.vcxproj -> C:\Users\Sanchit Garg\Desktop\GPU\Distributed Renderer\x64\Release\DistRenderer.exe
        PostBuildEvent:
-         echo copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\"
-         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\"
-         xcopy /y  /d  "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\lib\*.dll" "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\"
+         echo copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Sanchit Garg\Desktop\GPU\Distributed Renderer\x64\Release\"
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Sanchit Garg\Desktop\GPU\Distributed Renderer\x64\Release\"
+         xcopy /y  /d  "C:\Users\Sanchit Garg\Desktop\GPU\Distributed Renderer\lib\*.dll" "C:\Users\Sanchit Garg\Desktop\GPU\Distributed Renderer\x64\Release\"
          :VCEnd
-         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\x64\Release\"
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart*.dll" "C:\Users\Sanchit Garg\Desktop\GPU\Distributed Renderer\x64\Release\"
          C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart32_75.dll
          C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\bin\cudart64_75.dll
                  2 file(s) copied.
          0 File(s) copied
-     1>Done Building Project "C:\Users\Dome\Documents\GitHub\Distributed-Renderer\DistRenderer\DistRenderer.vcxproj" (Build target(s)).
+     1>Done Building Project "C:\Users\Sanchit Garg\Desktop\GPU\Distributed Renderer\DistRenderer\DistRenderer.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:04.60
+Time Elapsed 00:00:00.37

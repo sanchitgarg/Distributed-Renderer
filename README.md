@@ -4,6 +4,7 @@
 
 #### Team : Dome Pongmongkol and Sanchit Garg
 
+<img src="images/DistributedRenderer.png"  height="2062" width="943">
 
 <img src="images/DOF.png"  height="800" width="800">
 
@@ -14,13 +15,15 @@ We have implemented a Distributed Renderer. The idea is divide the final image i
 
 ### Slides
 
-Project Proposal : 
+Project Proposal : <a href="Slides/CIS565 Final Project.pdf">LINK</a>
 
 Progress Report 1 :
 
-Progress Report 2 :
+Progress Report 2 : <a href="Slides/Progress report 2 CIS565 Final Project.pdf">LINK</a>
 
-Progress Report 3 :
+Progress Report 3 : <a href="Slides/Progress report 3 CIS565 Final Project.pdf">LINK</a>
+
+Final Report : <a href="Slides/Final Report CIS565 Final Project.pdf">LINK</a>
 
 ## Networking
 
