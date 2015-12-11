@@ -181,38 +181,41 @@ void PacketManager::run(){
 							qRecv.push(packet);
 						}
 						mutexRecv.unlock();
-					}
 
-					if (pType == PacketType::FILE_DATA){
-						//read the file and save it!
-						Message::FILE_DATA *fData = packet->get_fileData();
-						std::string dir = fData->dirpath();
-						mkdir((dir + "/" + std::to_string(port)).c_str());
-						mkdir((dir + "/" + std::to_string(port) + "/objs").c_str());
+						if (pType == PacketType::FILE_DATA){
+							//read the file and save it!
+							Message::FILE_DATA *fData = packet->get_fileData();
+							std::string dir = fData->dirpath();
+							mkdir(dir.c_str());
+							mkdir((dir + "/objs").c_str());
 
-						for (int i = 0; i < fData->filename_size(); i++)
-						{
-							std::string fileName = fData->filename(i);
-							pSize = fData->filesize(i);
+							for (int i = 0; i < fData->filename_size(); i++)
+							{
+								std::string fileName = fData->filename(i);
+								pSize = fData->filesize(i);
 
-							//SAVE FILE YAY!
-							if (readStreamToBuffer(sd, buffer, pSize)){
-								std::string path = dir + "/" + std::to_string(port) + "/" + fileName;
-								std::ofstream file(path, std::ios::out | std::fstream::trunc);
-								if (file.is_open())
-								{
-									for (int j = 0; j < pSize; j++){
-										file << buffer[j];
+								//SAVE FILE YAY!
+								if (readStreamToBuffer(sd, buffer, pSize)){
+									std::string path = dir + "/" + fileName;
+									std::ofstream file(path, std::ios::out | std::fstream::trunc);
+									if (file.is_open())
+									{
+										for (int j = 0; j < pSize; j++){
+											file << buffer[j];
+										}
+										file.close();
 									}
-									file.close();
+									else
+										std::cout << "[PacketManager::run] Unable to create file:" << path << std::endl;
 								}
-								else
-									std::cout << "[PacketManager::run] Unable to create file:" << path << std::endl;
-							}
-							else{
-								//TODO: error handling -> connection lost
+								else{
+									//TODO: error handling -> connection lost
+								}
 							}
 						}
+					}
+					else{
+						std::cout << "Packet isn't parsed correctly" << std::endl;
 					}
 
 					packet = new Packet();

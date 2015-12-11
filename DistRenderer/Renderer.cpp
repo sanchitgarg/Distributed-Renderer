@@ -84,8 +84,7 @@ void Renderer::rendererStandby(){
 			Message::FILE_DATA* fmsg = pkt->get_fileData();
 
 			//initializing the renderer
-			scn = new Scene(fmsg->dirpath() + '/' + 
-				std::to_string(pMgr->getPort()) + '/' + fmsg->filename(0));
+			scn = new Scene(fmsg->dirpath() + '/' + fmsg->filename(0));
 			cudaEngine = new CUDAPathTracer();
 
 			state = RendererState::WAITFORASSIGN;
@@ -193,15 +192,22 @@ void Renderer::sendPixel(){
 		p->set_pixeloffset(no_renderer);
 
 		for (int ptr = 0; ptr < PIXEL_PER_MSG; ptr++){
-			Message::Color* c = p->add_color();
+			int px = ptr + i * PIXEL_PER_MSG;
 
-			glm::vec3 pix = pixels[ptr + i * PIXEL_PER_MSG];
+			if (px >= pixels.size()){
+				pMgr->push(p);
+				pMgr->sendPackets(viewerIP, viewerPort);
+				return;
+			}
+
+			glm::vec3 pix = pixels[px];
+			Message::Color* c = p->add_color();
 			c->set_r(glm::clamp((int)(pix.x / iteration * 255.0), 0, 255));
 			c->set_g(glm::clamp((int)(pix.y / iteration * 255.0), 0, 255));
 			c->set_b(glm::clamp((int)(pix.z / iteration * 255.0), 0, 255));
-
-			offset += no_renderer;
 		}
+
+		offset += PIXEL_PER_MSG * no_renderer;
 
 		pMgr->push(p);
 	}

@@ -72,7 +72,7 @@ int main(int argc, char** argv) {
 			std::string ip;
 			uint32_t port;
 			for (int i = 0; i < rendNo; i++){
-				std::cout << "Renderer #" << rendNo;
+				std::cout << "Renderer # " << rendNo << std::endl;
 				std::cout << "IP: ";
 				std::cin >> ip;
 

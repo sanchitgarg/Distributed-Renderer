@@ -254,37 +254,37 @@ bool Packet::parseFromArray(PacketType type_,
 			init_msg = new Message::INIT();
 		resultOK = len == 0 || init_msg->ParseFromArray(&buf[0], len);
 	}
-	if (type_ == PacketType::ACK){
+	else if(type_ == PacketType::ACK){
 		if (ack_msg == nullptr)
 			ack_msg = new Message::ACK();
 		resultOK = len == 0 || ack_msg->ParseFromArray(&buf[0], len);
 	}
-	if (type_ == PacketType::START_RENDER){
+	else if(type_ == PacketType::START_RENDER){
 		if (startRender_msg == nullptr)
 			startRender_msg = new Message::START_RENDER();
 		resultOK = len == 0 || startRender_msg->ParseFromArray(&buf[0], len);
 	}
-	if (type_ == PacketType::PIXEL){
+	else if(type_ == PacketType::PIXEL){
 		if (pixel_msg == nullptr)
 			pixel_msg = new Message::PIXEL();
 		resultOK = len == 0 || pixel_msg->ParseFromArray(&buf[0], len);
 	}
-	if (type_ == PacketType::DONE){
+	else if(type_ == PacketType::DONE){
 		if (done_msg == nullptr)
 			done_msg = new Message::DONE();
 		resultOK = len == 0 || done_msg->ParseFromArray(&buf[0], len);
 	}
-	if (type_ == PacketType::HALT){
+	else if(type_ == PacketType::HALT){
 		if (halt_msg == nullptr)
 			halt_msg = new Message::HALT();
 		resultOK = len == 0 || halt_msg->ParseFromArray(&buf[0], len);
 	}
-	if (type_ == PacketType::CAM_MOVE){
+	else if(type_ == PacketType::CAM_MOVE){
 		if (cam_msg == nullptr)
 			cam_msg = new Message::CAM_MOVE();
 		resultOK = len == 0 || cam_msg->ParseFromArray(&buf[0], len);
 	}
-	if (type_ == PacketType::FILE_DATA){
+	else if (type_ == PacketType::FILE_DATA){
 		if (file_msg == nullptr)
 			file_msg = new Message::FILE_DATA();
 		resultOK = len == 0 || file_msg->ParseFromArray(&buf[0], len);
