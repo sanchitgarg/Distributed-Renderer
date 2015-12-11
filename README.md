@@ -138,7 +138,7 @@ The render time comparison between the 2 systems is as follows :
 
 <img src="Analysis/systemComaprison.png">
 
-<img src="Analysis/systemComaprisonTable.png">
+<img src="Analysis/systemComparisonTable.png">
 
 
 ## References
