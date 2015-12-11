@@ -24,6 +24,8 @@ public:
 		PacketManager* pMgr;
 		LeaderState state;
 
+		int sendIteration;
+
 		std::string viewerIP;
 		unsigned int viewerPort;
 		std::string leaderIP;

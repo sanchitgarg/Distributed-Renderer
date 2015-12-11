@@ -35,12 +35,10 @@ int main(int argc, char** argv) {
 					"the SCENEFILE.txt itself." << std::endl;
 			}
 
-			PacketManager pMgr(VIEW_RECVPORT);
-			FrontEnd fe(&pMgr, argv[2], argv[3]);
-
 			//ask for the leader's IP:Port
 			std::string ip;
 			uint32_t port;
+			int iteration;
 
 			std::cout << "Leader's IP: ";
 			std::cin >> ip;
@@ -48,6 +46,11 @@ int main(int argc, char** argv) {
 			std::cout << "Leader's port: ";
 			std::cin >> port;
 
+			std::cout << "Update image every .... iteration? : ";
+			std::cin >> iteration;
+
+			PacketManager pMgr(VIEW_RECVPORT);
+			FrontEnd fe(&pMgr, argv[2], argv[3], iteration);
 			fe.setLeaderIPPort(ip, port);
 
 			std::thread pmThread = pMgr.getThread();
@@ -137,7 +140,7 @@ void debugFunc(const char *dirPath, const char* listFile)
 	}
 
 	PacketManager pMgr(VIEW_RECVPORT);
-	FrontEnd fEnd(&pMgr, dirPath, listFile);
+	FrontEnd fEnd(&pMgr, dirPath, listFile, TEST_SEND_ITERATION);
 	fEnd.setLeaderIPPort(pMgrLeader.getIP(), pMgrLeader.getPort());
 
 	threads.push_back(pMgr.getThread());

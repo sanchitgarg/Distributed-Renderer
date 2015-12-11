@@ -75,9 +75,10 @@ void protobuf_AssignDesc_msg_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Color));
   INIT_descriptor_ = file->message_type(1);
-  static const int INIT_offsets_[2] = {
+  static const int INIT_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(INIT, viewer_ip_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(INIT, viewer_port_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(INIT, iteration_),
   };
   INIT_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -273,21 +274,21 @@ void protobuf_AddDesc_msg_2eproto() {
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\tmsg.proto\022\007Message\"(\n\005Color\022\t\n\001r\030\001 \002(\005"
-    "\022\t\n\001g\030\002 \002(\005\022\t\n\001b\030\003 \002(\005\".\n\004INIT\022\021\n\tviewer"
-    "_ip\030\001 \002(\t\022\023\n\013viewer_port\030\002 \002(\005\"\033\n\004DONE\022\023"
-    "\n\013assigned_no\030\001 \001(\005\"S\n\tFILE_DATA\022\017\n\007dirP"
-    "ath\030\001 \002(\t\022\021\n\ttargetDir\030\002 \002(\t\022\020\n\010fileName"
-    "\030\003 \003(\t\022\020\n\010fileSize\030\004 \003(\005\"\033\n\004HALT\022\023\n\013assi"
-    "gned_no\030\001 \002(\005\"\027\n\003ACK\022\020\n\010ack_code\030\001 \002(\005\"_"
-    "\n\010CAM_MOVE\022\r\n\005theta\030\001 \002(\002\022\013\n\003phi\030\002 \002(\002\022\021"
-    "\n\tcammove_x\030\003 \002(\002\022\021\n\tcammove_y\030\004 \002(\002\022\021\n\t"
-    "cammove_z\030\005 \002(\002\"R\n\005PIXEL\022\025\n\rfirstPixelPt"
-    "r\030\001 \002(\005\022\023\n\013pixelOffset\030\002 \002(\005\022\035\n\005color\030\003 "
-    "\003(\0132\016.Message.Color\"\233\001\n\014START_RENDER\022\021\n\t"
-    "viewer_ip\030\001 \002(\t\022\023\n\013viewer_port\030\002 \002(\005\022\021\n\t"
-    "leader_ip\030\003 \002(\t\022\023\n\013leader_port\030\004 \002(\005\022\023\n\013"
-    "no_renderer\030\005 \002(\005\022\023\n\013assigned_no\030\006 \002(\005\022\021"
-    "\n\titeration\030\007 \002(\005", 617);
+    "\022\t\n\001g\030\002 \002(\005\022\t\n\001b\030\003 \002(\005\"A\n\004INIT\022\021\n\tviewer"
+    "_ip\030\001 \002(\t\022\023\n\013viewer_port\030\002 \002(\005\022\021\n\titerat"
+    "ion\030\003 \002(\005\"\033\n\004DONE\022\023\n\013assigned_no\030\001 \001(\005\"S"
+    "\n\tFILE_DATA\022\017\n\007dirPath\030\001 \002(\t\022\021\n\ttargetDi"
+    "r\030\002 \002(\t\022\020\n\010fileName\030\003 \003(\t\022\020\n\010fileSize\030\004 "
+    "\003(\005\"\033\n\004HALT\022\023\n\013assigned_no\030\001 \002(\005\"\027\n\003ACK\022"
+    "\020\n\010ack_code\030\001 \002(\005\"_\n\010CAM_MOVE\022\r\n\005theta\030\001"
+    " \002(\002\022\013\n\003phi\030\002 \002(\002\022\021\n\tcammove_x\030\003 \002(\002\022\021\n\t"
+    "cammove_y\030\004 \002(\002\022\021\n\tcammove_z\030\005 \002(\002\"R\n\005PI"
+    "XEL\022\025\n\rfirstPixelPtr\030\001 \002(\005\022\023\n\013pixelOffse"
+    "t\030\002 \002(\005\022\035\n\005color\030\003 \003(\0132\016.Message.Color\"\233"
+    "\001\n\014START_RENDER\022\021\n\tviewer_ip\030\001 \002(\t\022\023\n\013vi"
+    "ewer_port\030\002 \002(\005\022\021\n\tleader_ip\030\003 \002(\t\022\023\n\013le"
+    "ader_port\030\004 \002(\005\022\023\n\013no_renderer\030\005 \002(\005\022\023\n\013"
+    "assigned_no\030\006 \002(\005\022\021\n\titeration\030\007 \002(\005", 636);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "msg.proto", &protobuf_RegisterTypes);
   Color::default_instance_ = new Color();
@@ -636,6 +637,7 @@ void Color::Swap(Color* other) {
 #ifndef _MSC_VER
 const int INIT::kViewerIpFieldNumber;
 const int INIT::kViewerPortFieldNumber;
+const int INIT::kIterationFieldNumber;
 #endif  // !_MSC_VER
 
 INIT::INIT()
@@ -659,6 +661,7 @@ void INIT::SharedCtor() {
   _cached_size_ = 0;
   viewer_ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   viewer_port_ = 0;
+  iteration_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -697,14 +700,28 @@ INIT* INIT::New() const {
 }
 
 void INIT::Clear() {
-  if (_has_bits_[0 / 32] & 3) {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<INIT*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 7) {
+    ZR_(viewer_port_, iteration_);
     if (has_viewer_ip()) {
       if (viewer_ip_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
         viewer_ip_->clear();
       }
     }
-    viewer_port_ = 0;
   }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -743,6 +760,21 @@ bool INIT::MergePartialFromCodedStream(
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &viewer_port_)));
           set_has_viewer_port();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_iteration;
+        break;
+      }
+
+      // required int32 iteration = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_iteration:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &iteration_)));
+          set_has_iteration();
         } else {
           goto handle_unusual;
         }
@@ -790,6 +822,11 @@ void INIT::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->viewer_port(), output);
   }
 
+  // required int32 iteration = 3;
+  if (has_iteration()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->iteration(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -816,6 +853,11 @@ void INIT::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->viewer_port(), target);
   }
 
+  // required int32 iteration = 3;
+  if (has_iteration()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->iteration(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -840,6 +882,13 @@ int INIT::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->viewer_port());
+    }
+
+    // required int32 iteration = 3;
+    if (has_iteration()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->iteration());
     }
 
   }
@@ -875,6 +924,9 @@ void INIT::MergeFrom(const INIT& from) {
     if (from.has_viewer_port()) {
       set_viewer_port(from.viewer_port());
     }
+    if (from.has_iteration()) {
+      set_iteration(from.iteration());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -892,7 +944,7 @@ void INIT::CopyFrom(const INIT& from) {
 }
 
 bool INIT::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   return true;
 }
@@ -901,6 +953,7 @@ void INIT::Swap(INIT* other) {
   if (other != this) {
     std::swap(viewer_ip_, other->viewer_ip_);
     std::swap(viewer_port_, other->viewer_port_);
+    std::swap(iteration_, other->iteration_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

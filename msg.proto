@@ -10,6 +10,7 @@ message Color
 message INIT{
 	required string viewer_ip = 1;
 	required int32 viewer_port = 2;
+	required int32 iteration = 3;
 }
 
 message DONE{

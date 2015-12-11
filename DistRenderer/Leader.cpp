@@ -62,6 +62,7 @@ void Leader::leaderStandby(){
 
 			Message::INIT* imsg = pkt->get_init();
 			setViewerIPPort(imsg->viewer_ip(), imsg->viewer_port());
+			sendIteration = imsg->iteration();
 
 			//TODO: for now, we will just assume that the leader
 			//can only handle one rendering at a time.
@@ -151,7 +152,7 @@ void Leader::initRenderers(){
 		minit->set_leader_port(pMgr->getPort());
 		minit->set_assigned_no(i);
 		minit->set_no_renderer(activeRenderer.size());
-		minit->set_iteration(TEST_SEND_ITERATION);
+		minit->set_iteration(sendIteration);
 
 		pMgr->push(minit);
 		IP_Port target = activeRenderer[i];

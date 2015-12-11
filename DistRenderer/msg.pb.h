@@ -216,12 +216,21 @@ class INIT : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 viewer_port() const;
   inline void set_viewer_port(::google::protobuf::int32 value);
 
+  // required int32 iteration = 3;
+  inline bool has_iteration() const;
+  inline void clear_iteration();
+  static const int kIterationFieldNumber = 3;
+  inline ::google::protobuf::int32 iteration() const;
+  inline void set_iteration(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:Message.INIT)
  private:
   inline void set_has_viewer_ip();
   inline void clear_has_viewer_ip();
   inline void set_has_viewer_port();
   inline void clear_has_viewer_port();
+  inline void set_has_iteration();
+  inline void clear_has_iteration();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -229,6 +238,7 @@ class INIT : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::std::string* viewer_ip_;
   ::google::protobuf::int32 viewer_port_;
+  ::google::protobuf::int32 iteration_;
   friend void  protobuf_AddDesc_msg_2eproto();
   friend void protobuf_AssignDesc_msg_2eproto();
   friend void protobuf_ShutdownFile_msg_2eproto();
@@ -1153,6 +1163,30 @@ inline void INIT::set_viewer_port(::google::protobuf::int32 value) {
   set_has_viewer_port();
   viewer_port_ = value;
   // @@protoc_insertion_point(field_set:Message.INIT.viewer_port)
+}
+
+// required int32 iteration = 3;
+inline bool INIT::has_iteration() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void INIT::set_has_iteration() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void INIT::clear_has_iteration() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void INIT::clear_iteration() {
+  iteration_ = 0;
+  clear_has_iteration();
+}
+inline ::google::protobuf::int32 INIT::iteration() const {
+  // @@protoc_insertion_point(field_get:Message.INIT.iteration)
+  return iteration_;
+}
+inline void INIT::set_iteration(::google::protobuf::int32 value) {
+  set_has_iteration();
+  iteration_ = value;
+  // @@protoc_insertion_point(field_set:Message.INIT.iteration)
 }
 
 // -------------------------------------------------------------------

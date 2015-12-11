@@ -8,7 +8,8 @@ enum FrontEndState { IDLE = 0, WAITFORGREENLIGHT, SENDSCENE, READY };
 
 class FrontEnd{
 	public:
-		FrontEnd(PacketManager* pMgr_, std::string dirPath_, std::string listTxt_);
+		FrontEnd(PacketManager* pMgr_, std::string dirPath_, 
+			std::string listTxt_, int sendIteration_);
 		~FrontEnd();
 		void setLeaderIPPort(std::string ip_, uint32_t port_);
 		std::thread	getThread();
@@ -21,6 +22,8 @@ class FrontEnd{
 		void waitForLeader();
 		void sendSceneInfo();
 		void fetchPixels();
+		
+		int sendIteration;
 
 		FrontEndState state;
 		std::string leaderIP;

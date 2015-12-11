@@ -1,7 +1,7 @@
 #include "FrontEnd.h"
 
 FrontEnd::FrontEnd(PacketManager* pMgr_, 
-	std::string dirPath_, std::string listTxt_){
+	std::string dirPath_, std::string listTxt_, int sendIteration_){
 	pMgr = pMgr_;
 	dirPath = dirPath_;
 	listTxt = listTxt_;
@@ -9,6 +9,7 @@ FrontEnd::FrontEnd(PacketManager* pMgr_,
 	leaderIP = "";
 	leaderPort = 0;
 	display = nullptr;
+	sendIteration = sendIteration_;
 }
 
 FrontEnd::~FrontEnd(){
@@ -71,6 +72,7 @@ void FrontEnd::checkRendererAvailability(){
 	Message::INIT *imsg = new Message::INIT();
 	imsg->set_viewer_ip(getSelfIP());
 	imsg->set_viewer_port(pMgr->getPort());
+	imsg->set_iteration(sendIteration);
 
 	pMgr->push(imsg);
 	bool sent = pMgr->sendPackets(leaderIP, leaderPort);
