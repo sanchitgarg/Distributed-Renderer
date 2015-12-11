@@ -117,17 +117,28 @@ The major bottlenecks for this project is the network latency. So we need to fin
 
 A good iterations to update the viewer looked to be 50 iterations. It takes about 42 seconds to do 50 iterations including the data sending to the viewer. So the viewer updates around every 40 seconds.
 
-We compared the performance of our system when we send the image to the viewer at different number of iterations. As expected, when we send the image more frequently, the network latency overshadows the performance. So there is a tradeoff between how frequent we want the viewer image to be refreshed against how much time we want to spend on sending the image.
+We compared the performance of our system when we send the image to the viewer at different number of iterations. As expected, when we send the image more frequently, the network latency overshadows the performance. So there is a tradeoff between how frequent we want the viewer image to be refreshed against how much time we want to spend on sending the image. The time of execution is in seconds.
 
 <img src="Analysis/networkLatencyTable.png">
 
 <img src="Analysis/networkLatency.png">
 
-Comparing the performance of the system with different number of renderers, we can see a gain with more render nodes. We could test it with only 1 or 2 render nodes and here are the results. The performance increases if we have more render nodes.
+Comparing the performance of the system with different number of renderers, we can see a gain with more render nodes. We could test it with only 1 or 2 render nodes and here are the results. The performance increases if we have more render nodes. The time of execution is in seconds.
 
 <img src="Analysis/comparisonNumRenderersTable.png">
 
 <img src="Analysis/comparisonNumRenderers.png">
+
+We got a near 2x speed up with 2 render nodes as compared to one. The results here show a little more that 2x speed up but that is because of the difference in the render node performances. We used the following systems :
+
+* Mac Book Pro Early 2013, Windows 7, i7 @ 2.4 GHz, GT 650M 1GB
+* ASUS ROG GL552VW-DH71, Windows 10, i7 @ 2.6GHz, GTX 960M 2GB
+
+The render time comparison between the 2 systems is as follows :
+
+<img src="Analysis/systemComaprison.png">
+
+<img src="Analysis/systemComaprisonTable.png">
 
 
 ## References
