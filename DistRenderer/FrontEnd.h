@@ -16,6 +16,7 @@ class FrontEnd{
 		void run();
 
 	private:
+		void initGL();
 		void checkRendererAvailability();
 		void waitForLeader();
 		void sendSceneInfo();

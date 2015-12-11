@@ -85,7 +85,6 @@ bool Viewer::init(){
 	glUseProgram(passthroughProgram);
 	glActiveTexture(GL_TEXTURE0);
 
-
 	return true;
 }
 

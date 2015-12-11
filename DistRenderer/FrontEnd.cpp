@@ -8,7 +8,7 @@ FrontEnd::FrontEnd(PacketManager* pMgr_,
 	state = FrontEndState::IDLE;
 	leaderIP = "";
 	leaderPort = 0;
-	display = new GLDisplay();
+	display = nullptr;
 }
 
 FrontEnd::~FrontEnd(){
@@ -19,12 +19,22 @@ std::thread FrontEnd::getThread(){
 	return std::thread(&FrontEnd::run, this);
 }
 
+void FrontEnd::initGL(){
+	if (display == nullptr){
+		display = new GLDisplay();
+		display->checkGLError("FrontEnd init");
+	}
+}
+
 void FrontEnd::setLeaderIPPort(std::string ip_, unsigned int port_){
 	leaderIP = ip_;
 	leaderPort = port_;
 }
 
 void FrontEnd::step(){
+	//The thread that initializes OpenGL and makes a GL call must be the same!
+	initGL();
+
 	if (state == FrontEndState::IDLE){
 		if (leaderIP != "")
 			checkRendererAvailability();
@@ -37,9 +47,8 @@ void FrontEnd::step(){
 	}
 	else if (state == FrontEndState::READY){
 		fetchPixels();
-		if(display->update())
-			display->saveImage("FrontEnd");
-		display->draw();
+		display->update();
+			//display->saveImage("FrontEnd");
 	}
 }
 

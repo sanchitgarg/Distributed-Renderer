@@ -1,5 +1,6 @@
 #include "GLDisplay.h"
 
+bool GLDisplay::windowActive = false;
 bool GLDisplay::initialized = false;
 float GLDisplay::yaw = 0;
 float GLDisplay::pitch = 0;
@@ -15,13 +16,12 @@ GLDisplay::GLDisplay(){
 
 	initialized = true;
 	modified = false;
-	
-	windowInit();
-	glInit();
-	pixels = new GLubyte[WIDTH * HEIGHT * 3]();
 
-	//do it once to clear the scene
-	draw();
+	positionLocation = 0;
+	texcoordsLocation = 1;
+	
+	pixels = new GLubyte[WIDTH * HEIGHT * 3]();
+	init();
 }
 
 void GLDisplay::setPixelColor(int index, int r, int g, int b){
@@ -43,23 +43,24 @@ void GLDisplay::setPixelColor(int index, int r, int g, int b){
 }
 
 bool GLDisplay::update(){
+	if (!windowActive) return false;
+
+	checkGLError("pre-update");
+	//glfwPollEvents();
+
 	if (!modified) return false;
-
-	glfwPollEvents();
-	glBindTexture(GL_TEXTURE_2D, displayImage);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, WIDTH, HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+	checkGLError("update");
 
-	modified = false;
-	return true;
-}
-
-void GLDisplay::draw(){
 	glClearColor(0.0, 1.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
 	glfwSwapBuffers(window);
-}
+	checkGLError("draw");
 
+	modified = false;
+	return true;
+}
 
 void GLDisplay::saveImage(std::string title) {
 	// output image file
@@ -88,56 +89,64 @@ void GLDisplay::saveImage(std::string title) {
 	//img.saveHDR(filename);  // Save a Radiance HDR file
 
 }
-void GLDisplay::windowInit(){
-	glfwSetErrorCallback(errorCallBack);
 
-	if (!glfwInit())
-		exit(EXIT_FAILURE);
+bool GLDisplay::init(){
+	glfwSetErrorCallback(utilityCore::errorCallback);
 
-	window = glfwCreateWindow(WIDTH, HEIGHT, "Distributed Renderer", NULL, NULL);
-
-	if (!window){
-		glfwTerminate();
+	if (!glfwInit()) {
+		std::cout << "glfw not OK" << std::endl;
 		exit(EXIT_FAILURE);
 	}
 
+	window = glfwCreateWindow(WIDTH, WIDTH, "Distributed Renderer - Front End Viewer", NULL, NULL);
+	if (!window) {
+		glfwTerminate();
+		std::cout << "Window not OK" << std::endl;
+		return false;
+	}
+
 	glfwMakeContextCurrent(window);
+	windowActive = true;
+
+	// Set up GL context
+	glewExperimental = GL_TRUE;
+	checkGLError("glewExperimental");
+	if (glewInit() != GLEW_OK) {
+		std::cout << "glew not OK" << std::endl;
+		return false;
+	}
+
 	glfwSetKeyCallback(window, keyCallback);
 	//glfwSetCursorPosCallback(window, cursorCallback);
 	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	//glfwSetCursorPos(window, WIDTH/2, HEIGHT/2);
+
+	checkGLError("glfwSetKeyCallback");
+
+	// Initialize other stuff
+	initShader();
+	checkGLError("passthroughProgram");
+
+	initVAO();
+	checkGLError("initVAO");
+
+	initTextures();
+	checkGLError("initTextures");
+
+	return true;
 }
 
-void GLDisplay::glInit(){
-	//set GL context
-	glewExperimental = GL_TRUE;
-	if (glewInit() != GLEW_OK){
-		exit(EXIT_FAILURE);
-	}
+void GLDisplay::initTextures() {
+	glGenTextures(1, &displayImage);
+	glBindTexture(GL_TEXTURE_2D, displayImage);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, WIDTH, HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
 
-	initProgram();
-}
-GLuint GLDisplay::initShader() {
-	const char *attribLocations[] = { "Position", "Texcoords" };
-	GLuint program = glslUtility::createDefaultProgram(attribLocations, 2);
-	GLint location;
-
-	//glUseProgram(program);
-	if ((location = glGetUniformLocation(program, "u_image")) != -1) {
-		glUniform1i(location, 0);
-	}
-
-	return program;
+	checkGLError("initTextures");
 }
 
-//TODO:: add local shader program implementation.
-void GLDisplay::initProgram(){
-	GLuint passthroughProgram = initShader();
-
-	glUseProgram(passthroughProgram);
-	glActiveTexture(GL_TEXTURE0);
-
-	//set up VBOs
+void GLDisplay::initVAO(void) {
 	GLfloat vertices[] = {
 		-1.0f, -1.0f,
 		1.0f, -1.0f,
@@ -154,35 +163,49 @@ void GLDisplay::initProgram(){
 
 	GLushort indices[] = { 0, 1, 3, 3, 1, 2 };
 
-	GLuint vbo[3];
-	GLuint posLocation = 0;
-	GLuint texLocation = 1;
+	GLuint vertexBufferObjID[3];
+	glGenBuffers(3, vertexBufferObjID);
 
-	glGenBuffers(3, vbo);
-
-	glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObjID[0]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	glVertexAttribPointer((GLuint)posLocation, 2, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(posLocation);
+	glVertexAttribPointer((GLuint)positionLocation, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(positionLocation);
 
-	glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObjID[1]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(texcoords), texcoords, GL_STATIC_DRAW);
-	glVertexAttribPointer((GLuint)texLocation, 2, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(texLocation);
+	glVertexAttribPointer((GLuint)texcoordsLocation, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(texcoordsLocation);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo[2]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vertexBufferObjID[2]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-	//init texture
-	glGenTextures(1, &displayImage);
-	glBindTexture(GL_TEXTURE_2D, displayImage);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, WIDTH, HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
 }
 
-void GLDisplay::errorCallBack(int error, const char* description){
-	fputs(description, stderr);
+GLuint GLDisplay::initShader() {
+	const char *attribLocations[] = { "Position", "Texcoords" };
+	GLuint program = glslUtility::createDefaultProgram(attribLocations, 2);
+	checkGLError("createDefaultProgram");
+
+	glUseProgram(program);
+
+	GLint location = glGetUniformLocation(program, "u_image");
+	checkGLError("glGetUniformLocation");
+	if (location != -1) {
+		glUniform1i(location, 0);
+	}
+	checkGLError("glUniform1i");
+
+	glActiveTexture(GL_TEXTURE0);
+
+	return program;
+}
+
+void GLDisplay::checkGLError(std::string mark){
+	GLuint glErr = glGetError();
+	if (glErr != GL_NO_ERROR)
+	{
+		std::cout << "GL Error Code: " << glErr <<
+			" [" << mark << ":" << glewGetErrorString(glErr) << "]" << std::endl;
+	}
 }
 
 void GLDisplay::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods){

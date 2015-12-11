@@ -15,11 +15,11 @@ class Viewer{
 		Viewer(Scene *scene_);
 		~Viewer();
 
-		bool init();
 		void update(int iteration);
 		GLuint getPBO();
 
 	private:
+		bool init();
 		void initTextures();
 		void initVAO();
 		void initPBO();
