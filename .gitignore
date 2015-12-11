@@ -52,6 +52,7 @@ build/
 *.log
 *.scc
 *.sdf
+*.tlog
 
 # OS generated files #
 .DS_Store*
