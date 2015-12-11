@@ -10,6 +10,7 @@ Packet::Packet(){
 	done_msg = nullptr;
 	halt_msg = nullptr;
 	file_msg = nullptr;
+	cam_msg = nullptr;
 }
 
 Packet::~Packet(){
@@ -20,6 +21,7 @@ Packet::~Packet(){
 	delete done_msg;
 	delete halt_msg;
 	delete file_msg;
+	delete cam_msg;
 }
 
 PacketType Packet::get_type(){

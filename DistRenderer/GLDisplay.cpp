@@ -2,17 +2,20 @@
 
 bool GLDisplay::windowActive = false;
 bool GLDisplay::initialized = false;
-float GLDisplay::yaw = 0;
-float GLDisplay::pitch = 0;
-float GLDisplay::roll = 0;
-glm::vec3 GLDisplay::cam_pos = glm::vec3(0, 0, 0);
+bool GLDisplay::printimg = 0;
+bool GLDisplay::camchanged = 0;
+float GLDisplay::theta = 0;
+float GLDisplay::phi = 0;
+glm::vec3 GLDisplay::cammove = glm::vec3(0, 0, 0);
 GLFWwindow* GLDisplay::window = nullptr;
 
-GLDisplay::GLDisplay(){
+GLDisplay::GLDisplay(PacketManager* pMgr_){
 	if (initialized){
 		std::cout << "Display can only be initialized once." << std::endl;
 		exit(EXIT_FAILURE);
 	}
+
+	pMgr = pMgr_;
 
 	initialized = true;
 	modified = false;
@@ -42,24 +45,52 @@ void GLDisplay::setPixelColor(int index, int r, int g, int b){
 	//std::cout << pixels[offset] << " " << pixels[offset + 1] << " " << pixels[offset + 2] << std::endl;
 }
 
+Message::CAM_MOVE* GLDisplay::checkCameraMove(){
+	if (camchanged){
+		Message::CAM_MOVE* cmsg = new Message::CAM_MOVE();
+		cmsg->set_phi(phi);
+		cmsg->set_theta(theta);
+		cmsg->set_cammove_x(cammove.x);
+		cmsg->set_cammove_y(cammove.y);
+		cmsg->set_cammove_z(cammove.z);
+
+		camchanged = false;
+		return cmsg;
+	}
+
+	return nullptr;
+}
+
 bool GLDisplay::update(){
 	if (!windowActive) return false;
 
-	checkGLError("pre-update");
-	//glfwPollEvents();
+	if (printimg)
+		saveImage("FrontEnd");
 
-	if (!modified) return false;
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, WIDTH, HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
-	checkGLError("update");
+	if (!glfwWindowShouldClose(window)) {
+		checkGLError("pre-update");
+		glfwPollEvents();
 
-	glClearColor(0.0, 1.0, 0.0, 1.0);
-	glClear(GL_COLOR_BUFFER_BIT);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
-	glfwSwapBuffers(window);
-	checkGLError("draw");
+		if (!modified) return false;
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, WIDTH, HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+		checkGLError("update");
 
-	modified = false;
-	return true;
+		glClearColor(0.0, 1.0, 0.0, 1.0);
+		glClear(GL_COLOR_BUFFER_BIT);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
+		glfwSwapBuffers(window);
+		checkGLError("draw");
+
+		modified = false;
+		return true;
+	}
+	else {
+		glfwDestroyWindow(window);
+		glfwTerminate();
+		windowActive = false;
+	}
+
+	return false;
 }
 
 void GLDisplay::saveImage(std::string title) {
@@ -209,15 +240,26 @@ void GLDisplay::checkGLError(std::string mark){
 }
 
 void GLDisplay::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods){
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		exit(0);
-}
-
-void GLDisplay::cursorCallback(GLFWwindow* window, double xpos, double ypos){
-	//camera control
-	yaw += (xpos - HALF_WIDTH) * YAW_SENSITIVITY;		//around local y
-	pitch += (ypos - HALF_HEIGHT) * PITCH_SENSITIVITY;	//around local x
-
-	//reset cursor to middle pos.
-	//glfwSetCursorPos(window, HALF_WIDTH, HALF_HEIGHT);
+	if (action == GLFW_PRESS) {
+		switch (key) {
+		case GLFW_KEY_ESCAPE:
+			printimg = true;
+			glfwSetWindowShouldClose(window, GL_TRUE);
+			windowActive = false;
+			break;
+		case GLFW_KEY_SPACE:
+			printimg = true;
+			break;
+		case GLFW_KEY_DOWN:  camchanged = true; theta = -0.1f; break;
+		case GLFW_KEY_UP:    camchanged = true; theta = +0.1f; break;
+		case GLFW_KEY_RIGHT: camchanged = true; phi = -0.1f; break;
+		case GLFW_KEY_LEFT:  camchanged = true; phi = +0.1f; break;
+		case GLFW_KEY_A:     camchanged = true; cammove -= glm::vec3(.1f, 0, 0); break;
+		case GLFW_KEY_D:     camchanged = true; cammove += glm::vec3(.1f, 0, 0); break;
+		case GLFW_KEY_W:     camchanged = true; cammove += glm::vec3(0, 0, .1f); break;
+		case GLFW_KEY_S:     camchanged = true; cammove -= glm::vec3(0, 0, .1f); break;
+		case GLFW_KEY_R:     camchanged = true; cammove += glm::vec3(0, .1f, 0); break;
+		case GLFW_KEY_F:     camchanged = true; cammove -= glm::vec3(0, .1f, 0); break;
+		}
+	}
 }

@@ -178,7 +178,7 @@ void CUDAPathTracer::pathtrace(uchar4 *pbo, int iter) {
 		//If currDepth is > 2, play russian roullete
 		if (i > 2)
 		{
-			kernRussianRoullete << <numBlocks, numThreads >> >(dev_camera, dev_rays_begin, dev_image, iter, rayCount);
+			//kernRussianRoullete << <numBlocks, numThreads >> >(dev_camera, dev_rays_begin, dev_image, iter, rayCount);
 			checkCUDAError("kernRussianRoullete");
 		}
 

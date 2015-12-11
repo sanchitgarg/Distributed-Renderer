@@ -21,8 +21,7 @@ std::thread FrontEnd::getThread(){
 
 void FrontEnd::initGL(){
 	if (display == nullptr){
-		display = new GLDisplay();
-		display->checkGLError("FrontEnd init");
+		display = new GLDisplay(pMgr);
 	}
 }
 
@@ -49,6 +48,15 @@ void FrontEnd::step(){
 		fetchPixels();
 		display->update();
 			//display->saveImage("FrontEnd");
+
+		Message::CAM_MOVE* cmsg = display->checkCameraMove();
+		if (cmsg != nullptr){
+			pMgr->push(cmsg);
+			pMgr->sendPackets(leaderIP, leaderPort);
+		}
+
+		//TODO: if the window is closed (no longer active)
+		//stop the rendering process
 	}
 }
 
@@ -153,6 +161,7 @@ void FrontEnd::fetchPixels(){
 		}
 		else if (pkt->get_type() == PacketType::DONE){
 			std::cout << "[Front End] Rendering Done." << std::endl;
+			display->saveImage("FrontEnd");
 		}
 
 		delete pkt;
