@@ -112,7 +112,7 @@ The major bottlenecks for this project is the network latency. So we need to fin
 * PBRT
 * Adam Mally’s Slides for CIS 450/560 Fall 2015
 * Google Protocol Buffer documentation
-* WinSock 2 starting guide
+* Getting Started with Winsock (Windows)
 
 ## Google Protocol Buffer
 To compile protobuf API, Simply download a Windows binary from its website and set the directory to PATH,
