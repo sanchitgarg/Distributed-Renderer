@@ -4,9 +4,9 @@
 
 #### Team : Dome Pongmongkol and Sanchit Garg
 
-<img src="images/DistributedRenderer.png"  height="476.5" width="1031">
+<img src="images/DistributedRenderer.png"  height="471.5" width="1031">
 
-<img src="images/DOF.png"  height="800" width="800">
+<img src="images/DOF.png"  height="500" width="500" align="center">
 
 
 ### Project outline
