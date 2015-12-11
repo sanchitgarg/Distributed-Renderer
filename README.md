@@ -124,6 +124,6 @@ If you want to make any change to the message class, edit the [.proto] file and 
 		$SRC_DIR = the directory containing .proto
 		$DST_DIR = destination directory (cpp files dir) 
 
-	ie. protoc -I=C:\Users\Dome\Documents\GitHub\Walnut-FrontEnd --cpp_out=C:\Users\Dome\Documents\GitHub\Walnut-FrontEnd\Walnut-FrontEnd C:\Users\Dome\Documents\GitHub\Walnut-FrontEnd\msg.proto
+	ie. protoc -I=C:\Users\Dome\Documents\GitHub\Distributed-Renderer--cpp_out=C:\Users\Dome\Documents\GitHub\Distributed-Renderer\DistRenderer C:\Users\Dome\Documents\GitHub\Distributed-Renderer\msg.proto
 
 To compile the source file, dont forget to put in the [.pb.cc] file and [-lprotobuf] flag
