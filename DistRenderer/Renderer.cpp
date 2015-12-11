@@ -142,7 +142,7 @@ void Renderer::rendering(){
 			cudaEngine->pathtrace(nullptr, iteration);
 		}
 
-		if (iteration != 0 && iteration % sendIteration == 0){
+		if (iteration != 0 && (iteration + 1) % sendIteration == 0){
 			sendPixel();
 
 			//TODO: check if IT LOST CONTACT WITH THE VIEWER HENCE THIS RENDER SHOULD BE HALTED.
